@@ -205,6 +205,39 @@ section { padding-block: clamp(64px, 9vw, 120px); }
 
 .hero .shell { position: relative; }
 
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding: 8px 16px 8px 14px;
+  background: rgba(247, 211, 14, 0.1);
+  border: 1px solid rgba(247, 211, 14, 0.4);
+  color: var(--yellow);
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.18s ease;
+}
+.status:hover { background: rgba(247, 211, 14, 0.18); }
+
+.status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--yellow);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(247, 211, 14, 0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(247, 211, 14, 0); }
+}
+
+/* stack the status pill above the nameplate */
+.hero .shell > .status + .nameplate { display: table; margin-inline: auto; }
+
 .nameplate {
   display: inline-block;
   border: 1.5px solid var(--gold);
@@ -681,6 +714,7 @@ section { padding-block: clamp(64px, 9vw, 120px); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee__track { animation: none; }
+  .status__dot { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .btn:hover { transform: none; }
 }
