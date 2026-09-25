@@ -3,807 +3,504 @@
 
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Sagun Pradhan | Portfolio</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/favicon.png" rel="apple-touch-icon">
+  <title>Sagun B. Pradhan — Data Engineer</title>
+  <meta name="description" content="Sagun B. Pradhan is a data engineer in Lalitpur, Nepal, building asynchronous ETL pipelines, blockchain analytics systems and Django backends.">
+  <meta name="author" content="Sagun B. Pradhan">
+  <meta name="theme-color" content="#202825">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sagun B. Pradhan — Data Engineer">
+  <meta property="og:description" content="Asynchronous ETL pipelines, blockchain analytics and Django backends. Based in Lalitpur, Nepal.">
+  <meta property="og:url" content="https://www.sagunpradhan.com.np/">
+  <meta property="og:image" content="https://www.sagunpradhan.com.np/assets/img/sagun1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="canonical" href="https://www.sagunpradhan.com.np/">
+  <link rel="icon" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: MyResume
-  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-  * Updated: Jun 29 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="index-page">
+<body>
 
-  <header id="header" class="header d-flex flex-column justify-content-center">
+  <a class="skip-link" href="#work">Skip to content</a>
 
-    <i class="header-toggle d-xl-none bi bi-list"></i>
+  <!-- ============================= Nav ============================= -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav__inner">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-tab" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+      <div class="nav__tab" id="nav-tab">
+        <a class="nav__link" href="#work">My Work</a>
+        <a class="nav__link" href="#experience">Experience</a>
+        <a class="nav__link" href="#about">About Me</a>
+        <a class="nav__link" href="#contact">Contact Me</a>
+      </div>
+    </div>
+  </nav>
 
-    <nav id="navmenu" class="navmenu">
-      <ul>
-        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
-        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i><span>Resume</span></a></li>
-        <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span>Portfolio</span></a></li>
-        <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i><span>Services</span></a></li>
-        <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span>Contact</span></a></li>
+  <!-- ============================= Hero ============================= -->
+  <header class="hero" id="top">
+    <div class="shell">
+      <p class="nameplate">Sagun B. Pradhan</p>
+      <h1>Data<br>Engineer</h1>
+      <p class="hero__sub">
+        I build asynchronous ETL pipelines, blockchain analytics systems and Django
+        backends — turning messy, high-volume sources into data teams can actually rely on.
+      </p>
+      <ul class="hero__meta">
+        <li>Lalitpur, Nepal</li>
+        <li>Python · SQL · PostgreSQL</li>
+        <li>Crimson Umbrella Technologies</li>
       </ul>
-    </nav>
-
+    </div>
   </header>
 
-  <main class="main">
+  <!-- ===================== Stripes + marquee ======================= -->
+  <div class="stripes" aria-hidden="true">
+    <span class="s1"></span>
+    <span class="s2"></span>
+    <span class="s3"></span>
+    <span class="s4"></span>
+  </div>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <ul>
+        <li>ETL Pipelines</li>
+        <li>AsyncIO</li>
+        <li>PostgreSQL</li>
+        <li>MongoDB</li>
+        <li>AWS Lambda</li>
+        <li>Django REST</li>
+        <li>Blockchain Analytics</li>
+        <li>Data Modeling</li>
+      </ul>
+      <ul>
+        <li>ETL Pipelines</li>
+        <li>AsyncIO</li>
+        <li>PostgreSQL</li>
+        <li>MongoDB</li>
+        <li>AWS Lambda</li>
+        <li>Django REST</li>
+        <li>Blockchain Analytics</li>
+        <li>Data Modeling</li>
+      </ul>
+    </div>
+  </div>
 
-      <img src="assets/img/hero.jpg" alt="">
+  <main>
 
-      <div class="container" data-aos="zoom-out">
-        <div class="row justify-content-center">
-          <div class="col-lg-9">
-            <h2>Sagunn Bdr. Pradhan</h2>
-            <p>I'm <span class="typed" data-typed-items="a Machine Learning Enthusiast">a Machine Learning Enthusiast</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
-            <div class="social-links">
-              <a href="#"><i class="bi bi-twitter-x"></i></a>
-              <a href="#"><i class="bi bi-facebook"></i></a>
-              <a href="https://github.com/Sagunnn/"><i class="bi bi-github"></i></a>
-              <a href="https://www.linkedin.com/in/sagunnn/"><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- ============================ Work ============================ -->
+    <section class="work" id="work">
+      <div class="shell">
 
-    </section><!-- /Hero Section -->
-
-    <!-- About Section -->
-    <section id="about" class="about section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>About</h2>
-        <p>I am an aspiring Machine Learning enthusiast with a strong interest in leveraging data and algorithms to solve real-world problems. As a beginner in Python programming, I am committed to sharpening my skills and building a solid foundation in AI and data science. My passion lies in continuous learning, and I am eager to contribute to projects that challenge me to grow as a developer and innovator.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4">
-            <img src="assets/img/sagun1.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 content">
-            <h2>UI/UX Designer &amp; Web Developer.</h2>
-            <p class="fst-italic py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>17th May 2000</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Lalitpur, NEpal</span></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bachelors</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>[removed]</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
-                </ul>
-              </div>
-            </div>
-            <p class="py-3">
-              Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore. Et eius omnis.
-              Cupiditate ut dicta maxime officiis quidem quia. Sed et consectetur qui quia repellendus itaque neque.
-            </p>
-          </div>
+        <div class="section-head reveal">
+          <p class="eyebrow">01 — Selected Work</p>
+          <h2>My Work</h2>
+          <p>Systems I designed and shipped: a fraud-detection engine for Ethereum wallets,
+             and two Django platforms that replaced manual HR processes.</p>
         </div>
 
-      </div>
+        <div class="cards">
 
-    </section><!-- /About Section -->
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="bi bi-emoji-smile"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Happy Clients</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="bi bi-journal-richtext"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Projects</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="bi bi-headset"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hours Of Support</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="bi bi-people"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hard Workers</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Stats Section -->
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Skills</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row skills-content skills-animation">
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>HTML</span> <i class="val">100%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>CSS</span> <i class="val">60%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>JavaScript</span> <i class="val">45%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>Django</span> <i class="val">60%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>WordPress/CMS</span> <i class="val">40%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>Photoshop</span> <i class="val">75%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Skills Section -->
-
-    <!-- Resume Section -->
-    <section id="resume" class="resume section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Resume</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="resume-title">Sumary</h3>
-
-            <div class="resume-item pb-0">
-              <h4>Sagunn Bdr. Pradhan</h4>
-              <p><em>Motivated Graphics Designer with over a year of experience in tasks like image manipulation, cutouts, clipping paths, and color correction. Currently pursuing a Bachelor of Information Management (BIM) with foundational knowledge in programming (Python, Java), web development, and artificial intelligence. Enthusiastic about blending design and technology to create innovative solutions.</em></p>
-              <ul>
-                <li>Lalitpur, Nepal</li>
-                <li>(123) 456-7891</li>
-                <li>[removed]</li>
+          <!-- ---------- ScamFilter ---------- -->
+          <article class="card reveal">
+            <div class="card__body">
+              <p class="tag">Production module</p>
+              <h3>ScamFilter —<br>Fraud Detection</h3>
+              <p class="card__note">Ethereum wallet risk scoring · part of a larger blockchain analytics platform</p>
+              <p class="card__text">
+                A three-layer detection engine for Ethereum wallets, combining blacklist
+                matching against ScamSniffer's scam database with a custom behavioural
+                scoring system.
+              </p>
+              <ul class="card__points">
+                <li>11-signal heuristic scoring that detects sweeper bots, Sybil attacks and Permit2 drain attacks.</li>
+                <li>Chain-aware signal routing across Ethereum L1 and L2s (Arbitrum, Optimism, Base), with era-specific gas thresholds and ERC-4337 paymaster griefing detection.</li>
+                <li>Automated wallet health classification and a 90-day behavioural recovery system across 100k+ on-chain transaction records.</li>
               </ul>
-            </div><!-- Edn Resume Item -->
+              <div class="chips">
+                <span>Python</span><span>Polars</span><span>PostgreSQL</span><span>Ethereum</span><span>ERC-4337</span>
+              </div>
+            </div>
 
-            <h3 class="resume-title">Education</h3>
-            <div class="resume-item">
-              <h4>Bachelor of Information Management (BIM)</h4>
-              <h5>2020 - Ongoing</h5>
-              <p><em>St. Xavier’s College, Maitighar, Kathmandu (Tribhuvan University)</em></p>
+            <div class="card__art">
+              <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: a wallet address feeds three detection layers — blacklist match, behavioural signals and chain routing — which merge into a clean, watch or flagged verdict.">
+                <g fill="none" stroke="#eedec1" stroke-opacity=".28" stroke-width="1.5">
+                  <rect x="12" y="140" width="104" height="56"/>
+                  <path d="M116 168 H134 M134 78 V262 M134 78 H154 M134 170 H154 M134 262 H154"/>
+                  <rect x="156" y="46" width="250" height="64"/>
+                  <rect x="156" y="138" width="250" height="64"/>
+                  <rect x="156" y="230" width="250" height="64"/>
+                  <path d="M406 78 H436 M406 170 H436 M406 262 H436 M436 78 V262 M436 170 H458"/>
+                </g>
+
+                <g fill="#eedec1" font-family="'JetBrains Mono', monospace">
+                  <text x="64" y="163" font-size="13" font-weight="700" text-anchor="middle" fill-opacity=".9">WALLET</text>
+                  <text x="64" y="182" font-size="13" font-weight="700" text-anchor="middle" fill-opacity=".9">ADDRESS</text>
+
+                  <text x="176" y="74" font-size="14" font-weight="700">01 · BLACKLIST MATCH</text>
+                  <text x="176" y="94" font-size="11.5" fill-opacity=".6">ScamSniffer scam database</text>
+
+                  <text x="176" y="166" font-size="14" font-weight="700">02 · SIGNALS (11)</text>
+                  <text x="176" y="186" font-size="11.5" fill-opacity=".6">sweeper · Sybil · Permit2 drains</text>
+
+                  <text x="176" y="258" font-size="14" font-weight="700">03 · CHAIN ROUTING</text>
+                  <text x="176" y="278" font-size="11.5" fill-opacity=".6">L1 · Arbitrum · Optimism · Base</text>
+                </g>
+
+                <g font-family="'JetBrains Mono', monospace" font-size="11.5" font-weight="700">
+                  <rect x="462" y="110" width="86" height="30" fill="none" stroke="#217793" stroke-width="2"/>
+                  <text x="505" y="130" fill="#eedec1" text-anchor="middle">CLEAN</text>
+                  <rect x="462" y="155" width="86" height="30" fill="none" stroke="#f7d30e" stroke-width="2"/>
+                  <text x="505" y="175" fill="#eedec1" text-anchor="middle">WATCH</text>
+                  <rect x="462" y="200" width="86" height="30" fill="none" stroke="#d7212c" stroke-width="2"/>
+                  <text x="505" y="220" fill="#eedec1" text-anchor="middle">FLAGGED</text>
+                </g>
+
+                <text x="280" y="322" font-family="'JetBrains Mono', monospace" font-size="11" fill="#c7b074" text-anchor="middle" letter-spacing="1.2">100K+ ON-CHAIN TRANSACTIONS · 90-DAY RECOVERY WINDOW</text>
+              </svg>
+            </div>
+          </article>
+
+          <!-- ---------- Leave Management ---------- -->
+          <article class="card reveal">
+            <div class="card__body">
+              <p class="tag">Open source</p>
+              <h3>Leave Management<br>System</h3>
+              <p class="card__note">github.com/Sagunnn/leave-mgmt</p>
+              <p class="card__text">
+                Automated approval workflows, status notifications and tracking endpoints
+                that eliminated manual leave processing for HR teams.
+              </p>
+              <ul class="card__points">
+                <li>Approval workflow and tracking endpoints built with Django REST Framework and React.</li>
+                <li>Strict REST principles decoupled the Django backend from the React frontend — zero integration bugs at launch.</li>
+              </ul>
+              <div class="chips">
+                <span>Django REST</span><span>React</span><span>PostgreSQL</span>
+              </div>
+              <a class="btn" href="https://github.com/Sagunnn/leave-mgmt" target="_blank" rel="noopener">View on GitHub</a>
+            </div>
+
+            <div class="card__art">
+              <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: a leave request passes from the React client across the REST API to validation and manager review, branching into approved or rejected, then notification and tracking.">
+                <g fill="none" stroke="#eedec1" stroke-opacity=".28" stroke-width="1.5">
+                  <rect x="8" y="120" width="112" height="52"/>
+                  <rect x="152" y="120" width="112" height="52"/>
+                  <rect x="296" y="120" width="112" height="52"/>
+                  <path d="M120 146 H150 M264 146 H294 M408 146 H428 M428 96 V196 M428 96 H446 M428 196 H446"/>
+                  <path d="M130 44 V252" stroke-dasharray="6 7" stroke-opacity=".4"/>
+                  <rect x="8" y="264" width="544" height="44" stroke-dasharray="6 7" stroke-opacity=".4"/>
+                </g>
+
+                <g fill="#eedec1" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="13" text-anchor="middle" fill-opacity=".9">
+                  <text x="64" y="151">REQUEST</text>
+                  <text x="208" y="151">VALIDATE</text>
+                  <text x="352" y="151">REVIEW</text>
+                </g>
+
+                <g font-family="'JetBrains Mono', monospace" font-size="11.5" font-weight="700">
+                  <rect x="448" y="74" width="104" height="44" fill="none" stroke="#217793" stroke-width="2"/>
+                  <text x="500" y="101" fill="#eedec1" text-anchor="middle">APPROVED</text>
+                  <rect x="448" y="174" width="104" height="44" fill="none" stroke="#d7212c" stroke-width="2"/>
+                  <text x="500" y="201" fill="#eedec1" text-anchor="middle">REJECTED</text>
+                </g>
+
+                <g font-family="'JetBrains Mono', monospace" font-size="11" fill="#c7b074" letter-spacing="1.1">
+                  <text x="64" y="34" text-anchor="middle">REACT CLIENT</text>
+                  <text x="152" y="34">DJANGO REST FRAMEWORK</text>
+                  <text x="280" y="291" text-anchor="middle" fill="#eedec1" fill-opacity=".6">STATUS NOTIFICATION · TRACKING ENDPOINTS · AUDIT TRAIL</text>
+                </g>
+              </svg>
+            </div>
+          </article>
+
+          <!-- ---------- HRIS ---------- -->
+          <article class="card reveal">
+            <div class="card__body">
+              <p class="tag">Open source</p>
+              <h3>HRIS —<br>HR Information System</h3>
+              <p class="card__note">github.com/Sagunnn/hris</p>
+              <p class="card__text">
+                Attendance, leave and payroll modules for mid-sized organisations, with
+                role-based access control protecting sensitive HR data.
+              </p>
+              <ul class="card__points">
+                <li>Full payroll calculation accuracy, verified by test suite coverage.</li>
+                <li>User authentication and RBAC mechanisms validated through role-based access tests — no unauthorised access paths.</li>
+              </ul>
+              <div class="chips">
+                <span>Django</span><span>PostgreSQL</span><span>RBAC</span>
+              </div>
+              <a class="btn" href="https://github.com/Sagunnn/hris" target="_blank" rel="noopener">View on GitHub</a>
+            </div>
+
+            <div class="card__art">
+              <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: attendance, leave and payroll modules pass through a role-based access control gate into a PostgreSQL database.">
+                <g fill="none" stroke="#eedec1" stroke-opacity=".28" stroke-width="1.5">
+                  <rect x="12" y="30" width="168" height="64"/>
+                  <rect x="196" y="30" width="168" height="64"/>
+                  <rect x="380" y="30" width="168" height="64"/>
+                  <path d="M96 94 V130 M280 94 V130 M464 94 V130"/>
+                  <rect x="12" y="130" width="536" height="56" stroke="#c7b074" stroke-opacity=".55"/>
+                  <path d="M280 186 V222"/>
+                </g>
+
+                <g fill="#eedec1" font-family="'JetBrains Mono', monospace">
+                  <text x="96" y="60" font-size="13" font-weight="700" text-anchor="middle" fill-opacity=".9">ATTENDANCE</text>
+                  <text x="96" y="79" font-size="11" text-anchor="middle" fill-opacity=".55">check-in log</text>
+                  <text x="280" y="60" font-size="13" font-weight="700" text-anchor="middle" fill-opacity=".9">LEAVE</text>
+                  <text x="280" y="79" font-size="11" text-anchor="middle" fill-opacity=".55">balances</text>
+                  <text x="464" y="60" font-size="13" font-weight="700" text-anchor="middle" fill-opacity=".9">PAYROLL</text>
+                  <text x="464" y="79" font-size="11" text-anchor="middle" fill-opacity=".55">calculation</text>
+                </g>
+
+                <g font-family="'JetBrains Mono', monospace">
+                  <text x="30" y="164" font-size="13" font-weight="700" fill="#c7b074">RBAC GATE</text>
+                  <text x="142" y="164" font-size="11" fill="#eedec1" fill-opacity=".6">authentication · role scoping</text>
+                  <g font-size="10.5" font-weight="700" fill="#eedec1">
+                    <rect x="350" y="146" width="58" height="24" fill="none" stroke="#a7839c" stroke-width="1.5"/>
+                    <text x="379" y="162" text-anchor="middle">ADMIN</text>
+                    <rect x="416" y="146" width="48" height="24" fill="none" stroke="#db6635" stroke-width="1.5"/>
+                    <text x="440" y="162" text-anchor="middle">HR</text>
+                    <rect x="472" y="146" width="66" height="24" fill="none" stroke="#217793" stroke-width="1.5"/>
+                    <text x="505" y="162" text-anchor="middle">STAFF</text>
+                  </g>
+                </g>
+
+                <g fill="none" stroke="#eedec1" stroke-opacity=".28" stroke-width="1.5">
+                  <ellipse cx="280" cy="238" rx="92" ry="16"/>
+                  <path d="M188 238 V288"/>
+                  <path d="M372 238 V288"/>
+                  <path d="M188 288 A92 16 0 0 0 372 288"/>
+                  <path d="M188 264 A92 16 0 0 0 372 264" stroke-opacity=".16"/>
+                </g>
+                <text x="280" y="270" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#eedec1" fill-opacity=".9" text-anchor="middle">PostgreSQL</text>
+
+                <text x="280" y="328" font-family="'JetBrains Mono', monospace" font-size="11" fill="#c7b074" text-anchor="middle" letter-spacing="1.2">AUTHENTICATED · ROLE-SCOPED · TEST-VERIFIED PAYROLL</text>
+              </svg>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= Experience ========================= -->
+    <section class="exp" id="experience">
+      <div class="shell">
+
+        <div class="section-head reveal">
+          <p class="eyebrow">02 — Where I've worked</p>
+          <h2>Experience</h2>
+        </div>
+
+        <div class="exp__list">
+
+          <article class="job reveal">
+            <p class="job__when">
+              Jun 2025 — Present
+              <span>Lalitpur, Nepal</span>
+            </p>
+            <div>
+              <h3>Junior Data Engineer</h3>
+              <p class="job__org">Crimson Umbrella Technologies</p>
+              <ul>
+                <li>Engineered an asynchronous incremental ETL pipeline using Python (AsyncIO) and MongoDB, cutting API costs and significantly improving data processing throughput.</li>
+                <li>Built an AWS Lambda-based crawler monitoring system that logs pipeline status reports and triggers Discord bot alerts on failures, enabling rapid debugging and consistent uptime.</li>
+                <li>Enabled advanced blockchain analytics on 100k+ transaction records by indexing distributed ledger logs and converting on-chain events into structured datasets.</li>
+                <li>Developed Python and SQL functions to populate and sync data across local and remote PostgreSQL databases, supporting reliable parity between development and production.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="job reveal">
+            <p class="job__when">
+              Jun 2024 — Sep 2024
+              <span>Lalitpur, Nepal</span>
+            </p>
+            <div>
+              <h3>Python Developer Intern</h3>
+              <p class="job__org">Grafi Offshore Nepal</p>
+              <ul>
+                <li>Collaborated with a cross-functional team to test, debug and refine Django backend and React frontend code, reducing deployment-stage bug reports.</li>
+                <li>Accelerated feature delivery by implementing Git version control and REST API client–server architecture across the full software development lifecycle.</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ About =========================== -->
+    <section class="about" id="about">
+      <div class="shell">
+
+        <div class="section-head reveal">
+          <p class="eyebrow">03 — Background</p>
+          <h2>About Me</h2>
+        </div>
+
+        <div class="about__grid">
+
+          <div class="portrait reveal">
+            <img src="assets/img/sagun1.jpg" width="2937" height="3223" alt="Sagun B. Pradhan">
+          </div>
+
+          <div class="reveal">
+            <p class="about__lede">
+              I'm a data engineer in Lalitpur, Nepal. Most of my work sits where messy
+              sources meet systems that have to stay up — pipelines, schemas and the
+              monitoring that tells you when something quietly broke.
+            </p>
+
+            <div class="about__body">
               <p>
-                <strong>Core Programming:</strong> C Programming, Object-Oriented Programming with Java, Programming with Python<br>
-                <strong>Web and Software Development:</strong> Web Technology I, II, Software Design and Development<br>
-                <strong>Data and Systems:</strong> Database Management System, Data Structures and Algorithms, Microprocessor and Computer Architecture<br>
-                <strong>Business and Management:</strong> Foundation of Business Management, Organizational Behavior, Strategic Management, Business Environment<br>
-                <strong>Advanced Topics:</strong> Artificial Intelligence
+                At Crimson Umbrella Technologies I work on asynchronous ETL, blockchain
+                analytics and the PostgreSQL infrastructure behind them. Before that I spent
+                a summer at Grafi Offshore Nepal on Django and React, learning how features
+                actually get shipped rather than just written.
+              </p>
+              <p>
+                I'm drawn to the unglamorous parts: data validation, sync correctness,
+                alerting that fires before a client notices. My most recent project pushed
+                that into fraud detection, where being wrong has an immediate cost.
               </p>
             </div>
-            
-            <div class="resume-item">
-              <h4>High School (National Education Board)</h4>
-              <h5>Manbhawan, Lalitpur, Nepal</h5>
-              <p><em>Adarsha Vidya Mandir School</em></p>
-            </div>
-          </div>   
 
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="resume-title">Professional Experience</h3>
-            <div class="resume-item">
-              <h4>Graphics Designer</h4>
-              <h5>May 2019 - Oct 2020</h5>
-              <p><em>Grafi Offshore Nepal, Lalitpur, Nepal</em></p>
-              <ul>
-                <li>Executed high-quality design tasks, including image manipulation, cutout, clipping path, and color correction, ensuring client satisfaction and project deadlines.</li>
-                <li>Collaborated with the team to deliver creative solutions for diverse design projects.</li>
-                <li>Maintained consistency and attention to detail across all design outputs, enhancing the company’s visual standards.</li>
+            <div class="panel edu">
+              <h3>Education</h3>
+              <h4>Bachelor of Information Management (BIM)</h4>
+              <p>St. Xavier's College, Kathmandu — Tribhuvan University</p>
+              <p>Coursework: Data Structures &amp; Algorithms, Database Management Systems,
+                 Software Design &amp; Development, Object-Oriented Programming (Java),
+                 Python Programming, Web Technologies, Computer Architecture.</p>
+              <p class="when">Dec 2020 — Dec 2025</p>
+            </div>
+
+            <div class="panel">
+              <h3>Skills</h3>
+              <div class="skills">
+                <div class="skills__row" style="--accent: #f7d30e">
+                  <p class="skills__label">Languages</p>
+                  <div class="skills__set"><span>Python</span><span>SQL</span><span>Java</span><span>Bash</span></div>
+                </div>
+                <div class="skills__row" style="--accent: #db6635">
+                  <p class="skills__label">Data Engineering</p>
+                  <div class="skills__set"><span>ETL / ELT</span><span>Data Modeling</span><span>Validation</span><span>Cleaning</span><span>AsyncIO</span><span>Pandas</span><span>Scikit-Learn</span></div>
+                </div>
+                <div class="skills__row" style="--accent: #d7212c">
+                  <p class="skills__label">Databases</p>
+                  <div class="skills__set"><span>PostgreSQL</span><span>MySQL</span><span>SQLite</span><span>MongoDB</span></div>
+                </div>
+                <div class="skills__row" style="--accent: #a7839c">
+                  <p class="skills__label">Backend</p>
+                  <div class="skills__set"><span>Django</span><span>Django REST</span><span>RESTful APIs</span></div>
+                </div>
+                <div class="skills__row" style="--accent: #217793">
+                  <p class="skills__label">Tools</p>
+                  <div class="skills__set"><span>Git</span><span>GitHub</span><span>Postman</span><span>Canva</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Leadership &amp; Activities</h3>
+              <ul class="activities">
+                <li><strong>Manav Kalyan Samaj</strong> — Welfare Volunteer (Jul–Aug 2023). Organised health camps reaching 200+ residents and distributed educational resources to underprivileged families.</li>
+                <li><strong>Erasmus Nepal</strong> — Entrepreneurship Knowledge Transfer Program (Jan–Feb 2023). Cross-functional team collaboration with an intercultural exchange focus.</li>
+                <li><strong>Skill Lab</strong> — Research Analyst Certification (Jun–Jul 2023). Research methodology, data collection and report preparation.</li>
               </ul>
             </div>
-            <!-- Edn Resume Item -->
-
           </div>
 
         </div>
-
       </div>
+    </section>
 
-    </section><!-- /Resume Section -->
+    <!-- =========================== Contact ========================== -->
+    <section class="contact" id="contact">
+      <div class="shell">
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Card</li>
-            <li data-filter=".filter-branding">Web</li>
-          </ul><!-- End Portfolio Filters -->
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-          </div><!-- End Portfolio Container -->
-
+        <div class="section-head reveal">
+          <p class="eyebrow">04 — Get in touch</p>
+          <h2>Contact Me</h2>
+          <p>Email is the fastest way to reach me. I read everything, and I reply to anything specific.</p>
         </div>
 
-      </div>
+        <div class="contact__grid">
 
-    </section><!-- /Portfolio Section -->
-
-    <!-- Services Section -->
-    <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item item-cyan position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"></path>
-                </svg>
-                <i class="bi bi-activity"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Nesciunt Mete</h3>
-              </a>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
+          <dl class="contact__list reveal">
+            <div class="contact__row">
+              <dt>Email</dt>
+              <dd><a href="mailto:[removed]">[removed]</a></dd>
             </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item item-orange position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"></path>
-                </svg>
-                <i class="bi bi-broadcast"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Eosle Commodi</h3>
-              </a>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+            <div class="contact__row">
+              <dt>Phone</dt>
+              <dd><a href="tel:+977[removed]">+977 [removed]</a></dd>
             </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item item-teal position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781"></path>
-                </svg>
-                <i class="bi bi-easel"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Ledo Markt</h3>
-              </a>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+            <div class="contact__row">
+              <dt>Location</dt>
+              <dd>Lalitpur, Nepal</dd>
             </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item item-red position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
-                </svg>
-                <i class="bi bi-bounding-box-circles"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Asperiores Commodit</h3>
-              </a>
-              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <a href="#" class="stretched-link"></a>
+            <div class="contact__row">
+              <dt>LinkedIn</dt>
+              <dd><a href="https://www.linkedin.com/in/sagunpradhan" target="_blank" rel="noopener">linkedin.com/in/sagunpradhan</a></dd>
             </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item item-indigo position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,532.3542879108572C369.38199826031484,532.3153073249985,429.10787420159085,491.63046689027357,474.5244479745417,439.17860296908856C522.8885846962883,383.3225815378663,569.1668002868075,314.3205725914397,550.7432151929288,242.7694973846089C532.6665558377875,172.5657663291529,456.2379748765914,142.6223662098291,390.3689995646985,112.34683881706744C326.66090330228417,83.06452184765237,258.84405631176094,53.51806209861945,193.32584062364296,78.48882559362697C121.61183558270385,105.82097193414197,62.805066853699245,167.19869350419734,48.57481801355237,242.6138429142374C34.843463184063346,315.3850353017275,76.69343916112496,383.4422959591041,125.22947124332185,439.3748458443577C170.7312796277747,491.8107796887764,230.57421082200815,532.3932930995766,300,532.3542879108572"></path>
-                </svg>
-                <i class="bi bi-calendar4-week icon"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Velit Doloremque</h3>
-              </a>
-              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <a href="#" class="stretched-link"></a>
+            <div class="contact__row">
+              <dt>GitHub</dt>
+              <dd><a href="https://github.com/Sagunnn" target="_blank" rel="noopener">github.com/Sagunnn</a></dd>
             </div>
-          </div><!-- End Service Item -->
+          </dl>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item item-pink position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,566.797414625762C385.7384707136149,576.1784315230908,478.7894351017131,552.8928747891023,531.9192734346935,484.94944893311C584.6109503024035,417.5663521118492,582.489472248146,322.67544863468447,553.9536738515405,242.03673114598146C529.1557734026468,171.96086150256528,465.24506316201064,127.66468636344209,395.9583748389544,100.7403814666027C334.2173773831606,76.7482773500951,269.4350130405921,84.62216499799875,207.1952322260088,107.2889140133804C132.92018162631612,134.33871894543012,41.79353780512637,160.00259165414826,22.644507872594943,236.69541883565114C3.319112789854554,314.0945973066697,72.72355303640163,379.243833228382,124.04198916343866,440.3218312028393C172.9286146004772,498.5055451809895,224.45579914871206,558.5317968840102,300,566.797414625762"></path>
-                </svg>
-                <i class="bi bi-chat-square-text"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Dolori Architecto</h3>
-              </a>
-              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Services Section -->
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              }
-            }
-          </script>
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Saul Goodman</h3>
-                      <h4>Ceo &amp; Founder</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Sara Wilsson</h3>
-                      <h4>Designer</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Jena Karlis</h3>
-                      <h4>Store Owner</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>John Larson</h3>
-                      <h4>Entrepreneur</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- /Testimonials Section -->
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h3>Email Us</h3>
-                <p>info@example.com</p>
-              </div>
-            </div><!-- End Info Item -->
-
+          <div class="contact__cta reveal">
+            <h3>Working on something<br>data-heavy?</h3>
+            <p>
+              Pipelines that keep falling over, a database that has drifted out of sync,
+              or a backend that needs building properly the first time — tell me what
+              you're dealing with.
+            </p>
+            <a class="btn" href="mailto:[removed]?subject=Project%20enquiry">Send me an email</a>
           </div>
 
-          <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div><!-- End Contact Form -->
-
         </div>
-
       </div>
-
-    </section><!-- /Contact Section -->
+    </section>
 
   </main>
 
-  <footer id="footer" class="footer position-relative light-background">
-    <div class="container">
-      <h3 class="sitename">Sagunn Bdr. Pradhan</h3>
-      <p>ALL INFORMATIONS ARE DATA BUT NOT ALL DATA ARE INFORMATION</p>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-skype"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
-      </div>
-      <div class="container">
-        <div class="copyright">
-          <span>Copyright</span> <strong class="px-1 sitename">Alex Smith</strong> <span>All Rights Reserved</span>
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you've purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
+  <!-- =========================== Footer ============================ -->
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <p>© 2026 Sagun B. Pradhan — Lalitpur, Nepal</p>
+      <div class="footer__social">
+        <a href="https://github.com/Sagunnn" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sagunpradhan" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:[removed]" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
       </div>
     </div>
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 
 </html>
