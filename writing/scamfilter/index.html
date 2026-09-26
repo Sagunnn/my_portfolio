@@ -25,8 +25,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../../assets/css/style.css?v=3">
-  <link rel="stylesheet" href="../../assets/css/case-study.css?v=1">
+  <link rel="stylesheet" href="../../assets/css/style.css?v=4">
+  <link rel="stylesheet" href="../../assets/css/case-study.css?v=2">
 
   <script type="application/ld+json">
   {
@@ -55,6 +55,7 @@
         <a class="nav__link is-active" href="../../#work">My Work</a>
         <a class="nav__link" href="../../#experience">Experience</a>
         <a class="nav__link" href="../../#about">About Me</a>
+        <a class="nav__link" href="../../#writing">Writing</a>
         <a class="nav__link" href="../../#contact">Contact Me</a>
       </div>
     </div>
@@ -73,8 +74,8 @@
       </p>
 
       <dl class="cs-facts">
-        <div><dt>Role</dt><dd>Junior Data Engineer</dd></div>
-        <div><dt>Where</dt><dd>Crimson Umbrella Technologies</dd></div>
+        <div><dt>Type</dt><dd>Personal project</dd></div>
+        <div><dt>Role</dt><dd>Design, build &amp; testing</dd></div>
         <div><dt>When</dt><dd>2025 – 2026</dd></div>
         <div><dt>Stack</dt><dd>Python · Polars · PostgreSQL · MongoDB</dd></div>
       </dl>
@@ -96,7 +97,7 @@
         <p class="eyebrow">01 · The problem</p>
         <h2 id="problem">Bad data looks like real activity</h2>
         <p>
-          ScamFilter is one module of a larger blockchain analytics platform. The platform
+          ScamFilter is a personal project built on a wallet analytics pipeline. The pipeline
           pulls a wallet's full transaction history from Etherscan and turns it into metrics
           such as active days, total gas spent and wallet age.
         </p>
@@ -108,7 +109,7 @@
           Left alone, that wallet looks busy and healthy in the metrics.
         </p>
         <p>
-          So the platform needed two things before calculating anything: remove transactions
+          So the pipeline needed two things before calculating anything: remove transactions
           that come from known scammers, and label wallets that are being drained, even when
           the attacker has never been reported.
         </p>
@@ -285,7 +286,7 @@
         <p class="eyebrow">05 · Different chains, different rules</p>
         <h2 id="chains">The same signal can mean different things</h2>
         <p>
-          The platform covers Ethereum and three layer-2 networks: Arbitrum, Optimism and
+          The filter covers Ethereum and three layer-2 networks: Arbitrum, Optimism and
           Base. A rule that is a strong signal on one chain can be meaningless on another,
           so the filter is told which chain it is scoring and adjusts.
         </p>

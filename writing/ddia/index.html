@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Reading DDIA — Sagun B. Pradhan</title>
+  <meta name="description" content="Chapter-by-chapter notes on Designing Data-Intensive Applications (2nd edition): summaries, takeaways and where I would push back.">
+  <meta name="author" content="Sagun B. Pradhan">
+  <meta name="theme-color" content="#202825">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Reading DDIA: chapter-by-chapter notes">
+  <meta property="og:description" content="Chapter-by-chapter notes on Designing Data-Intensive Applications (2nd edition): summaries, takeaways and where I would push back.">
+  <meta property="og:url" content="https://www.sagunpradhan.com.np/writing/ddia/">
+  <meta property="og:image" content="https://www.sagunpradhan.com.np/assets/img/sagun1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://www.sagunpradhan.com.np/writing/ddia/">
+  <link rel="icon" href="../../assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../assets/css/style.css?v=4">
+  <link rel="stylesheet" href="../../assets/css/case-study.css?v=2">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Reading DDIA: chapter-by-chapter notes",
+    "author": { "@type": "Person", "name": "Sagun B. Pradhan", "url": "https://www.sagunpradhan.com.np/" },
+    "url": "https://www.sagunpradhan.com.np/writing/ddia/"
+  }
+  </script>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <!-- ============================= Nav ============================= -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav__inner">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-tab" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+      <div class="nav__tab" id="nav-tab">
+        <a class="nav__link" href="../../#work">My Work</a>
+        <a class="nav__link" href="../../#experience">Experience</a>
+        <a class="nav__link" href="../../#about">About Me</a>
+        <a class="nav__link is-active" href="../../#writing">Writing</a>
+        <a class="nav__link" href="../../#contact">Contact Me</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================ Header =========================== -->
+  <header class="cs-hero">
+    <div class="shell">
+      <a class="cs-back" href="../../#writing">← All writing</a>
+      <p class="eyebrow">Reading notes</p>
+      <h1>Reading DDIA</h1>
+      <p class="cs-hero__lede">
+        Chapter-by-chapter notes on <em>Designing Data-Intensive Applications</em>: what
+        each chapter argues, what holds up, where I'd push back, and how it connects to
+        pipelines I've actually built.
+      </p>
+
+      <dl class="cs-facts">
+        <div><dt>Book</dt><dd>DDIA, 2nd edition</dd></div>
+        <div><dt>Authors</dt><dd>Martin Kleppmann &amp; Chris Riccomini</dd></div>
+        <div><dt>Progress</dt><dd>1 chapter so far</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="stripes" aria-hidden="true">
+    <span class="s1"></span>
+    <span class="s2"></span>
+    <span class="s3"></span>
+    <span class="s4"></span>
+  </div>
+
+  <main id="content" class="cs-body">
+    <div class="shell">
+
+      <section class="prose" aria-labelledby="why">
+        <p class="eyebrow">Why this book</p>
+        <h2 id="why">The book data engineers keep recommending</h2>
+        <p>
+          DDIA explains how data systems actually work underneath: storage engines,
+          replication, partitioning, transactions, and batch and stream processing. It
+          doesn't teach any single tool. It teaches the ideas every tool is built from,
+          which makes it easier to judge a new database than reading its marketing page.
+        </p>
+        <p>
+          I'm reading the second edition, updated for cloud-native systems, and writing up
+          each chapter as I go. Writing forces me to check that I actually understood it.
+        </p>
+      </section>
+
+      <section class="prose" aria-labelledby="format">
+        <p class="eyebrow">How each post works</p>
+        <h2 id="format">Summary, take, push back</h2>
+        <ul class="list">
+          <li><strong>The gist:</strong> what the chapter argues, in plain language.</li>
+          <li><strong>My take:</strong> what I found most useful, tied to real work where it fits.</li>
+          <li><strong>Push back:</strong> where the chapter is thin, oversimplified or in tension with itself.</li>
+        </ul>
+      </section>
+
+      <section class="prose" aria-labelledby="chapters">
+        <p class="eyebrow">Chapters</p>
+        <h2 id="chapters">Notes so far</h2>
+      </section>
+
+      <div class="chapters">
+        <a class="chapter" href="ch01/">
+          <span class="chapter__num">CH 01</span>
+          <span class="chapter__title">Every system is a trade-off<span>Trade-offs in Data Systems Architecture</span></span>
+          <span class="chapter__status">Read →</span>
+        </a>
+        <div class="chapter">
+          <span class="chapter__num">CH 02</span>
+          <span class="chapter__title">Defining Nonfunctional Requirements<span>Reliability, scalability and maintainability</span></span>
+          <span class="chapter__status">Coming soon</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =========================== Footer ============================ -->
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <p>© 2026 Sagun B. Pradhan — Lalitpur, Nepal</p>
+      <div class="footer__social">
+        <a href="https://github.com/Sagunnn" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sagunnn/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:pradhan_sagun@hotmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/app.js?v=3"></script>
+</body>
+
+</html>

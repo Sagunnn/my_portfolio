@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DDIA Chapter 1 Notes — Sagun B. Pradhan</title>
+  <meta name="description" content="Notes on chapter 1 of Designing Data-Intensive Applications (2nd edition): operational vs analytical, cloud vs self-hosting, single node vs distributed, and data law.">
+  <meta name="author" content="Sagun B. Pradhan">
+  <meta name="theme-color" content="#202825">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="DDIA Chapter 1: every system is a trade-off">
+  <meta property="og:description" content="Notes on chapter 1 of Designing Data-Intensive Applications (2nd edition): operational vs analytical, cloud vs self-hosting, single node vs distributed, and data law.">
+  <meta property="og:url" content="https://www.sagunpradhan.com.np/writing/ddia/ch01/">
+  <meta property="og:image" content="https://www.sagunpradhan.com.np/assets/img/sagun1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://www.sagunpradhan.com.np/writing/ddia/ch01/">
+  <link rel="icon" href="../../../assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../assets/css/style.css?v=4">
+  <link rel="stylesheet" href="../../../assets/css/case-study.css?v=2">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "DDIA Chapter 1: every system is a trade-off",
+    "author": { "@type": "Person", "name": "Sagun B. Pradhan", "url": "https://www.sagunpradhan.com.np/" },
+    "url": "https://www.sagunpradhan.com.np/writing/ddia/ch01/"
+  }
+  </script>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <!-- ============================= Nav ============================= -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav__inner">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-tab" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+      <div class="nav__tab" id="nav-tab">
+        <a class="nav__link" href="../../../#work">My Work</a>
+        <a class="nav__link" href="../../../#experience">Experience</a>
+        <a class="nav__link" href="../../../#about">About Me</a>
+        <a class="nav__link is-active" href="../../../#writing">Writing</a>
+        <a class="nav__link" href="../../../#contact">Contact Me</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================ Header =========================== -->
+  <header class="cs-hero">
+    <div class="shell">
+      <a class="cs-back" href="../">← Reading DDIA</a>
+      <p class="eyebrow">DDIA notes · Chapter 1</p>
+      <h1>Every system is a trade-off</h1>
+      <p class="cs-hero__lede">
+        The first chapter of <em>Designing Data-Intensive Applications</em> barely mentions
+        a database. There's no B-tree and no replication log. Instead it asks four questions
+        you have to answer before you pick any tool, and it refuses to give you default answers.
+      </p>
+
+      <dl class="cs-facts">
+        <div><dt>Book</dt><dd>DDIA, 2nd edition</dd></div>
+        <div><dt>Authors</dt><dd>Martin Kleppmann &amp; Chris Riccomini</dd></div>
+        <div><dt>Chapter</dt><dd>Trade-offs in Data Systems Architecture</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="stripes" aria-hidden="true">
+    <span class="s1"></span>
+    <span class="s2"></span>
+    <span class="s3"></span>
+    <span class="s4"></span>
+  </div>
+
+  <main id="content" class="cs-body">
+    <div class="shell">
+
+      <section class="prose" aria-labelledby="gist">
+        <p class="eyebrow">The gist</p>
+        <h2 id="gist">Four questions, no defaults</h2>
+        <p>
+          Most applications today are limited less by CPU than by data: how much there is,
+          how complex it is, and how fast it changes. Those applications are built from the
+          same few building blocks: databases, caches, search indexes, stream processors and
+          batch jobs. Chapter 1 doesn't explain how any of them work. It explains the decisions
+          that come <em>before</em> choosing them, and it frames each one as a spectrum rather
+          than a right answer.
+        </p>
+      </section>
+
+      <figure class="figure">
+        <div class="figure__scroll">
+          <svg viewBox="0 0 900 300" role="img" aria-label="Four spectrums from the chapter: operational to analytical, self-hosted to cloud, single node to distributed, and keep everything to keep only what you need. Each has a question mark in the middle because the answer depends on the system.">
+            <g font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#eedec1">
+              <text x="40" y="58">OPERATIONAL</text>
+              <text x="860" y="58" text-anchor="end">ANALYTICAL</text>
+              <text x="40" y="126">SELF-HOSTED</text>
+              <text x="860" y="126" text-anchor="end">CLOUD</text>
+              <text x="40" y="194">SINGLE NODE</text>
+              <text x="860" y="194" text-anchor="end">DISTRIBUTED</text>
+              <text x="40" y="262">KEEP EVERYTHING</text>
+              <text x="860" y="262" text-anchor="end">KEEP ONLY WHAT YOU NEED</text>
+            </g>
+            <g stroke-width="3">
+              <path d="M40 74 H860" stroke="#a7839c"/>
+              <path d="M40 142 H860" stroke="#d7212c"/>
+              <path d="M40 210 H860" stroke="#db6635"/>
+              <path d="M40 278 H860" stroke="#f7d30e"/>
+            </g>
+            <g font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" text-anchor="middle">
+              <circle cx="450" cy="74" r="13" fill="#151c1a" stroke="#eedec1" stroke-width="2"/><text x="450" y="79" fill="#eedec1">?</text>
+              <circle cx="450" cy="142" r="13" fill="#151c1a" stroke="#eedec1" stroke-width="2"/><text x="450" y="147" fill="#eedec1">?</text>
+              <circle cx="450" cy="210" r="13" fill="#151c1a" stroke="#eedec1" stroke-width="2"/><text x="450" y="215" fill="#eedec1">?</text>
+              <circle cx="450" cy="278" r="13" fill="#151c1a" stroke="#eedec1" stroke-width="2"/><text x="450" y="283" fill="#eedec1">?</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Fig. 1 — The chapter's four trade-offs. Where a system sits on each line depends on what it's for.</figcaption>
+      </figure>
+
+      <!-- ---------- 1 ---------- -->
+      <section class="prose" aria-labelledby="ops">
+        <p class="eyebrow">Trade-off 01</p>
+        <h2 id="ops">Operational vs analytical</h2>
+        <p>
+          The first split is between systems that <strong>run</strong> the business and systems
+          that <strong>study</strong> it. An operational database handles a checkout or a login:
+          small reads and writes, one record at a time, and it needs to be fast now.
+          An analytical system answers "how did sales change last quarter?" by scanning
+          millions of rows, often from a copy of the data.
+        </p>
+      </section>
+
+      <div class="table-scroll">
+        <table class="cs-table">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Operational (OLTP)</th><th scope="col">Analytical (OLAP)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Reads</td><td>Look up a few records by key</td><td>Aggregate over huge numbers of records</td></tr>
+            <tr><td>Writes</td><td>Create, update, delete single records</td><td>Bulk loads or a stream of events</td></tr>
+            <tr><td>Used by</td><td>Customers, through the app</td><td>Analysts and data scientists</td></tr>
+            <tr><td>Queries</td><td>A fixed set, written by developers</td><td>Anything someone thinks to ask</td></tr>
+            <tr><td>Data shows</td><td>The current state</td><td>The history of what happened</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <section class="prose prose--cont" aria-label="Warehouses, lakes and derived data">
+        <p>
+          Because the two workloads fight each other, companies copy data out of operational
+          databases into a <strong>data warehouse</strong> through ETL (extract, transform, load),
+          or dump it raw into a <strong>data lake</strong> and decide later what it means.
+          The chapter then introduces the idea I expect to see in every later chapter: a
+          <strong>system of record</strong> holds the authoritative version of the data, and
+          everything else, such as caches, indexes, warehouses and models, is
+          <strong>derived data</strong> that can be rebuilt from it.
+        </p>
+
+        <div class="take">
+          <p class="take__label">My take</p>
+          <p>
+            "Which system is the source of truth?" is the most useful question in the chapter,
+            and I wish I'd asked it earlier. In <a href="../../scamfilter/">ScamFilter</a>, the
+            system of record was really the blockchain, read through Etherscan. My PostgreSQL
+            transactions table, the <code>spam_detections</code> table and the wallet metrics in
+            MongoDB were all derived. Seeing it that way changes how you treat a bug: if derived
+            data is wrong, you don't patch rows by hand, you fix the logic and rebuild.
+          </p>
+        </div>
+
+        <div class="take take--push">
+          <p class="take__label">Push back</p>
+          <p>
+            The OLTP/OLAP table is tidy, but real systems blur it, and the chapter admits as much.
+            Product features like recommendations and in-app dashboards run analytical queries
+            inside the operational app, and "reverse ETL" pushes warehouse results back into
+            production tools. Treat the table as a starting point, not a rule.
+          </p>
+        </div>
+      </section>
+
+      <!-- ---------- 2 ---------- -->
+      <section class="prose" aria-labelledby="cloud">
+        <p class="eyebrow">Trade-off 02</p>
+        <h2 id="cloud">Cloud vs self-hosting</h2>
+        <p>
+          This is the classic build-or-buy decision. A managed cloud service means you don't
+          run the servers, capacity can grow and shrink with demand, and specialists handle the
+          hard parts. The price is control: you can't fix a bug in the service yourself, you
+          see less of what's happening inside it when something goes wrong, you depend on the
+          vendor staying around and staying affordable, and a steady, predictable workload can
+          cost more rented than owned.
+        </p>
+        <p>
+          The chapter also describes what "cloud-native" changes about database design. The
+          big shift is <strong>separating storage from compute</strong>: data lives in cheap,
+          durable object storage like S3, and the machines that run queries can be added or
+          removed independently. And operations work doesn't disappear. It moves from
+          patching machines to choosing services, wiring them together and watching the bill.
+        </p>
+
+        <div class="take">
+          <p class="take__label">My take</p>
+          <p>
+            That last point matches my experience. I built pipeline monitoring on AWS Lambda,
+            so there were no servers to look after, but I still had to decide what counted as a
+            failure, log status reports and send alerts to Discord when a crawler broke.
+            Serverless removed the machines. It didn't remove the need to know when things go wrong.
+          </p>
+        </div>
+
+        <div class="take take--push">
+          <p class="take__label">Push back</p>
+          <p>
+            The chapter's honest answer is "it depends", which can feel unsatisfying. What
+            makes it useful anyway is the list of what it depends on: team size, how
+            predictable the load is, how much control you need and how much lock-in you
+            can live with. I'd use that list as a checklist before choosing.
+          </p>
+        </div>
+      </section>
+
+      <!-- ---------- 3 ---------- -->
+      <section class="prose" aria-labelledby="distributed">
+        <p class="eyebrow">Trade-off 03</p>
+        <h2 id="distributed">Single node vs distributed</h2>
+        <p>
+          There are good reasons to spread a system across machines: the users are spread
+          out, one machine can't hold the data or handle the load, you need to survive a
+          machine failing, or the law says certain data must stay in a certain country.
+          The chapter also covers microservices and serverless as distributed designs.
+        </p>
+        <p>
+          The cost is steep. Every call over the network can be slow or fail in ways a
+          function call on the same machine can't. Finding a bug means following one request
+          across many services, which is why tracing and observability tools exist. And
+          keeping data consistent across services becomes your problem. The chapter's
+          advice is plain: if a single machine can do the job, it's usually simpler and cheaper.
+        </p>
+
+        <div class="take">
+          <p class="take__label">My take</p>
+          <p>
+            This is the advice I'd most like to hear repeated. Single machines are powerful
+            now: ScamFilter's metrics engine runs in Polars on one machine, and for its workload
+            that was the right call. Distribution is something you should need before you
+            reach for it, not a sign of a serious system.
+          </p>
+        </div>
+      </section>
+
+      <!-- ---------- 4 ---------- -->
+      <section class="prose" aria-labelledby="law">
+        <p class="eyebrow">Trade-off 04</p>
+        <h2 id="law">Data, law and society</h2>
+        <p>
+          The chapter ends somewhere most database books never go: the law. Rules like the
+          EU's GDPR give people the right to have their data deleted, which is awkward when
+          your system is built on append-only logs and immutable files. The chapter argues
+          for <strong>data minimisation</strong>: collect and keep only what you need,
+          because stored data is a liability as well as an asset.
+        </p>
+
+        <div class="take take--push">
+          <p class="take__label">Push back</p>
+          <p>
+            The chapter holds two ideas in tension without fully resolving them. Earlier it
+            describes the data-lake habit of keeping raw data because you might need it later.
+            Here it says to keep only what you need. Both are reasonable, and in practice the
+            fix is to decide retention up front, per dataset, instead of defaulting to
+            "keep everything".
+          </p>
+          <p>
+            Blockchain data makes this interesting. On-chain transactions are public and
+            can't be deleted. A wallet profile built from them can still point to a real person,
+            and the analytics about the wallet <em>can</em> be deleted. The raw data may be
+            public, but what you derive from it is still yours to answer for.
+          </p>
+        </div>
+      </section>
+
+      <!-- ---------- Verdict ---------- -->
+      <section class="prose" aria-labelledby="verdict">
+        <p class="eyebrow">Verdict</p>
+        <h2 id="verdict">Worth reading, but not for internals</h2>
+        <p>
+          Chapter 1 is a map, not a manual. If you want to know how a storage engine works,
+          that comes later, and this chapter can feel like a long list of terms, each
+          introduced briefly. What it does well is give you the vocabulary for architecture
+          discussions, and a habit worth keeping: when someone says a design is "best",
+          ask best at what, and at what cost.
+        </p>
+        <p>
+          <strong>Next up:</strong> Chapter 2, on defining nonfunctional requirements such as
+          reliability, scalability and maintainability.
+        </p>
+      </section>
+
+      <nav class="series-nav" aria-label="Series">
+        <a href="../">← All DDIA notes</a>
+        <span>Chapter 2 · coming soon</span>
+      </nav>
+
+    </div>
+  </main>
+
+  <!-- =========================== Footer ============================ -->
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <p>© 2026 Sagun B. Pradhan — Lalitpur, Nepal</p>
+      <div class="footer__social">
+        <a href="https://github.com/Sagunnn" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sagunnn/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:pradhan_sagun@hotmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../../assets/js/app.js?v=3"></script>
+</body>
+
+</html>
