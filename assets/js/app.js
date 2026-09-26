@@ -23,7 +23,8 @@
   }
 
   /* ---- Scroll-spy --------------------------------------------------- */
-  var links = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
+  // in-page links only — subpages link back with "../../#work" etc.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav__link[href^="#"]'));
   var sections = links
     .map(function (link) { return document.querySelector(link.getAttribute('href')); })
     .filter(Boolean);

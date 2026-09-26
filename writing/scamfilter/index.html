@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ScamFilter Case Study — Sagun B. Pradhan</title>
+  <meta name="description" content="How I built ScamFilter, a detection engine that flags scam transactions and drained Ethereum wallets using blacklists, an 11-signal sweeper-bot score and chain-aware rules for L2s.">
+  <meta name="author" content="Sagun B. Pradhan">
+  <meta name="theme-color" content="#202825">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ScamFilter: catching drained wallets on Ethereum">
+  <meta property="og:description" content="Case study: a detection engine that flags scam transactions and compromised wallets before they skew wallet analytics.">
+  <meta property="og:url" content="https://www.sagunpradhan.com.np/writing/scamfilter/">
+  <meta property="og:image" content="https://www.sagunpradhan.com.np/assets/img/sagun1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://www.sagunpradhan.com.np/writing/scamfilter/">
+  <link rel="icon" href="../../assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../assets/css/style.css?v=3">
+  <link rel="stylesheet" href="../../assets/css/case-study.css?v=1">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ScamFilter: catching drained wallets on Ethereum",
+    "author": { "@type": "Person", "name": "Sagun B. Pradhan", "url": "https://www.sagunpradhan.com.np/" },
+    "url": "https://www.sagunpradhan.com.np/writing/scamfilter/"
+  }
+  </script>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <!-- ============================= Nav ============================= -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav__inner">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-tab" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+      <div class="nav__tab" id="nav-tab">
+        <a class="nav__link is-active" href="../../#work">My Work</a>
+        <a class="nav__link" href="../../#experience">Experience</a>
+        <a class="nav__link" href="../../#about">About Me</a>
+        <a class="nav__link" href="../../#contact">Contact Me</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================ Header =========================== -->
+  <header class="cs-hero">
+    <div class="shell">
+      <a class="cs-back" href="../../#work">← All work</a>
+      <p class="eyebrow">Case study</p>
+      <h1>ScamFilter</h1>
+      <p class="cs-hero__lede">
+        A detection engine that strips scam transactions out of wallet data and flags
+        Ethereum wallets that have been drained by bots, including attackers that
+        aren't on any blacklist yet.
+      </p>
+
+      <dl class="cs-facts">
+        <div><dt>Role</dt><dd>Junior Data Engineer</dd></div>
+        <div><dt>Where</dt><dd>Crimson Umbrella Technologies</dd></div>
+        <div><dt>When</dt><dd>2025 – 2026</dd></div>
+        <div><dt>Stack</dt><dd>Python · Polars · PostgreSQL · MongoDB</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="stripes" aria-hidden="true">
+    <span class="s1"></span>
+    <span class="s2"></span>
+    <span class="s3"></span>
+    <span class="s4"></span>
+  </div>
+
+  <main id="content" class="cs-body">
+    <div class="shell">
+
+      <!-- ---------- Problem ---------- -->
+      <section class="prose" aria-labelledby="problem">
+        <p class="eyebrow">01 · The problem</p>
+        <h2 id="problem">Bad data looks like real activity</h2>
+        <p>
+          ScamFilter is one module of a larger blockchain analytics platform. The platform
+          pulls a wallet's full transaction history from Etherscan and turns it into metrics
+          such as active days, total gas spent and wallet age.
+        </p>
+        <p>
+          Raw on-chain history is noisy. Scammers send fake airdrops and "address poisoning"
+          transactions to millions of wallets, and those transactions show up in the victim's
+          history as if the victim took part. Worse, when a wallet's private key leaks,
+          a <strong>sweeper bot</strong> watches it and drains every deposit within seconds.
+          Left alone, that wallet looks busy and healthy in the metrics.
+        </p>
+        <p>
+          So the platform needed two things before calculating anything: remove transactions
+          that come from known scammers, and label wallets that are being drained, even when
+          the attacker has never been reported.
+        </p>
+      </section>
+
+      <!-- ---------- Pipeline ---------- -->
+      <section class="prose" aria-labelledby="pipeline">
+        <p class="eyebrow">02 · Where it fits</p>
+        <h2 id="pipeline">Filter first, then measure</h2>
+        <p>
+          Transactions are loaded into PostgreSQL. For each wallet, ScamFilter reads the
+          history in time order and splits it into clean and flagged transactions. Flagged
+          transactions are recorded in their own table with a source and severity. Only the
+          clean set goes on to the metrics engine, which is written in Polars and merges
+          its results into each wallet's MongoDB document without double-counting earlier runs.
+        </p>
+      </section>
+
+      <figure class="figure">
+        <div class="figure__scroll">
+          <svg viewBox="0 0 900 320" role="img" aria-label="Pipeline: transactions in PostgreSQL flow into Layer 1, the spam filter, which does blacklist matching, sweeper scoring and sets health status. Flagged transactions go to a spam_detections table in PostgreSQL. Clean transactions go to Layer 2, the Polars metrics engine, which produces an automation score and wallet metrics that are merged into MongoDB.">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#eedec1" fill-opacity=".55"/>
+              </marker>
+            </defs>
+
+            <g fill="none" stroke="#eedec1" stroke-opacity=".28" stroke-width="1.5">
+              <rect x="24" y="122" width="150" height="76"/>
+              <rect x="226" y="96" width="232" height="128"/>
+              <rect x="560" y="34" width="184" height="70"/>
+              <rect x="560" y="196" width="184" height="96"/>
+              <rect x="780" y="208" width="108" height="72"/>
+            </g>
+
+            <g fill="none" stroke-width="2" marker-end="url(#arrow)">
+              <path d="M174 160 H220" stroke="#eedec1" stroke-opacity=".45"/>
+              <path d="M458 130 H500 V69 H554" stroke="#d7212c"/>
+              <path d="M458 190 H500 V244 H554" stroke="#217793"/>
+              <path d="M744 244 H774" stroke="#eedec1" stroke-opacity=".45"/>
+            </g>
+
+            <g fill="#eedec1" font-family="'JetBrains Mono', monospace">
+              <text x="99" y="156" font-size="14" font-weight="700" text-anchor="middle">POSTGRES</text>
+              <text x="99" y="177" font-size="12" text-anchor="middle" fill-opacity=".6">transactions</text>
+
+              <text x="244" y="124" font-size="14" font-weight="700">LAYER 1 · SPAMFILTER</text>
+              <text x="244" y="154" font-size="12.5" fill-opacity=".7">① blacklist match</text>
+              <text x="244" y="178" font-size="12.5" fill-opacity=".7">② sweeper-bot scoring</text>
+              <text x="244" y="202" font-size="12.5" fill-opacity=".7">③ wallet health status</text>
+
+              <text x="578" y="62" font-size="14" font-weight="700">POSTGRES</text>
+              <text x="578" y="84" font-size="12" fill-opacity=".6">spam_detections</text>
+
+              <text x="578" y="224" font-size="14" font-weight="700">LAYER 2 · POLARS</text>
+              <text x="578" y="250" font-size="12" fill-opacity=".6">wallet metrics</text>
+              <text x="578" y="272" font-size="12" fill-opacity=".6">automation score</text>
+
+              <text x="834" y="240" font-size="14" font-weight="700" text-anchor="middle">MONGODB</text>
+              <text x="834" y="261" font-size="12" text-anchor="middle" fill-opacity=".6">merge</text>
+            </g>
+
+            <g font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" letter-spacing=".5">
+              <text x="507" y="104" fill="#f08a8f">FLAGGED</text>
+              <text x="507" y="222" fill="#5fb4cf">CLEAN</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Fig. 1 — Scam transactions are removed before any metric is calculated.</figcaption>
+      </figure>
+
+      <!-- ---------- Blacklist ---------- -->
+      <section class="prose" aria-labelledby="known">
+        <p class="eyebrow">03 · Known threats</p>
+        <h2 id="known">Start with the easy wins</h2>
+        <p>
+          The first check is a blacklist. ScamFilter downloads and caches ScamSniffer's
+          public scam database, then checks the sender and the destination of every
+          transaction against it. Any match is removed from the clean set.
+        </p>
+        <p>
+          I deliberately left out a third field, <code>contractAddress</code>. In Etherscan's
+          data it is only filled in when a transaction <em>creates</em> a contract, not when it
+          calls one, and calls to a scam contract are already caught by the destination check.
+          Knowing exactly what each field in the source data means kept the rules simple.
+        </p>
+        <p>
+          A blacklist only catches attackers someone has already reported, though. A sweeper
+          bot can use a brand-new wallet every time.
+        </p>
+      </section>
+
+      <!-- ---------- Sweeper scoring ---------- -->
+      <section class="prose" aria-labelledby="sweeper">
+        <p class="eyebrow">04 · Unknown threats</p>
+        <h2 id="sweeper">Scoring the behaviour of a sweeper bot</h2>
+        <p>
+          Sweeper bots behave in a recognisable way: they empty the wallet, they do it
+          seconds after money arrives, and they overpay for gas to get in first. Instead of
+          one hard rule, I gave each of these behaviours a weight. Every outgoing transaction
+          gets a score, and a transaction counts as a sweep only if both of these hold:
+        </p>
+        <ul class="list">
+          <li>its total score is <strong>65 points or more</strong>, and</li>
+          <li>at least one <strong>economic</strong> signal fired, meaning the transaction
+            makes no financial sense for a normal user.</li>
+        </ul>
+        <p>
+          The second rule matters most. Plenty of honest users forward money quickly,
+          such as payment relays and multi-sig operators, and they rack up points for speed
+          alone. What they don't do is empty the whole wallet, massively overbid on gas or
+          pay more in fees than they send.
+        </p>
+      </section>
+
+      <div class="table-scroll">
+        <table class="cs-table">
+          <thead>
+            <tr><th scope="col">ID</th><th scope="col">Signal</th><th scope="col">What it looks for</th><th scope="col" class="num">Points</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>S1</td><td>Balance drain <span class="econ">econ</span></td><td>Sends 90% or more of the wallet's running ETH balance</td><td class="num">25</td></tr>
+            <tr><td>S2</td><td>High gas price <span class="econ">econ</span></td><td>Gas price above the threshold for that period (see below)</td><td class="num">20</td></tr>
+            <tr><td>S3</td><td>Upside-down economics <span class="econ">econ</span></td><td>Pays more than 10× the transferred value in fees</td><td class="num">20</td></tr>
+            <tr><td>S4</td><td>Small extraction</td><td>Sends more than 0 but less than 0.1 ETH</td><td class="num">20</td></tr>
+            <tr><td>S5</td><td>Plain ETH transfer</td><td>No contract call, exactly 21,000 gas</td><td class="num">15</td></tr>
+            <tr><td>S6</td><td>Timing</td><td>Sent within 30 seconds of the last deposit</td><td class="num">30</td></tr>
+            <tr><td>S7</td><td>Permit2 drain <span class="econ">econ</span></td><td>A signed token approval is used to take 95%+ of a token balance, with nothing given back</td><td class="num">30</td></tr>
+            <tr><td>S8</td><td>Sequencer latency <span class="econ">econ</span></td><td>L2 only: the drain lands within 2 positions of the deposit in the same block</td><td class="num">25</td></tr>
+            <tr><td>S9</td><td>Paymaster drain <span class="econ">econ</span></td><td>A sponsored ERC-4337 operation fails after burning 90%+ of its gas budget</td><td class="num">25</td></tr>
+            <tr><td>S10</td><td>Mixer-funded recipient</td><td>The receiving wallet was first funded by Tornado Cash within 72 hours</td><td class="num">15</td></tr>
+            <tr><td>S11</td><td>Whitehat rescue</td><td>Sent privately via Flashbots to a verified recovery contract</td><td class="num neg">−40</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <section class="prose" aria-labelledby="examples">
+        <h3 id="examples">Two transactions, side by side</h3>
+        <p>
+          These are illustrative examples of how the score and the economic gate combine.
+        </p>
+      </section>
+
+      <div class="examples">
+        <article class="example example--flag">
+          <h3>A sweep</h3>
+          <p>0.04 ETH arrives. 12 seconds later, 98% of the balance leaves as a plain transfer at 300 gwei, in 2024.</p>
+          <ol>
+            <li><span>S1 · balance drain <span class="econ">econ</span></span><b>+25</b></li>
+            <li><span>S2 · high gas <span class="econ">econ</span></span><b>+20</b></li>
+            <li><span>S4 · small extraction</span><b>+20</b></li>
+            <li><span>S5 · plain transfer</span><b>+15</b></li>
+            <li><span>S6 · within 30 s</span><b>+30</b></li>
+            <li class="total"><span>Score</span><b>110</b></li>
+          </ol>
+          <p class="verdict">Flagged — over 100, so the wallet is marked compromised right away</p>
+        </article>
+
+        <article class="example example--pass">
+          <h3>A quick payment</h3>
+          <p>A user receives funds and 20 seconds later sends 0.05 ETH to a friend at normal gas, keeping most of the balance.</p>
+          <ol>
+            <li><span>S4 · small extraction</span><b>+20</b></li>
+            <li><span>S5 · plain transfer</span><b>+15</b></li>
+            <li><span>S6 · within 30 s</span><b>+30</b></li>
+            <li class="total"><span>Score</span><b>65</b></li>
+          </ol>
+          <p class="verdict">Not flagged — meets the score, but no economic signal</p>
+        </article>
+      </div>
+
+      <!-- ---------- Chains ---------- -->
+      <section class="prose" aria-labelledby="chains">
+        <p class="eyebrow">05 · Different chains, different rules</p>
+        <h2 id="chains">The same signal can mean different things</h2>
+        <p>
+          The platform covers Ethereum and three layer-2 networks: Arbitrum, Optimism and
+          Base. A rule that is a strong signal on one chain can be meaningless on another,
+          so the filter is told which chain it is scoring and adjusts.
+        </p>
+        <ul class="list">
+          <li>
+            <strong>Arbitrum processes transactions first-come, first-served.</strong>
+            Paying more gas doesn't get you in earlier, so the high-gas signal (S2) is switched off there.
+            Serious bots compete on network speed instead, which is what S8 detects.
+          </li>
+          <li>
+            <strong>Layer-2 fees include the cost of posting data to Ethereum.</strong>
+            Using the full fee made ordinary transfers look like they were overpaying, so on L2s the
+            upside-down-economics signal (S3) uses only the computation part of the fee.
+          </li>
+          <li>
+            <strong>"High gas" depends on when.</strong> During the DeFi and NFT boom
+            (June 2020 to October 2022), gas regularly went above 100 gwei for everyone.
+            The threshold is 500 gwei for that period and 100 gwei otherwise.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ---------- Verdict ---------- -->
+      <section class="prose" aria-labelledby="verdict">
+        <p class="eyebrow">06 · From transactions to a verdict</p>
+        <h2 id="verdict">Being careful about labelling a wallet</h2>
+        <p>
+          Calling a wallet compromised is a strong claim, so a single suspicious
+          transaction isn't enough. A wallet is marked compromised after it sends
+          <strong>three</strong> transactions that pass both checks. For very busy wallets, those with more than
+          20,000 transactions, the bar rises to one strike per 5,000 transactions. A single transaction
+          scoring 100 or more (90 for token transfers) skips the wait, because a score that
+          high leaves little doubt.
+        </p>
+        <p>
+          The label also says <em>how</em> the wallet was attacked: an ETH sweeper, a token
+          sweeper, a Permit2 signature drain or paymaster griefing. A wallet is never downgraded
+          to a milder label, and it isn't blacklisted forever. After <strong>90 days</strong> with
+          no further sweeps, it moves to <code>Healthy (Recovered)</code>.
+        </p>
+        <p>
+          Rescues needed special care. When a key leaks, the owner or a whitehat often
+          races the bot by sending funds privately through Flashbots to a recovery wallet,
+          and that looks a lot like a sweep. S11 takes 40 points off, but only when
+          <strong>both</strong> conditions hold: the transaction came through a private builder,
+          <em>and</em> it went to a verified recovery contract such as a Gnosis Safe.
+          An attacker who only uses a private mempool gets no discount.
+        </p>
+      </section>
+
+      <!-- ---------- Missing data ---------- -->
+      <section class="prose" aria-labelledby="data">
+        <p class="eyebrow">07 · Designing for missing data</p>
+        <h2 id="data">Signals that switch on when the data does</h2>
+        <p>
+          Etherscan's transaction lists cover S1–S6. The newer attacks behind S7–S11,
+          such as Permit2 signature drains, ERC-4337 paymasters, mixer funding and Flashbots
+          bundles, need extra fields that another part of the pipeline has to work out first.
+        </p>
+        <p>
+          I defined those 15 fields as a contract between the ingestion pipeline and the
+          filter. Every field is optional and defaults to a harmless value, so when a
+          field is missing its signal simply doesn't fire. The filter runs the same on plain
+          Etherscan data today, and picks up each advanced signal as soon as the upstream
+          pipeline starts providing its field. No change to the filter is needed.
+        </p>
+      </section>
+
+      <!-- ---------- Layer 2 ---------- -->
+      <section class="prose" aria-labelledby="automation">
+        <p class="eyebrow">08 · Automation is not malice</p>
+        <h2 id="automation">Keeping two questions apart</h2>
+        <p>
+          The second layer looks at a wallet's whole history in Polars and asks a different
+          question: <em>is this wallet run by a script?</em>
+        </p>
+        <ul class="list">
+          <li><strong>No sleep:</strong> activity spread almost evenly across all 24 hours of the day.</li>
+          <li><strong>Block-rate bursts:</strong> more than half of transactions within 12 seconds (one Ethereum block) of the previous one.</li>
+          <li><strong>Disposable wallets:</strong> over 500 transactions in its first 7 days.</li>
+          <li><strong>Mempool sniping:</strong> more than half of 20+ transactions failed.</li>
+          <li><strong>Airdrop spam:</strong> over 100 outgoing transactions, nearly every one to a different address.</li>
+        </ul>
+        <div class="callout">
+          <p>
+            Exchanges, bridges and market makers are automated by design and trip these flags
+            all the time. So this layer produces a separate automation score, and it is
+            never used to decide whether a wallet is compromised. Mixing the two would have
+            labelled every exchange hot wallet as hacked.
+          </p>
+        </div>
+      </section>
+
+      <!-- ---------- Testing ---------- -->
+      <section class="prose" aria-labelledby="testing">
+        <p class="eyebrow">09 · Testing</p>
+        <h2 id="testing">Testing what shouldn't be flagged</h2>
+        <p>
+          The filter has 34 unit tests. Many of them check that honest behaviour
+          <em>isn't</em> flagged: a legitimate gasless swap through Permit2, a whitehat rescue,
+          a successful sponsored transaction, a partial Permit2 transfer, two paymaster
+          failures where three are required, and Ethereum behaving exactly as before when
+          the L2 rules were added. In a system like this, a false accusation costs more
+          than a missed catch, so those cases got the most tests.
+        </p>
+      </section>
+
+      <div class="cs-cta">
+        <p>Want to talk about data pipelines or this project?</p>
+        <a class="btn" href="mailto:pradhan_sagun@hotmail.com?subject=ScamFilter%20case%20study">Email me</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =========================== Footer ============================ -->
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <p>© 2026 Sagun B. Pradhan — Lalitpur, Nepal</p>
+      <div class="footer__social">
+        <a href="https://github.com/Sagunnn" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sagunnn/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:pradhan_sagun@hotmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/app.js?v=3"></script>
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Case study pages — loaded after style.css
+   ========================================================================== */
+
+/* --- Header --------------------------------------------------------------- */
+.cs-hero {
+  position: relative;
+  background: var(--ink-deep);
+  padding-block: clamp(130px, 16vw, 180px) clamp(56px, 8vw, 88px);
+  overflow: hidden;
+}
+
+/* same graph-paper grid as the home hero */
+.cs-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(238, 222, 193, 0.075) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(238, 222, 193, 0.075) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+}
+
+.cs-hero .shell { position: relative; }
+
+.cs-back {
+  display: inline-block;
+  margin-bottom: 28px;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  text-decoration: none;
+}
+.cs-back:hover { color: var(--yellow); }
+
+.cs-hero h1 {
+  font-size: clamp(2.6rem, 8vw, 5.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  max-width: 14ch;
+}
+
+.cs-hero__lede {
+  margin-top: 24px;
+  max-width: 60ch;
+  font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+  color: var(--cream-dim);
+}
+
+.cs-facts {
+  margin: 40px 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1px;
+  background: var(--ink-line);
+  border: 1px solid var(--ink-line);
+  max-width: 900px;
+}
+.cs-facts div { background: var(--ink-deep); padding: 16px 18px; }
+.cs-facts dt {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-lit);
+  margin-bottom: 8px;
+}
+.cs-facts dd { margin: 0; font-size: 0.95rem; }
+
+/* --- Body ----------------------------------------------------------------- */
+.cs-body { padding-block: clamp(56px, 8vw, 96px); }
+
+.cs-body section { padding-block: 0; }   /* override the home page's section padding */
+
+.prose { max-width: 70ch; }
+.prose + .prose,
+.figure + .prose,
+.table-scroll + .prose,
+.examples + .prose { margin-top: clamp(56px, 8vw, 88px); }
+.table-scroll + .prose:has(> h3:first-child) { margin-top: 8px; }
+
+.prose h2 {
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 22px;
+}
+
+.prose h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 36px 0 12px;
+}
+
+.prose p { color: rgba(238, 222, 193, 0.82); }
+.prose p + p { margin-top: 16px; }
+.prose strong { color: var(--cream); }
+
+.prose ul.list { margin-top: 16px; display: grid; gap: 10px; }
+.prose ul.list + p { margin-top: 16px; }
+.prose ul.list li {
+  position: relative;
+  padding-left: 22px;
+  color: rgba(238, 222, 193, 0.82);
+}
+.prose ul.list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  background: var(--yellow);
+}
+
+.prose code, .cs-table code {
+  font: 500 0.86em/1 var(--mono);
+  background: var(--ink-soft);
+  padding: 2px 6px;
+  color: var(--cream);
+}
+
+.callout {
+  margin-top: 24px;
+  border-left: 3px solid var(--yellow);
+  background: var(--ink-soft);
+  padding: 18px 22px;
+}
+.callout p { color: var(--cream); }
+
+/* --- Figures -------------------------------------------------------------- */
+.figure { margin: 36px 0 0; max-width: 980px; }
+.figure__scroll { overflow-x: auto; border: 1px solid var(--ink-line); background: var(--ink-deep); }
+.figure svg { display: block; width: 100%; min-width: 640px; height: auto; }
+.figure figcaption {
+  margin-top: 12px;
+  font: 500 12px/1.5 var(--mono);
+  letter-spacing: 0.04em;
+  color: var(--cream-dim);
+}
+
+/* --- Tables --------------------------------------------------------------- */
+.table-scroll { margin-top: 24px; overflow-x: auto; max-width: 980px; }
+
+.cs-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+}
+.cs-table th {
+  text-align: left;
+  font: 500 11px/1.2 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-lit);
+  padding: 0 14px 12px 0;
+  border-bottom: 1px solid var(--gold);
+}
+.cs-table td {
+  padding: 12px 14px 12px 0;
+  border-bottom: 1px solid var(--ink-line);
+  vertical-align: top;
+  color: rgba(238, 222, 193, 0.82);
+}
+.cs-table td:first-child { font-family: var(--mono); color: var(--cream); white-space: nowrap; }
+.cs-table .num { font-family: var(--mono); text-align: right; white-space: nowrap; color: var(--cream); }
+.cs-table .neg { color: #f08a8f; }
+
+.econ {
+  display: inline-block;
+  font: 700 10px/1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--yellow);
+  padding: 4px 6px;
+}
+
+/* --- Worked examples ------------------------------------------------------ */
+.examples {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 980px;
+}
+
+.example {
+  background: var(--cream-face);
+  color: var(--on-face);
+  padding: 24px 24px 22px;
+  border-top: 6px solid var(--red);
+}
+.example--pass { border-top-color: var(--teal); }
+
+.example h3 { font-size: 1.15rem; font-weight: 800; }
+.example > p { margin-top: 8px; color: var(--on-face-dim); font-size: 0.95rem; }
+
+.example ol {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  font: 500 13px/1.4 var(--mono);
+}
+.example li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--on-face-faint);
+}
+.example li b { font-weight: 700; white-space: nowrap; }
+.example .total { font-weight: 700; border-bottom: 0; padding-top: 12px; }
+
+.verdict {
+  margin-top: 14px;
+  font: 700 12px/1.5 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.example--flag .verdict { color: var(--red); }
+.example--pass .verdict { color: var(--teal-deep); }
+
+/* --- Next steps / footer CTA ---------------------------------------------- */
+.cs-cta {
+  margin-top: clamp(56px, 8vw, 88px);
+  padding-top: 40px;
+  border-top: 1px solid var(--ink-line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+.cs-cta p { font-size: 1.1rem; font-weight: 700; }
+.cs-cta .btn { margin-top: 0; }
