@@ -235,6 +235,20 @@ section { padding-block: clamp(64px, 9vw, 120px); }
   50%      { box-shadow: 0 0 0 6px rgba(247, 211, 14, 0); }
 }
 
+/* soot sprite that wanders along the bottom of the hero (assets/js/pet.js) */
+.pet {
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  width: 64px;
+  height: 64px;
+  background: url("../img/pet/soot.png") 0 0 no-repeat;
+  /* cream halo so the black sprite reads on the dark hero */
+  filter: drop-shadow(0 0 1px rgba(238, 222, 193, 0.7)) drop-shadow(0 0 8px rgba(238, 222, 193, 0.25));
+  transition: transform 1200ms linear;
+}
+.pet.is-pettable { cursor: pointer; }
+
 /* stack the status pill above the nameplate */
 .hero .shell > .status + .nameplate { display: table; margin-inline: auto; }
 
