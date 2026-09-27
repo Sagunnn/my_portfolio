@@ -295,3 +295,7 @@ a.chapter .chapter__status { color: var(--yellow); }
 }
 .series-nav a { color: var(--cream); text-decoration: none; }
 .series-nav a:hover { color: var(--yellow); }
+
+/* DDIA progress HUD placement (styles live in style.css) */
+.cs-hud { margin-top: 36px; }
+.cs-hud--end { margin-top: clamp(56px, 8vw, 88px); }

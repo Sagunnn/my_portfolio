@@ -24,7 +24,7 @@
   <link rel="preload" href="assets/fonts/archivo-latin.woff2?v=2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/fonts.css?v=2">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=4">
+  <link rel="stylesheet" href="assets/css/style.css?v=6">
 
   <script type="application/ld+json">
   {
@@ -340,17 +340,32 @@
 
           <article class="job reveal">
             <p class="job__when">
-              Jun 2025 — Jul 2026
-              <span>Lalitpur, Nepal</span>
+              Jan 2026 — Jun 2026
+              <span>Contract · Lalitpur, Nepal</span>
             </p>
             <div>
-              <h3>Junior Data Engineer</h3>
+              <h3>Associate Data Engineer</h3>
               <p class="job__org">Crimson Umbrella Technologies</p>
               <ul>
-                <li>Engineered an asynchronous incremental ETL pipeline using Python (AsyncIO) and MongoDB, cutting API costs and significantly improving data processing throughput.</li>
-                <li>Built an AWS Lambda-based crawler monitoring system that logs pipeline status reports and triggers Discord bot alerts on failures, enabling rapid debugging and consistent uptime.</li>
-                <li>Enabled advanced blockchain analytics on 100k+ transaction records by indexing distributed ledger logs and converting on-chain events into structured datasets.</li>
-                <li>Developed Python and SQL functions to populate and sync data across local and remote PostgreSQL databases, supporting reliable parity between development and production.</li>
+                <li>Built a behavioural fraud-detection module for Ethereum wallets, scoring on-chain transaction patterns to flag compromised and drained wallets across L1 and L2 networks.</li>
+                <li>Wrote a Python replication job that copies production PostgreSQL data into dev and QA environments, keeping them in parity so testing runs against realistic data.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="job reveal">
+            <p class="job__when">
+              Jun 2025 — Jan 2026
+              <span>Full-time · Lalitpur, Nepal</span>
+            </p>
+            <div>
+              <h3>Data Engineer Associate Trainee</h3>
+              <p class="job__org">Crimson Umbrella Technologies</p>
+              <ul>
+                <li>Built end-to-end ETL pipelines, including an asynchronous incremental pipeline in Python (AsyncIO) and MongoDB that cut API costs and raised processing throughput.</li>
+                <li>Built AWS Lambda-based monitoring for the data crawlers: status reports for every run and Discord alerts on failure, so broken pipelines were caught and debugged fast.</li>
+                <li>Indexed on-chain ledger logs and turned blockchain events into structured datasets, enabling analytics across 100k+ transaction records.</li>
+                <li>Worked across PostgreSQL, MongoDB, Microsoft Fabric and Web3 data sources, and on the first versions of the team's Ethereum fraud-detection modules.</li>
               </ul>
             </div>
           </article>
@@ -398,9 +413,9 @@
 
             <div class="about__body">
               <p>
-                Through July 2026 I was at Crimson Umbrella Technologies, working on
-                asynchronous ETL, blockchain analytics and the PostgreSQL infrastructure
-                behind them. Before that I spent a summer at Grafi Offshore Nepal on Django
+                From June 2025 to June 2026 I was at Crimson Umbrella Technologies, first as a
+                trainee and then as an associate data engineer, working on asynchronous ETL,
+                blockchain analytics and the PostgreSQL infrastructure behind them. Before that I spent a summer at Grafi Offshore Nepal on Django
                 and React, learning how features actually get shipped rather than just written.
               </p>
               <p>
@@ -429,7 +444,7 @@
                 </div>
                 <div class="skills__row" style="--accent: #db6635">
                   <p class="skills__label">Data Engineering</p>
-                  <div class="skills__set"><span>ETL / ELT</span><span>Data Modeling</span><span>Validation</span><span>Cleaning</span><span>AsyncIO</span><span>Pandas</span><span>Scikit-Learn</span></div>
+                  <div class="skills__set"><span>ETL / ELT</span><span>Data Modeling</span><span>Validation</span><span>Cleaning</span><span>AsyncIO</span><span>Polars</span><span>Pandas</span><span>Scikit-Learn</span></div>
                 </div>
                 <div class="skills__row" style="--accent: #d7212c">
                   <p class="skills__label">Databases</p>
@@ -438,6 +453,10 @@
                 <div class="skills__row" style="--accent: #a7839c">
                   <p class="skills__label">Backend</p>
                   <div class="skills__set"><span>Django</span><span>Django REST</span><span>RESTful APIs</span></div>
+                </div>
+                <div class="skills__row" style="--accent: #c7b074">
+                  <p class="skills__label">Cloud &amp; Platforms</p>
+                  <div class="skills__set"><span>AWS Lambda</span><span>Microsoft Fabric</span><span>Etherscan / Web3 APIs</span></div>
                 </div>
                 <div class="skills__row" style="--accent: #217793">
                   <p class="skills__label">Tools</p>
@@ -487,6 +506,7 @@
             <span class="post__kind">Series</span>
             <span class="post__title">Reading DDIA</span>
             <span class="post__text">All my notes on <em>Designing Data-Intensive Applications</em>, 2nd edition, as I work through it.</span>
+            <div class="post__hud" data-ddia-hud data-variant="compact"></div>
             <span class="post__more">See the series →</span>
           </a>
         </div>
@@ -561,6 +581,7 @@
 
   <script src="assets/js/app.js?v=3"></script>
   <script src="assets/js/pet.js?v=1"></script>
+  <script src="assets/js/ddia-hud.js?v=1"></script>
 </body>
 
 </html>

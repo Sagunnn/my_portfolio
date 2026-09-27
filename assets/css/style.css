@@ -773,3 +773,139 @@ section { padding-block: clamp(64px, 9vw, 120px); }
   .reveal { opacity: 1; transform: none; transition: none; }
   .btn:hover { transform: none; }
 }
+
+/* --- DDIA progress HUD (assets/js/ddia-hud.js) ---------------------------- */
+.hud {
+  --hp-high: #3fbf5f;
+  --hp-mid:  var(--yellow);
+  --hp-low:  var(--red);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 480px;
+}
+
+.hud__box {
+  flex: 1;
+  min-width: 0;
+  background: var(--cream-face);
+  color: var(--on-face);
+  border: 2px solid var(--on-face);
+  box-shadow: 5px 5px 0 var(--gold);
+  padding: 12px 16px 10px;
+  font-family: var(--mono);
+}
+
+.hud__top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.hud__name { font-weight: 700; font-size: 15px; letter-spacing: 0.06em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hud__lv { font-size: 12px; font-weight: 700; white-space: nowrap; }
+.hud__lv b { font-size: 16px; margin-left: 2px; }
+
+.hud__hp { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.hud__hp-label {
+  font: 700 11px/1 var(--mono);
+  color: var(--yellow);
+  background: var(--on-face);
+  padding: 3px 6px;
+}
+.hud__track {
+  flex: 1;
+  height: 12px;
+  background: #3a4640;
+  border: 2px solid var(--on-face);
+}
+.hud__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--hp-low);
+  transition: width 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.hud--mid  .hud__fill { background: var(--hp-mid); }
+.hud--high .hud__fill { background: var(--hp-high); }
+
+.hud__xp { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.hud__xp-label {
+  font: 700 9px/1 var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--on-face-dim);
+  width: 26px;
+  text-align: right;
+}
+.hud__xp-track {
+  flex: 1;
+  height: 6px;
+  background: #3a4640;
+  border: 1.5px solid var(--on-face);
+}
+.hud__xp-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #3fa7e0;
+  transition: width 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s;
+}
+
+.hud__box { position: relative; }
+.hud__levelup {
+  position: absolute;
+  top: -13px;
+  right: 12px;
+  font: 700 11px/1 var(--mono);
+  letter-spacing: 0.12em;
+  background: var(--yellow);
+  color: var(--on-face);
+  border: 2px solid var(--on-face);
+  padding: 4px 8px;
+  animation: hud-levelup 0.9s steps(2, jump-none) 4;
+}
+@keyframes hud-levelup { 50% { background: var(--cream-face); } }
+
+.hud__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.hud__next { color: var(--on-face-dim); }
+.hud__count { font-weight: 700; font-size: 15px; white-space: nowrap; }
+
+.hud__mon {
+  flex: none;
+  display: block;
+  background: none;
+  border: 0;
+  padding: 0;
+  line-height: 0;
+}
+button.hud__mon { cursor: pointer; }
+.hud__mon img {
+  width: 128px;
+  height: 128px;
+  image-rendering: pixelated;
+  animation: hud-bob 2.4s ease-in-out infinite;
+}
+button.hud__mon:hover img { animation-duration: 0.6s; }
+
+@keyframes hud-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+.hud[data-variant="compact"] .hud__mon img { width: 84px; height: 84px; }
+.hud[data-variant="compact"] .hud__box { box-shadow: 4px 4px 0 var(--gold); }
+
+.post__hud { margin-top: 6px; }
+
+@media (max-width: 420px) {
+  .hud__mon img { width: 96px; height: 96px; }
+  .hud[data-variant="compact"] .hud__mon img { width: 72px; height: 72px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud__mon img { animation: none; }
+  .hud__fill, .hud__xp-fill { transition: none; }
+  .hud__levelup { animation: none; }
+}
