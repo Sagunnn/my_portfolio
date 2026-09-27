@@ -141,6 +141,31 @@
   border-radius: 4px;
 }
 .dex__sprite { width: 144px; height: 144px; image-rendering: pixelated; }
+.dex__sprite[hidden], .dex__types[hidden], .dex__menu[hidden] { display: none; }
+
+/* MENU mode list on the LCD */
+.dex__menu {
+  align-self: stretch;
+  justify-self: stretch;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  overflow: auto;
+  font: 700 12px/1.2 var(--mono);
+  color: var(--dex-line);
+}
+.dex__menu li {
+  position: relative;
+  padding: 4px 6px 4px 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.dex__menu li:hover { background: rgba(22, 22, 22, 0.08); }
+.dex__menu li.is-active { background: var(--dex-line); color: var(--dex-lcd); }
+.dex__menu li.is-active::before { content: "▶"; position: absolute; left: 5px; font-size: 9px; top: 6px; }
+.dex.is-menu .dex__green { font-size: 13px; }
 .dex__bezel-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
 .dex__led { width: 14px; height: 14px; }
 .dex__grill {
@@ -172,9 +197,23 @@
   cursor: pointer;
 }
 
-.dex__slits { display: flex; gap: 10px; }
-.dex__slits i { display: block; flex: 1; height: 5px; border-radius: 3px; border: 1.5px solid var(--dex-line); background: #d42121; }
-.dex__slits i:nth-child(2) { background: var(--dex-blue); }
+/* DEX / MENU mode tabs, drawn as the two slits above the green screen */
+.dex__tabs { display: flex; gap: 10px; }
+.dex__tab {
+  flex: 1;
+  height: 16px;
+  padding: 0;
+  border: 2px solid var(--dex-line);
+  border-radius: 4px;
+  background: #d42121;
+  color: rgba(255, 255, 255, 0.85);
+  font: 700 8px/1 var(--mono);
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.dex__tab--menu { background: var(--dex-blue); color: #0d2d40; }
+.dex__tab[aria-pressed="true"] { opacity: 1; box-shadow: 0 0 0 2px #fff; }
 
 .dex__green {
   display: block;

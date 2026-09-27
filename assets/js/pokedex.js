@@ -5,6 +5,8 @@
      black button   random Pokémon
      blue keypad    type a Pokédex number · CLR clears · GO jumps (3 digits jump on their own)
      yellow button  the Pokémon currently shown in the DDIA progress box
+   The DEX / MENU tabs above the green screen switch to a site menu:
+     D-pad ▲ ▼ move · ▶ opens a submenu · ◀ or BACK goes up · A or GO selects · 1–9 pick an item
    Keyboard, while the Pokédex has focus: arrows, 0–9, Enter, Backspace, R, Esc.
    Data comes from PokeAPI via scripts/fetch_pokemon.py and is served locally. */
 
@@ -16,6 +18,54 @@
   var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var PAGES = ['info', 'stats'];
   var STATS = [['hp', 'HP'], ['atk', 'ATK'], ['def', 'DEF'], ['spa', 'SP.ATK'], ['spd', 'SP.DEF'], ['spe', 'SPD']];
+  var ROOT = ASSETS.replace(/assets\/$/, '');
+
+  /* ---- Site menu (MENU mode) -----------------------------------------
+     href: '#id' = a section on the home page, 'path/' = a page on this site, else a full URL */
+  function L(label, href, note) { return { label: label, href: href, note: note }; }
+
+  var MENU = { label: 'Menu', items: [
+    { label: 'On this page', note: 'Jump to a section of the page you are on.', items: pageSections },
+    { label: 'Home', note: 'The main portfolio page.', items: [
+      L('Top', '#top', 'Back to the start of the portfolio.'),
+      L('My Work', '#work', 'ScamFilter, the Leave Management System and HRIS.'),
+      L('Experience', '#experience', 'Crimson Umbrella Technologies and Grafi Offshore Nepal.'),
+      L('About Me', '#about', 'Background, education and skills.'),
+      L('Writing', '#writing', 'Case studies and reading notes.'),
+      L('Contact', '#contact', 'The fastest ways to reach me.')
+    ] },
+    { label: 'Projects', note: 'Things I have built.', items: [
+      L('ScamFilter case study', 'writing/scamfilter/', 'How ScamFilter scores sweeper-bot behaviour without flagging honest users.'),
+      L('Leave Management', 'https://github.com/Sagunnn/HRIS-Internship', 'Django REST and React leave workflows, on GitHub.'),
+      L('HRIS', 'https://github.com/Sagunnn/Synergy', 'Attendance, leave and payroll with RBAC, on GitHub.')
+    ] },
+    { label: 'Writing', note: 'Case studies and reading notes.', items: [
+      { label: 'Reading DDIA', note: 'Chapter-by-chapter notes on Designing Data-Intensive Applications.', items: [
+        L('Series overview', 'writing/ddia/', 'Why I am reading it, how the notes work, and progress so far.'),
+        L('Ch 1 · Trade-offs', 'writing/ddia/ch01/', 'Every system is a trade-off: operational vs analytical, cloud vs self-hosting and more.')
+      ] },
+      L('ScamFilter case study', 'writing/scamfilter/', 'A detection engine for drained Ethereum wallets.')
+    ] },
+    { label: 'Contact', note: 'Get in touch.', items: [
+      L('Email', 'mailto:pradhan_sagun@hotmail.com', 'pradhan_sagun@hotmail.com'),
+      L('LinkedIn', 'https://www.linkedin.com/in/sagunnn/', 'linkedin.com/in/sagunnn'),
+      L('GitHub', 'https://github.com/Sagunnn', 'github.com/Sagunnn')
+    ] }
+  ] };
+
+  // "On this page": the hero plus every section or heading with an id
+  function pageSections() {
+    var seen = {};
+    var out = [];
+    document.querySelectorAll('header[id], main section[id], main h2[id]').forEach(function (el) {
+      if (seen[el.id]) return;
+      seen[el.id] = true;
+      var h = el.matches('h2') ? el : el.querySelector('h2');
+      var label = el.id === 'top' ? 'Top' : (h ? h.textContent.replace(/\s+/g, ' ').trim() : el.id);
+      out.push(L(label, '#' + el.id, 'Section on this page.'));
+    });
+    return out.length ? out : [L('Top', '#', 'This page has no sections to jump to.')];
+  }
 
   /* ---- Markup -------------------------------------------------------- */
   var launcher = document.createElement('button');
@@ -68,16 +118,22 @@
       '</div>' +
       '<div class="dex__bezel">' +
         '<span class="dex__bezel-dots"><i></i><i></i></span>' +
-        '<div class="dex__screen"><img class="dex__sprite" width="96" height="96" alt=""></div>' +
+        '<div class="dex__screen">' +
+          '<img class="dex__sprite" width="96" height="96" alt="">' +
+          '<ol class="dex__menu" hidden></ol>' +
+        '</div>' +
         '<span class="dex__bezel-foot"><i class="dex__led"></i><i class="dex__grill"></i></span>' +
       '</div>' +
       '<div class="dex__controls">' +
         '<div class="dex__col">' +
           '<button type="button" class="dex__round" data-act="random" aria-label="Random Pokémon"></button>' +
-          '<span class="dex__label">RND</span>' +
+          '<span class="dex__label dex__label--round">RND</span>' +
         '</div>' +
         '<div class="dex__col dex__col--mid">' +
-          '<span class="dex__slits"><i></i><i></i></span>' +
+          '<span class="dex__tabs" role="group" aria-label="Mode">' +
+            '<button type="button" class="dex__tab dex__tab--dex" data-act="mode-dex" aria-pressed="true">DEX</button>' +
+            '<button type="button" class="dex__tab dex__tab--menu" data-act="mode-menu" aria-pressed="false">MENU</button>' +
+          '</span>' +
           '<output class="dex__green">No.001</output>' +
         '</div>' +
         '<div class="dex__col">' +
@@ -103,7 +159,7 @@
       '<div class="dex__keys" role="group" aria-label="Enter a Pokédex number">' + digits + '</div>' +
       '<div class="dex__row">' +
         '<span class="dex__whites">' +
-          '<button type="button" data-act="clear">CLR</button>' +
+          '<button type="button" class="dex__clear" data-act="clear">CLR</button>' +
           '<button type="button" data-act="go">GO</button>' +
         '</span>' +
         '<span class="dex__col">' +
@@ -124,7 +180,9 @@
   var ui = {
     sprite: q('.dex__sprite'), green: q('.dex__green'), name: q('.dex__name'),
     pageNo: q('.dex__page-no'), genus: q('.dex__genus'), types: q('.dex__types'),
-    text: q('.dex__text'), stats: q('.dex__stats'), ht: q('.dex__ht'), wt: q('.dex__wt')
+    text: q('.dex__text'), stats: q('.dex__stats'), ht: q('.dex__ht'), wt: q('.dex__wt'),
+    menu: q('.dex__menu'), round: q('.dex__round'), roundLabel: q('.dex__label--round'),
+    clear: q('.dex__clear'), tabDex: q('.dex__tab--dex'), tabMenu: q('.dex__tab--menu')
   };
 
   /* ---- State --------------------------------------------------------- */
@@ -134,6 +192,8 @@
   var page = 0;
   var typed = '';
   var loading = null;
+  var mode = 'dex';
+  var stack = [];       // menu levels: [{node, items, i}]
 
   function load() {
     if (!loading) {
@@ -155,6 +215,10 @@
   function pad3(n) { return ('00' + n).slice(-3); }
 
   function render() {
+    if (mode === 'menu') return renderMenu();
+    ui.menu.hidden = true;
+    ui.sprite.hidden = false;
+    ui.types.hidden = false;
     if (!pool) return;
     var mon = pool[idx];
     var info = details[idx];
@@ -202,6 +266,105 @@
     ui.wt.textContent = 'WT ' + info.weight.toFixed(1) + ' kg';
   }
 
+  /* ---- MENU mode ----------------------------------------------------- */
+  function level(node) {
+    return { node: node, items: typeof node.items === 'function' ? node.items() : node.items, i: 0 };
+  }
+
+  function renderMenu() {
+    if (!stack.length) stack.push(level(MENU));
+    var lv = stack[stack.length - 1];
+    var item = lv.items[lv.i];
+
+    ui.sprite.hidden = true;
+    ui.menu.hidden = false;
+    ui.menu.textContent = '';
+    lv.items.forEach(function (it, n) {
+      var li = document.createElement('li');
+      li.textContent = (n < 9 ? (n + 1) + '. ' : '   ') + it.label +
+        (it.items ? ' ▸' : /^https?:/.test(it.href) ? ' ↗' : '');
+      li.setAttribute('data-index', String(n));
+      if (n === lv.i) { li.className = 'is-active'; li.setAttribute('aria-current', 'true'); }
+      ui.menu.appendChild(li);
+    });
+    var active = ui.menu.children[lv.i];
+    if (active.offsetTop < ui.menu.scrollTop) ui.menu.scrollTop = active.offsetTop;
+    else if (active.offsetTop + active.offsetHeight > ui.menu.scrollTop + ui.menu.clientHeight) {
+      ui.menu.scrollTop = active.offsetTop + active.offsetHeight - ui.menu.clientHeight;
+    }
+
+    ui.green.textContent = 'MENU ' + (lv.i + 1) + '/' + lv.items.length;
+    ui.name.textContent = lv.node.label.toUpperCase();
+    ui.pageNo.textContent = 'LEVEL ' + stack.length;
+    ui.genus.textContent = stack.map(function (s) { return s.node.label; }).join(' › ');
+    ui.types.hidden = true;
+    ui.stats.hidden = true;
+    ui.text.hidden = false;
+    ui.text.textContent = item.label + ' — ' + (item.note || '') +
+      (item.items ? ' Press ▶ to open.' : /^https?:/.test(item.href) ? ' Opens in a new tab.' : '');
+    ui.ht.textContent = stack.length > 1 ? '◀ BACK' : '▲▼ MOVE';
+    ui.wt.textContent = item.items ? '▶ OPEN' : 'A SELECT';
+  }
+
+  function navigate(href) {
+    if (/^mailto:/.test(href)) { location.href = href; return; }
+    if (/^https?:/.test(href)) { window.open(href, '_blank', 'noopener'); return; }
+    var url = new URL(href.charAt(0) === '#' && stack[1] && stack[1].node.label === 'On this page'
+      ? href : ROOT + href, location.href);
+    if (url.pathname === location.pathname && url.hash) {
+      close();
+      var target = document.getElementById(url.hash.slice(1));
+      if (target) target.scrollIntoView({ behavior: motionOK ? 'smooth' : 'auto' });
+      history.replaceState(null, '', url.hash);
+    } else {
+      location.href = url.href;
+    }
+  }
+
+  function select() {
+    var lv = stack[stack.length - 1];
+    var item = lv.items[lv.i];
+    if (item.items) { stack.push(level(item)); renderMenu(); }
+    else navigate(item.href);
+  }
+
+  var menuActions = {
+    up: function () { var lv = stack[stack.length - 1]; lv.i = (lv.i - 1 + lv.items.length) % lv.items.length; renderMenu(); },
+    down: function () { var lv = stack[stack.length - 1]; lv.i = (lv.i + 1) % lv.items.length; renderMenu(); },
+    right: function () { if (stack[stack.length - 1].items[stack[stack.length - 1].i].items) select(); },
+    left: function () { if (stack.length > 1) { stack.pop(); renderMenu(); } },
+    clear: function () { menuActions.left(); },
+    random: select,     // the black button is "A" in MENU mode
+    go: select,
+    digit: function (n) {
+      var lv = stack[stack.length - 1];
+      var i = parseInt(n, 10) - 1;
+      if (i >= 0 && i < lv.items.length) { lv.i = i; select(); }
+    },
+    partner: function () { setMode('dex'); if (pool) showId(partnerId()); }
+  };
+
+  function setMode(m) {
+    mode = m;
+    var menu = m === 'menu';
+    dex.classList.toggle('is-menu', menu);
+    ui.tabDex.setAttribute('aria-pressed', String(!menu));
+    ui.tabMenu.setAttribute('aria-pressed', String(menu));
+    ui.roundLabel.textContent = menu ? 'A' : 'RND';
+    ui.round.setAttribute('aria-label', menu ? 'Select' : 'Random Pokémon');
+    ui.clear.textContent = menu ? 'BACK' : 'CLR';
+    if (menu) stack = [level(MENU)];   // rebuild so "On this page" reflects the page
+    typed = '';
+    render();
+  }
+
+  ui.menu.addEventListener('click', function (e) {
+    var li = e.target.closest('li');
+    if (!li) return;
+    stack[stack.length - 1].i = parseInt(li.getAttribute('data-index'), 10);
+    select();
+  });
+
   function showId(id) {
     var i = pool.findIndex(function (m) { return m.id === id; });
     if (i >= 0) { idx = i; typed = ''; render(); return true; }
@@ -238,6 +401,8 @@
 
   function run(act, arg) {
     if (act === 'close') return close();
+    if (act === 'mode-dex' || act === 'mode-menu') return setMode(act.slice(5));
+    if (mode === 'menu') return menuActions[act] && menuActions[act](arg);
     if (!pool) return;
     actions[act](arg);
   }
@@ -260,6 +425,7 @@
     if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('button')) return;
     if (/^[0-9]$/.test(e.key)) { run('digit', e.key); e.preventDefault(); return; }
     var act = KEYS[e.key];
+    if (act === 'random' && mode === 'menu') return;   // R is only a shortcut in DEX mode
     if (act) { run(act); e.preventDefault(); }
   });
 
@@ -272,9 +438,10 @@
     launcher.setAttribute('aria-label', 'Close Pokédex');
     requestAnimationFrame(function () { dex.classList.add('is-open'); });
     dex.focus();
+    if (mode === 'menu') setMode('menu');   // refresh "On this page"
     load().then(function () {
       if (!pool) return;
-      if (!opened) { opened = true; if (!showId(partnerId())) render(); }
+      if (!opened) { opened = true; if (mode === 'dex' && !showId(partnerId())) render(); }
     });
   }
 
