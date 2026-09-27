@@ -117,6 +117,8 @@
       var p = pool[Math.floor(Math.random() * pool.length)];
       name.textContent = p.name.toUpperCase();
       img.src = ASSETS + 'img/pokemon/' + p.id + '.png';
+      // the Pokédex's yellow button jumps to this Pokémon
+      document.documentElement.setAttribute('data-ddia-partner', String(p.id));
       if (reroll) {
         mon.setAttribute('aria-label', p.name + ' — show another Pokémon');
         mon.title = 'Show another Pokémon';
