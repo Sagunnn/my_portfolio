@@ -244,27 +244,21 @@
    Reading notes (writing/ddia/) — share the case-study layout above
    ========================================================================== */
 
+/* "My take" and "Push back" boxes are speech bubbles from Professor Oak, who stands to the
+   left: listening for a take, pointing for a push back */
 .take {
-  margin-top: 26px;
-  background: var(--cream-face);
-  color: var(--on-face);
-  padding: 20px 24px 22px;
-  border-left: 6px solid var(--teal);
-}
-.take--push { border-left-color: var(--orange); }
-
-/* "My take" as a speech bubble from Professor Oak, who stands to its left */
-.take:not(.take--push) {
   position: relative;
   min-height: 118px;
-  margin-left: 92px;
+  margin: 26px 0 0 92px;
+  padding: 20px 24px 22px;
   background: #fff;
   color: #1c1c1c;
   border: 3px solid #1c1c1c;
   border-radius: 10px;
   box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #6f8190;
 }
-.take:not(.take--push)::before {          /* Oak */
+.take--push { box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px var(--orange); }
+.take::before {                           /* Oak */
   content: "";
   position: absolute;
   left: -95px;
@@ -273,7 +267,12 @@
   height: 138px;
   background: url("../img/oak.png") center bottom / contain no-repeat;
 }
-.take:not(.take--push)::after {           /* the bubble's tail, pointing at Oak */
+.take--push::before {
+  left: -100px;
+  width: 64px;
+  background-image: url("../img/oak-point.png");
+}
+.take::after {                            /* the bubble's tail, pointing at Oak */
   content: "";
   position: absolute;
   left: -12px;
@@ -285,11 +284,11 @@
   border-bottom: 3px solid #1c1c1c;
   transform: rotate(45deg);
 }
-.take:not(.take--push) .take__label { color: #a3081f; }
 
 @media (max-width: 560px) {
-  .take:not(.take--push) { margin-left: 62px; min-height: 96px; }
-  .take:not(.take--push)::before { left: -64px; width: 44px; height: 104px; }
+  .take { margin-left: 62px; min-height: 96px; }
+  .take::before { left: -64px; width: 44px; height: 104px; }
+  .take--push::before { left: -66px; width: 48px; }
 }
 
 .take__label {
@@ -299,6 +298,7 @@
   color: var(--teal-deep);
   margin-bottom: 10px;
 }
+.take .take__label { color: #a3081f; }
 .take--push .take__label { color: #a8461f; }
 .take p { color: var(--on-face); }
 .take p + p { margin-top: 12px; }
