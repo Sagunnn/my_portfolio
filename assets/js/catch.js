@@ -1,7 +1,7 @@
 /* Sagun B. Pradhan — the failed catch
-   On the first home-page load of a browser session, a Poké Ball is thrown at the
+   On every home-page load (including a refresh), a Poké Ball is thrown at the
    "Open to data engineering roles" badge, pulls it in, wobbles three times and bursts open:
-   the badge breaks free, so it's still open to roles. Plays once per session, never loops,
+   the badge breaks free, so it's still open to roles. Plays once per load, never loops,
    and is skipped for reduced motion. Uses the Web Animations API; the Poké Ball is the CSS
    one from style.css. */
 
@@ -11,10 +11,6 @@
   var badge = document.querySelector('.hero .status');
   if (!badge || !badge.animate) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  try {
-    if (sessionStorage.getItem('catch-played')) return;
-    sessionStorage.setItem('catch-played', '1');
-  } catch (e) { /* storage blocked — play it, it's harmless */ }
 
   var stage = badge.parentNode;              // .hero .shell, position: relative
   var BALL = 28;
