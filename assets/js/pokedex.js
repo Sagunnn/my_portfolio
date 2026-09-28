@@ -8,6 +8,8 @@
    The DEX / MENU tabs above the green screen switch to a site menu:
      D-pad ▲ ▼ move · ▶ opens a submenu · ◀ or BACK goes up · A or GO selects · 1–9 pick an item
    Keyboard, while the Pokédex has focus: arrows, 0–9, Enter, Backspace, R, Esc.
+   Sounds (assets/js/chiptune.js): a power-on chirp when it opens, a power-down when it closes,
+   a click for each button and a buzz for an unknown number; ♪ turns sound off site-wide.
    Data comes from PokeAPI via scripts/fetch_pokemon.py and is served locally. */
 
 (function () {
@@ -17,6 +19,14 @@
   var ASSETS = script.src.replace(/js\/pokedex\.js.*$/, '');
   var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var PAGES = ['info', 'stats'];
+  var Chip = window.Chip || { note: function () {}, seq: function () {}, isOn: function () { return false; }, toggle: function () { return false; } };
+  var SFX = {
+    open:  function () { Chip.seq([[659, 55, 0.04], [831, 55, 0.04], [988, 55, 0.04], [1319, 150, 0.04]]); },
+    close: function () { Chip.seq([[988, 55, 0.035], [659, 55, 0.035], [494, 120, 0.035]]); },
+    press: function () { Chip.note(1400, 22, 0.025); },
+    page:  function () { Chip.seq([[880, 40, 0.03], [1175, 60, 0.03]]); },
+    error: function () { Chip.seq([[220, 90, 0.045], [185, 150, 0.045]]); }
+  };
   var STATS = [['hp', 'HP'], ['atk', 'ATK'], ['def', 'DEF'], ['spa', 'SP.ATK'], ['spd', 'SP.DEF'], ['spe', 'SPD']];
   var ROOT = ASSETS.replace(/assets\/$/, '');
 
@@ -119,6 +129,7 @@
       '<div class="dex__top">' +
         '<span class="dex__lens"></span>' +
         '<span class="dex__lights"><i></i><i></i><i></i></span>' +
+        '<button type="button" class="dex__sound" data-act="sound" aria-label="Sound">♪</button>' +
         '<button type="button" class="dex__close" data-act="close" aria-label="Close Pokédex">×</button>' +
       '</div>' +
       '<div class="dex__bezel">' +
@@ -395,6 +406,7 @@
         typed = '';
         render();
         ui.green.textContent = 'No.???';
+        SFX.error();
       }
     },
     digit: function (n) {
@@ -404,8 +416,19 @@
     close: function () { close(); }
   };
 
+  var soundBtn = dex.querySelector('.dex__sound');
+  function syncSound() {
+    soundBtn.setAttribute('aria-pressed', String(Chip.isOn()));
+    soundBtn.title = Chip.isOn() ? 'Sound on' : 'Sound off';
+  }
+  document.addEventListener('chip:sound', syncSound);   // Oak's ♪ button changes it too
+  syncSound();
+
   function run(act, arg) {
     if (act === 'close') return close();
+    if (act === 'sound') { if (Chip.toggle()) SFX.page(); return; }
+    if (act === 'up' || act === 'down' || act === 'mode-dex' || act === 'mode-menu') SFX.page();
+    else SFX.press();
     if (act === 'mode-dex' || act === 'mode-menu') return setMode(act.slice(5));
     if (mode === 'menu') return menuActions[act] && menuActions[act](arg);
     if (!pool) return;
@@ -438,6 +461,7 @@
   var opened = false;
 
   function open() {
+    SFX.open();
     dex.hidden = false;
     launcher.setAttribute('aria-expanded', 'true');
     launcher.setAttribute('aria-label', 'Close Pokédex');
@@ -451,6 +475,7 @@
   }
 
   function close() {
+    SFX.close();
     dex.classList.remove('is-open');
     launcher.setAttribute('aria-expanded', 'false');
     launcher.setAttribute('aria-label', 'Open Pokédex');

@@ -103,8 +103,24 @@
 .dex__lights i:nth-child(2) { background: #f2d535; }
 .dex__lights i:nth-child(3) { background: #2e9a3e; }
 
-.dex__close {
+.dex__sound {
   margin-left: auto;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--dex-line);
+  border-radius: 50%;
+  background: var(--dex-red-dk);
+  color: #fff;
+  font: 700 14px/1 var(--mono);
+  cursor: pointer;
+}
+.dex__sound[aria-pressed="false"] {
+  color: rgba(255, 255, 255, 0.45);
+  background: linear-gradient(135deg, transparent 45%, #fff 45% 55%, transparent 55%), var(--dex-red-dk);
+}
+
+.dex__close {
+  margin-left: 6px;
   width: 28px;
   height: 28px;
   border: 2px solid var(--dex-line);

@@ -5,7 +5,7 @@
    Without JavaScript the block stays a plain list of takeaways.
      A / click / Enter / Space   finish the line, or go to the next one
      Show all                    reveal every line as a list
-     ♪ button                    sound on/off (remembered per browser) */
+     ♪ button                    sound on/off for the whole site (see chiptune.js) */
 
 (function () {
   'use strict';
@@ -29,29 +29,10 @@
     return img;
   }
 
-  /* ---- Sound: short square-wave blips ---------------------------------- */
-  var audio = null;
-  var soundOn = true;
-  try { soundOn = localStorage.getItem('oak-sound') !== 'off'; } catch (e) { /* default on */ }
-
-  function blip(freq, ms, vol) {
-    if (!soundOn) return;
-    try {
-      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
-      if (audio.state === 'suspended') audio.resume();
-      var osc = audio.createOscillator();
-      var gain = audio.createGain();
-      osc.type = 'square';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(vol || 0.035, audio.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + ms / 1000);
-      osc.connect(gain).connect(audio.destination);
-      osc.start();
-      osc.stop(audio.currentTime + ms / 1000);
-    } catch (e) { /* no Web Audio — stay silent */ }
-  }
-  function talkBlip() { blip(640 + Math.random() * 120, 32); }
-  function nextBlip() { blip(988, 50, 0.04); setTimeout(function () { blip(1319, 70, 0.04); }, 55); }
+  /* ---- Sound: square-wave blips from assets/js/chiptune.js ------------ */
+  var Chip = window.Chip || { note: function () {}, seq: function () {}, isOn: function () { return false; }, toggle: function () { return false; } };
+  function talkBlip() { Chip.note(640 + Math.random() * 120, 32); }
+  function nextBlip() { Chip.seq([[988, 55, 0.04], [1319, 70, 0.04]]); }
 
   /* ---- Dialogue -------------------------------------------------------- */
   function el(tag, cls, text) {
@@ -111,8 +92,8 @@
     var timer = null;
 
     function syncSound() {
-      sound.textContent = soundOn ? '♪ Sound on' : '♪ Sound off';
-      sound.setAttribute('aria-pressed', String(soundOn));
+      sound.textContent = Chip.isOn() ? '♪ Sound on' : '♪ Sound off';
+      sound.setAttribute('aria-pressed', String(Chip.isOn()));
     }
 
     function status() {
@@ -169,11 +150,10 @@
     });
 
     sound.addEventListener('click', function () {
-      soundOn = !soundOn;
-      try { localStorage.setItem('oak-sound', soundOn ? 'on' : 'off'); } catch (e) { /* not remembered */ }
-      syncSound();
-      if (soundOn) nextBlip();
+      if (Chip.toggle()) nextBlip();
     });
+    // the setting is site-wide: the Pokédex's ♪ button changes it too
+    document.addEventListener('chip:sound', syncSound);
 
     syncSound();
     prompt();
