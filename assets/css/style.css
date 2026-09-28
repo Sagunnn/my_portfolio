@@ -396,13 +396,14 @@ section { padding-block: clamp(64px, 9vw, 120px); }
 /* --- Retro stripes + marquee ---------------------------------------------- */
 .stripes { background: var(--ink-deep); padding-top: 6px; }
 .stripes span { display: block; }
-.stripes .s1 { height: 9px;  background: var(--purple); }
-.stripes .s2 { height: 10px; background: var(--red);    margin-top: 7px; }
-.stripes .s3 { height: 11px; background: var(--orange); margin-top: 7px; }
-.stripes .s4 { height: 15px; background: var(--yellow); margin-top: 7px; }
+/* stripes and skills band use the classic Pokémon logo palette */
+.stripes .s1 { height: 9px;  background: #ff0000; }
+.stripes .s2 { height: 10px; background: #cc0000; margin-top: 7px; }
+.stripes .s3 { height: 11px; background: #ffde00; margin-top: 7px; }
+.stripes .s4 { height: 15px; background: #b3a125; margin-top: 7px; }
 
 .marquee {
-  background: var(--teal);
+  background: #3b4cca;
   overflow: hidden;
   padding-block: 16px;
   display: flex;
