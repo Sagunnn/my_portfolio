@@ -27,13 +27,13 @@
   padding: 6px 10px 4px;
 }
 .hud__name { font: 11px/1.4 var(--pixel); letter-spacing: 0; }
-.hud__lv { font: 8px/1 var(--pixel); }
+.hud__lv { font: 9px/1 var(--pixel); }
 .hud__lv b { font-size: 11px; font-weight: 400; }
-.hud__hp-label { font: 8px/1 var(--pixel); padding: 3px 4px; }
-.hud__xp-label { font: 6px/1 var(--pixel); letter-spacing: 0; }
+.hud__hp-label { font: 9px/1 var(--pixel); padding: 3px 4px; }
+.hud__xp-label { font: 15px/1 var(--lcd); letter-spacing: 0.04em; }
 .hud__foot { font: 18px/1 var(--lcd); }
 .hud__count { font: 11px/1 var(--pixel); }
-.hud__levelup { font: 8px/1 var(--pixel); }
+.hud__levelup { font: 9px/1 var(--pixel); }
 .hud[data-variant="compact"] .hud__box { box-shadow: none; }
 
 /* --- Professor Oak dialogue ------------------------------------------------ */
@@ -54,7 +54,7 @@
 }
 .oak__speaker { font: 9px/1 var(--pixel); letter-spacing: 0.04em; margin-bottom: 8px; }
 .oak__arrow { font: 18px/1 var(--lcd); right: 12px; bottom: 6px; }
-.oak__count, .oak__btn { font: 8px/1.2 var(--pixel); letter-spacing: 0.04em; }
+.oak__count, .oak__btn { font: 9px/1.2 var(--pixel); letter-spacing: 0.04em; }
 .oak__btn { padding: 9px 10px; }
 
 @media (max-width: 480px) {
@@ -108,18 +108,18 @@
   background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px);
 }
 .dex__name { font: 11px/1.4 var(--pixel); letter-spacing: 0; }
-.dex__page-no { font: 7px/1 var(--pixel); letter-spacing: 0; }
+.dex__page-no { font: 15px/1 var(--lcd); letter-spacing: 0.04em; }
 .dex__genus { font: 17px/1.1 var(--lcd); }
-.dex__type { font: 7px/1 var(--pixel); letter-spacing: 0; padding: 4px 5px; border-radius: 0; }
+.dex__type { font: 15px/1 var(--lcd); letter-spacing: 0.04em; padding: 2px 6px; border-radius: 0; }
 .dex__text { font: 19px/1.1 var(--lcd); }
 .dex__stats { font: 17px/1.15 var(--lcd); }
 .dex__stats b { font-weight: 400; }
 .dex__green { font: 12px/1 var(--pixel); letter-spacing: 0; padding: 10px 6px; }
 .dex.is-menu .dex__green { font-size: 10px; }
 .dex__keys button { font: 11px/1 var(--pixel); }
-.dex__whites button { font: 8px/1 var(--pixel); letter-spacing: 0; }
-.dex__label { font: 7px/1 var(--pixel); letter-spacing: 0; }
-.dex__tab { font: 6px/1 var(--pixel); letter-spacing: 0.04em; }
+.dex__whites button { font: 9px/1 var(--pixel); letter-spacing: 0; }
+.dex__label { font: 15px/1 var(--lcd); letter-spacing: 0.06em; }
+.dex__tab { font: 14px/1 var(--lcd); letter-spacing: 0.08em; height: 18px; }
 .dex__bottom output { font: 18px/1 var(--lcd); padding: 7px 6px; }
 .dex__menu { font: 19px/1.05 var(--lcd); }
 .dex__menu li.is-active::before { top: 5px; }

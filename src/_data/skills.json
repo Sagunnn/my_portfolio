@@ -1,0 +1,15 @@
+[
+  { "label": "Languages", "accent": "#f7d30e", "items": [
+    ["Python", "python"], ["SQL", "sql"], ["Java", "java"], ["Bash", "bash"] ] },
+  { "label": "Data Engineering", "accent": "#db6635", "items": [
+    ["ETL / ELT", "etl"], ["Data Modeling", "modeling"], ["Validation", "validation"], ["Cleaning", "cleaning"],
+    ["AsyncIO", "async"], ["Polars", "polars"], ["Pandas", "pandas"], ["Scikit-Learn", "scikitlearn"] ] },
+  { "label": "Databases", "accent": "#d7212c", "items": [
+    ["PostgreSQL", "postgresql"], ["MySQL", "mysql"], ["SQLite", "sqlite"], ["MongoDB", "mongodb"] ] },
+  { "label": "Backend", "accent": "#a7839c", "items": [
+    ["Django", "django"], ["Django REST", "django"], ["RESTful APIs", "api"], ["SQLAlchemy", "sqlalchemy"] ] },
+  { "label": "Cloud & Platforms", "accent": "#c7b074", "items": [
+    ["AWS Lambda", "lambda"], ["Microsoft Fabric", "fabric"], ["Etherscan / Web3 APIs", "ethereum"] ] },
+  { "label": "Tools", "accent": "#217793", "items": [
+    ["Git", "git"], ["GitHub", "github"], ["uv", "uv"] ] }
+]

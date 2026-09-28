@@ -369,30 +369,14 @@ hud: true
             <div class="panel">
               <h3>Skills</h3>
               <div class="skills">
-                <div class="skills__row" style="--accent: #f7d30e">
-                  <p class="skills__label">Languages</p>
-                  <div class="skills__set"><span>Python</span><span>SQL</span><span>Java</span><span>Bash</span></div>
+                {%- for row in skills %}
+                <div class="skills__row" style="--accent: {{ row.accent }}">
+                  <p class="skills__label">{{ row.label }}</p>
+                  <div class="skills__set">
+                    {%- for item in row.items %}<span><i class="skill-icon" style="--icon: url(/assets/img/skills/{{ item[1] }}.svg)" aria-hidden="true"></i>{{ item[0] }}</span>{% endfor -%}
+                  </div>
                 </div>
-                <div class="skills__row" style="--accent: #db6635">
-                  <p class="skills__label">Data Engineering</p>
-                  <div class="skills__set"><span>ETL / ELT</span><span>Data Modeling</span><span>Validation</span><span>Cleaning</span><span>AsyncIO</span><span>Polars</span><span>Pandas</span><span>Scikit-Learn</span></div>
-                </div>
-                <div class="skills__row" style="--accent: #d7212c">
-                  <p class="skills__label">Databases</p>
-                  <div class="skills__set"><span>PostgreSQL</span><span>MySQL</span><span>SQLite</span><span>MongoDB</span></div>
-                </div>
-                <div class="skills__row" style="--accent: #a7839c">
-                  <p class="skills__label">Backend</p>
-                  <div class="skills__set"><span>Django</span><span>Django REST</span><span>RESTful APIs</span></div>
-                </div>
-                <div class="skills__row" style="--accent: #c7b074">
-                  <p class="skills__label">Cloud &amp; Platforms</p>
-                  <div class="skills__set"><span>AWS Lambda</span><span>Microsoft Fabric</span><span>Etherscan / Web3 APIs</span></div>
-                </div>
-                <div class="skills__row" style="--accent: #217793">
-                  <p class="skills__label">Tools</p>
-                  <div class="skills__set"><span>Git</span><span>GitHub</span><span>Postman</span><span>Canva</span></div>
-                </div>
+                {%- endfor %}
               </div>
             </div>
 
