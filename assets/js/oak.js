@@ -1,6 +1,6 @@
 /* Sagun B. Pradhan — Professor Oak dialogue
    Turns every [data-oak] block into a Game Boy-style conversation: Professor Oak
-   (assets/img/oak-px.png) types out the <li> lines one at a time, with square-wave "blip"
+   (assets/img/oak-sprite.png) types out the <li> lines one at a time, with square-wave "blip"
    sounds made by Web Audio.
    Without JavaScript the block stays a plain list of takeaways.
      A / click / Enter / Space   finish the line, or go to the next one
@@ -22,9 +22,9 @@
   function professor() {
     var img = document.createElement('img');
     img.className = 'oak__sprite';
-    img.src = ASSETS + 'img/oak-px.png';   // half-resolution pixel art, drawn at 2× (retro.css)
-    img.width = 38;
-    img.height = 90;
+    img.src = ASSETS + 'img/oak-sprite.png';   // outlined pixel sprite, drawn 1:1 (retro.css)
+    img.width = 77;
+    img.height = 180;
     img.alt = '';
     return img;
   }

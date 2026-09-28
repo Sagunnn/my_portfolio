@@ -4,7 +4,7 @@
    case-study.css; the rest of the portfolio keeps its normal look.
      - pixel fonts: Press Start 2P for small labels and numbers, VT323 for screen text
      - stepped pixel borders from a 6×6 SVG, scaled 4× (one "pixel" = 4px)
-     - Oak drawn at half resolution and scaled 2× with hard pixel edges
+     - Oak as crisp pixel sprites with solid black outlines (1:1, hard edges)
      - faint LCD scanlines on the Pokédex screens
    ========================================================================== */
 
@@ -37,7 +37,7 @@
 .hud[data-variant="compact"] .hud__box { box-shadow: none; }
 
 /* --- Professor Oak dialogue ------------------------------------------------ */
-.oak__sprite { width: 76px; height: 180px; image-rendering: pixelated; }
+.oak__sprite { width: 77px; height: 180px; image-rendering: pixelated; }
 .oak__box {
   border: 8px solid transparent;
   border-image: var(--px-frame-white) 2 / 8px stretch;
@@ -70,18 +70,18 @@
   box-shadow: none;
   padding: 15px 19px 17px;
 }
-.take::before {                           /* pixel Oak, 2× */
-  left: -100px;
+.take::before {                           /* pixel-sprite Oak, 1:1 */
+  left: -101px;
   bottom: -8px;
-  width: 58px;
+  width: 59px;
   height: 138px;
-  background: url("../img/oak-px-sm.png") center bottom / 58px 138px no-repeat;
+  background: url("../img/oak-sprite-sm.png") center bottom / 59px 138px no-repeat;
   image-rendering: pixelated;
 }
 .take--push::before {
   left: -104px;
   width: 62px;
-  background-image: url("../img/oak-point-px-sm.png");
+  background-image: url("../img/oak-point-sprite-sm.png");
   background-size: 62px 138px;
 }
 .take::after {                            /* stepped tail over the left edge of the frame */
@@ -96,7 +96,7 @@
 .take__label { font: 9px/1.2 var(--pixel); letter-spacing: 0.04em; }
 
 @media (max-width: 560px) {
-  .take::before { left: -69px; width: 44px; height: 104px; background-size: 44px 104px; }
+  .take::before { left: -69px; width: 44px; height: 104px; background-size: 44px 104px; image-rendering: auto; }
   .take--push::before { left: -71px; width: 47px; background-size: 47px 104px; }
 }
 
