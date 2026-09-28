@@ -1,11 +1,11 @@
-/* Sagun B. Pradhan — Professor dialogue
-   Turns every [data-oak] block into a Game Boy-style conversation: a pixel-art professor
-   types out the <li> lines one at a time, with square-wave "blip" sounds made by Web Audio.
+/* Sagun B. Pradhan — Professor Oak dialogue
+   Turns every [data-oak] block into a Game Boy-style conversation: Professor Oak
+   (assets/img/oak.png) types out the <li> lines one at a time, with square-wave "blip"
+   sounds made by Web Audio.
    Without JavaScript the block stays a plain list of takeaways.
      A / click / Enter / Space   finish the line, or go to the next one
      Show all                    reveal every line as a list
-     ♪ button                    sound on/off (remembered per browser)
-   The sprite is original pixel art drawn below, not a copy of any game asset. */
+     ♪ button                    sound on/off (remembered per browser) */
 
 (function () {
   'use strict';
@@ -16,33 +16,17 @@
   var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var TYPE_MS = 28;
 
-  /* ---- Sprite: 8-column left halves, mirrored into a 16×26 figure ------ */
-  var HALF = [
-    '....kkkk', '...khhhh', '..khhhhh', '..khHhhh', '..kHssss', '..kssess', '..kSssss',
-    '...kssss', '....kssk', '.....kSS', '...kwwwp', '..kwwwWp', '.kwwwwWp', '.kwwwwWp',
-    '.kwwwwWp', '.kwwwwWp', '.kswwwWp', '.kkwwwwW', '..kwwwwW', '..kwwwwW', '...kbbbb',
-    '...kbbBk', '...kbbBk', '...kbbBk', '..kfffk.', '..kkkk..'
-  ];
-  var COLORS = {
-    k: '#1c1c1c', h: '#d7d7d7', H: '#a9a9a9', s: '#f3c9a2', S: '#d9a27a', e: '#1c1c1c',
-    w: '#f5f5f5', W: '#c7cdd4', p: '#7c52a8', b: '#7a5a36', B: '#5a4226', f: '#3a2a1a'
-  };
+  var script = document.currentScript || document.querySelector('script[src*="oak.js"]');
+  var ASSETS = script.src.replace(/js\/oak\.js.*$/, '');
 
-  function drawProfessor() {
-    var canvas = document.createElement('canvas');
-    canvas.width = 16;
-    canvas.height = HALF.length;
-    canvas.className = 'oak__sprite';
-    canvas.setAttribute('aria-hidden', 'true');
-    var ctx = canvas.getContext('2d');
-    HALF.forEach(function (half, y) {
-      var row = half + half.split('').reverse().join('');
-      for (var x = 0; x < row.length; x++) {
-        var c = COLORS[row[x]];
-        if (c) { ctx.fillStyle = c; ctx.fillRect(x, y, 1, 1); }
-      }
-    });
-    return canvas;
+  function professor() {
+    var img = document.createElement('img');
+    img.className = 'oak__sprite';
+    img.src = ASSETS + 'img/oak.png';
+    img.width = 152;
+    img.height = 360;
+    img.alt = '';
+    return img;
   }
 
   /* ---- Sound: short square-wave blips ---------------------------------- */
@@ -88,7 +72,7 @@
 
     var stage = el('div', 'oak__stage');
     var figure = el('div', 'oak__figure');
-    figure.appendChild(drawProfessor());
+    figure.appendChild(professor());
     stage.appendChild(figure);
 
     var box = el('button', 'oak__box');

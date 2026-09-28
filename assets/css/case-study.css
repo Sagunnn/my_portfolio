@@ -263,6 +263,8 @@
 .take p { color: var(--on-face); }
 .take p + p { margin-top: 12px; }
 .take code { background: rgba(28, 35, 31, 0.08); color: var(--on-face); }
+.take strong { color: var(--on-face); }      /* .prose strong is cream, invisible on the cream box */
+.prose .table-scroll + p { margin-top: 20px; }
 
 /* series index: chapter list */
 .chapters { margin-top: 32px; max-width: 820px; border-top: 1px solid var(--ink-line); }
@@ -318,7 +320,7 @@ a.chapter .chapter__status { color: var(--yellow); }
 
 .oak__figure {
   position: relative;
-  width: 64px;
+  width: 76px;
   margin: 0 auto 18px;
 }
 /* the round platform the professor stands on */
@@ -336,9 +338,8 @@ a.chapter .chapter__status { color: var(--yellow); }
 .oak__sprite {
   position: relative;
   display: block;
-  width: 64px;
-  height: 104px;
-  image-rendering: pixelated;
+  width: 76px;
+  height: 180px;
 }
 
 .oak__box {

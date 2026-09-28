@@ -1,0 +1,60 @@
+---
+layout: "layouts/article.njk"
+title: "Reading DDIA — Sagun B. Pradhan"
+description: "Chapter-by-chapter notes on Designing Data-Intensive Applications (2nd edition): summaries, takeaways and where I would push back."
+ogTitle: "Reading DDIA: chapter-by-chapter notes"
+nav: "writing"
+hud: true
+heroHud: true
+back: {"href": "/#writing", "label": "← All writing"}
+eyebrow: "Reading notes"
+heading: "Reading DDIA"
+lede: "Chapter-by-chapter notes on <em>Designing Data-Intensive Applications</em>: what each chapter argues, what holds up, where I'd push back, and how it connects to pipelines I've actually built."
+facts: [["Book", "DDIA, 2nd edition"], ["Authors", "Martin Kleppmann &amp; Chris Riccomini"], ["Length", "14 chapters"]]
+---
+      <section class="prose" aria-labelledby="why">
+        <p class="eyebrow">Why this book</p>
+        <h2 id="why">The book data engineers keep recommending</h2>
+        <p>
+          DDIA explains how data systems actually work underneath: storage engines,
+          replication, partitioning, transactions, and batch and stream processing. It
+          doesn't teach any single tool. It teaches the ideas every tool is built from,
+          which makes it easier to judge a new database than reading its marketing page.
+        </p>
+        <p>
+          I'm reading the second edition, updated for cloud-native systems, and writing up
+          each chapter as I go. Writing forces me to check that I actually understood it.
+        </p>
+      </section>
+
+      <section class="prose" aria-labelledby="format">
+        <p class="eyebrow">How each post works</p>
+        <h2 id="format">Summary, take, push back</h2>
+        <ul class="list">
+          <li><strong>The gist:</strong> what the chapter argues, in plain language.</li>
+          <li><strong>My take:</strong> what I found most useful, tied to real work where it fits.</li>
+          <li><strong>Push back:</strong> where the chapter is thin, oversimplified or in tension with itself.</li>
+        </ul>
+      </section>
+
+      <section class="prose" aria-labelledby="chapters">
+        <p class="eyebrow">Chapters</p>
+        <h2 id="chapters">Notes so far</h2>
+      </section>
+
+      <div class="chapters">
+        {%- for c in collections.chapters %}
+        <a class="chapter" href="{{ c.url }}">
+          <span class="chapter__num">CH {% if c.data.chapter < 10 %}0{% endif %}{{ c.data.chapter }}</span>
+          <span class="chapter__title">{{ c.data.heading }}<span>{{ c.data.chapterTitle }}</span></span>
+          <span class="chapter__status">Read →</span>
+        </a>
+        {%- endfor %}
+        {%- if ddia.next %}
+        <div class="chapter">
+          <span class="chapter__num">CH {% if ddia.next.chapter < 10 %}0{% endif %}{{ ddia.next.chapter }}</span>
+          <span class="chapter__title">{{ ddia.next.title }}<span>Notes coming soon</span></span>
+          <span class="chapter__status">Coming soon</span>
+        </div>
+        {%- endif %}
+      </div>

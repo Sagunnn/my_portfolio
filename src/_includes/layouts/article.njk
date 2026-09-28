@@ -1,0 +1,83 @@
+---
+layout: layouts/base.njk
+ogType: article
+css: [ "/assets/css/case-study.css" ]
+---
+{#- Article layout: case studies, the DDIA series page and chapter notes.
+    Front matter it reads (on top of base.njk's):
+      back: { href, label }       — link above the eyebrow
+      eyebrow, heading, lede      — the header text (lede may contain HTML)
+      facts: [ [label, value] ]   — the fact grid under the lede
+      heroHud: true               — full DDIA progress box in the header
+      takeaways: [ "…" ]          — Prof. Oak's lines, shown first in the body
+      tags: ddiaChapter + chapter — makes it a DDIA chapter: compact progress box
+                                    and previous / next chapter links at the end -#}
+{%- set isChapter = "ddiaChapter" in (tags or []) -%}
+  <!-- ============================ Header =========================== -->
+  <header class="cs-hero">
+    <div class="shell">
+      <a class="cs-back" href="{{ back.href }}">{{ back.label }}</a>
+      <p class="eyebrow">{{ eyebrow }}</p>
+      <h1>{{ heading }}</h1>
+      <p class="cs-hero__lede">{{ lede | safe }}</p>
+      {%- if facts %}
+
+      <dl class="cs-facts">
+        {%- for fact in facts %}
+        <div><dt>{{ fact[0] }}</dt><dd>{{ fact[1] | safe }}</dd></div>
+        {%- endfor %}
+      </dl>
+      {%- endif %}
+      {%- if heroHud %}
+
+      {% set hudClass = "cs-hud" %}{% set hudVariant = "" %}{% include "partials/hud.njk" %}
+      {%- endif %}
+    </div>
+  </header>
+
+  <div class="stripes" aria-hidden="true">
+    <span class="s1"></span>
+    <span class="s2"></span>
+    <span class="s3"></span>
+    <span class="s4"></span>
+  </div>
+
+  <main id="content" class="cs-body">
+    <div class="shell">
+      {%- if takeaways %}
+
+      <!-- ---------- Takeaways (Prof. Oak dialogue, assets/js/oak.js) ---------- -->
+      <section class="prose oak" data-oak aria-labelledby="takeaways">
+        <p class="eyebrow">TL;DR</p>
+        <h2 id="takeaways">Key takeaways</h2>
+        <ol class="oak__list">
+          {%- for line in takeaways %}
+          <li>{{ line }}</li>
+          {%- endfor %}
+        </ol>
+      </section>
+      {%- endif %}
+
+{{ content | safe }}
+      {%- if isChapter %}
+      {%- set prev = collections.chapters | getPreviousCollectionItem(page) %}
+      {%- set next = collections.chapters | getNextCollectionItem(page) %}
+
+      {% set hudClass = "cs-hud cs-hud--end" %}{% set hudVariant = "compact" %}{% include "partials/hud.njk" %}
+
+      <nav class="series-nav" aria-label="Series">
+        {%- if prev %}
+        <a href="{{ prev.url }}">← Chapter {{ prev.data.chapter }}</a>
+        {%- else %}
+        <a href="/writing/ddia/">← All DDIA notes</a>
+        {%- endif %}
+        {%- if next %}
+        <a href="{{ next.url }}">Chapter {{ next.data.chapter }} →</a>
+        {%- else %}
+        <span>Chapter {{ chapter + 1 }} · coming soon</span>
+        {%- endif %}
+      </nav>
+      {%- endif %}
+
+    </div>
+  </main>

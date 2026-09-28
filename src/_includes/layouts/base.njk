@@ -1,0 +1,103 @@
+{#- Base layout: <head>, nav, footer and scripts for every page.
+    Front matter it reads:
+      title, description          — <title> and meta description
+      ogTitle, ogDescription      — social previews (default to title / description)
+      ogType: website | article   — article pages also get Article JSON-LD
+      nav: work | writing         — highlights that nav link on subpages
+      skipTo                      — skip-link target (default #content)
+      css: [ "/assets/css/…" ]    — extra stylesheets
+      pet, hud                    — load pet.js / ddia-hud.js
+      takeaways                   — loads oak.js (see layouts/article.njk) -#}
+{%- set isHome = page.url == "/" -%}
+{%- set navBase = "" if isHome else "/" -%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="theme-color" content="#202825">
+
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:title" content="{{ ogTitle or title }}">
+  <meta property="og:description" content="{{ ogDescription or description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}{{ site.image }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="icon" href="/assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2?v=2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/fonts.css' | v }}">
+
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | v }}">
+  <link rel="stylesheet" href="{{ '/assets/css/pokedex.css' | v }}">
+  {%- for sheet in css %}
+  <link rel="stylesheet" href="{{ sheet | v }}">
+  {%- endfor %}
+
+  {%- if isHome %}
+  {% include "partials/person-jsonld.njk" %}
+  {%- elif ogType == "article" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ (ogTitle or title) | dump | safe }},
+    "author": { "@type": "Person", "name": "{{ site.author }}", "url": "{{ site.url }}/" },
+    "url": "{{ site.url }}{{ page.url }}"
+  }
+  </script>
+  {%- endif %}
+</head>
+
+<body>
+
+  <a class="skip-link" href="{{ skipTo or '#content' }}">Skip to content</a>
+
+  <!-- ============================= Nav ============================= -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav__inner">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-tab" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+      <div class="nav__tab" id="nav-tab">
+        {%- for item in [["work", "My Work"], ["experience", "Experience"], ["about", "About Me"], ["writing", "Writing"], ["contact", "Contact Me"]] %}
+        <a class="nav__link{% if nav == item[0] %} is-active{% endif %}" href="{{ navBase }}#{{ item[0] }}">{{ item[1] }}</a>
+        {%- endfor %}
+      </div>
+    </div>
+  </nav>
+
+{{ content | safe }}
+
+  <!-- =========================== Footer ============================ -->
+  {% include "partials/footer.njk" %}
+
+  {#- DDIA chapters for the Pokédex menu (Menu › Writing › Reading DDIA) #}
+  <script type="application/json" id="ddia-chapters">
+  {{ collections.chapters | chapterMenu | dump | safe }}
+  </script>
+
+  <script src="{{ '/assets/js/app.js' | v }}"></script>
+  {%- if pet %}
+  <script src="{{ '/assets/js/pet.js' | v }}"></script>
+  {%- endif %}
+  {%- if hud %}
+  <script src="{{ '/assets/js/ddia-hud.js' | v }}"></script>
+  {%- endif %}
+  <script src="{{ '/assets/js/pokedex.js' | v }}"></script>
+  {%- if takeaways %}
+  <script src="{{ '/assets/js/oak.js' | v }}"></script>
+  {%- endif %}
+</body>
+
+</html>

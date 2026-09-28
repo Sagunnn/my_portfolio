@@ -24,6 +24,14 @@
      href: '#id' = a section on the home page, 'path/' = a page on this site, else a full URL */
   function L(label, href, note) { return { label: label, href: href, note: note }; }
 
+  // DDIA chapters come from the page (<script id="ddia-chapters">, written by the build)
+  var ddiaItems = [L('Series overview', 'writing/ddia/', 'Why I am reading it, how the notes work, and progress so far.')];
+  try {
+    JSON.parse(document.getElementById('ddia-chapters').textContent).forEach(function (c) {
+      ddiaItems.push(L(c.label, c.href, c.note));
+    });
+  } catch (e) { /* no chapter list on this page — the overview still links to them */ }
+
   var MENU = { label: 'Menu', items: [
     { label: 'On this page', note: 'Jump to a section of the page you are on.', items: pageSections },
     { label: 'Home', note: 'The main portfolio page.', items: [
@@ -40,10 +48,7 @@
       L('HRIS', 'https://github.com/Sagunnn/Synergy', 'Attendance, leave and payroll with RBAC, on GitHub.')
     ] },
     { label: 'Writing', note: 'Case studies and reading notes.', items: [
-      { label: 'Reading DDIA', note: 'Chapter-by-chapter notes on Designing Data-Intensive Applications.', items: [
-        L('Series overview', 'writing/ddia/', 'Why I am reading it, how the notes work, and progress so far.'),
-        L('Ch 1 · Trade-offs', 'writing/ddia/ch01/', 'Every system is a trade-off: operational vs analytical, cloud vs self-hosting and more.')
-      ] },
+      { label: 'Reading DDIA', note: 'Chapter-by-chapter notes on Designing Data-Intensive Applications.', items: ddiaItems },
       L('ScamFilter case study', 'writing/scamfilter/', 'A detection engine for drained Ethereum wallets.')
     ] },
     { label: 'Contact', note: 'Get in touch.', items: [

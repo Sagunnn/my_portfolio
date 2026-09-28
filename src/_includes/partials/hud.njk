@@ -1,0 +1,3 @@
+{#- DDIA progress box (assets/js/ddia-hud.js). Set hudClass and hudVariant before including.
+    Level = number of chapter pages; total and exp come from src/_data/ddia.json. -#}
+<div class="{{ hudClass }}" data-ddia-hud{% if hudVariant %} data-variant="{{ hudVariant }}"{% endif %} data-read="{{ collections.chapters.length }}" data-total="{{ ddia.total }}" data-exp="{{ ddia.exp }}"></div>

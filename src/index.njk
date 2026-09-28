@@ -1,82 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Sagun B. Pradhan — Data Engineer</title>
-  <meta name="description" content="Sagun B. Pradhan — data engineer in Lalitpur, Nepal, open to new roles. Python, SQL, PostgreSQL, asynchronous ETL pipelines, AWS Lambda and blockchain analytics.">
-  <meta name="author" content="Sagun B. Pradhan">
-  <meta name="theme-color" content="#202825">
-
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Sagun B. Pradhan — Data Engineer">
-  <meta property="og:description" content="Data engineer open to new roles. Asynchronous ETL pipelines, blockchain analytics and Django backends. Based in Lalitpur, Nepal.">
-  <meta property="og:url" content="https://www.sagunpradhan.com.np/">
-  <meta property="og:image" content="https://www.sagunpradhan.com.np/assets/img/sagun1.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <link rel="canonical" href="https://www.sagunpradhan.com.np/">
-  <link rel="icon" href="assets/img/favicon.png">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-
-  <link rel="preload" href="assets/fonts/archivo-latin.woff2?v=2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/fonts.css?v=2">
-
-  <link rel="stylesheet" href="assets/css/style.css?v=6">
-  <link rel="stylesheet" href="assets/css/pokedex.css?v=2">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sagun B. Pradhan",
-    "alternateName": "Sagun Pradhan",
-    "jobTitle": "Data Engineer",
-    "url": "https://www.sagunpradhan.com.np/",
-    "image": "https://www.sagunpradhan.com.np/assets/img/sagun1.jpg",
-    "email": "mailto:pradhan_sagun@hotmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Lalitpur",
-      "addressCountry": "NP"
-    },
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "St. Xavier's College, Kathmandu"
-    },
-    "knowsAbout": ["Data Engineering", "ETL", "Python", "SQL", "PostgreSQL", "MongoDB", "AsyncIO", "AWS Lambda", "Django", "Django REST Framework", "Blockchain Analytics"],
-    "sameAs": [
-      "https://www.linkedin.com/in/sagunnn/",
-      "https://github.com/Sagunnn"
-    ]
-  }
-  </script>
-</head>
-
-<body>
-
-  <a class="skip-link" href="#work">Skip to content</a>
-
-  <!-- ============================= Nav ============================= -->
-  <nav class="nav" aria-label="Primary">
-    <div class="nav__inner">
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-tab" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M3 6h18M3 12h18M3 18h18" />
-        </svg>
-      </button>
-      <div class="nav__tab" id="nav-tab">
-        <a class="nav__link" href="#work">My Work</a>
-        <a class="nav__link" href="#experience">Experience</a>
-        <a class="nav__link" href="#about">About Me</a>
-        <a class="nav__link" href="#writing">Writing</a>
-        <a class="nav__link" href="#contact">Contact Me</a>
-      </div>
-    </div>
-  </nav>
-
+---
+layout: "layouts/base.njk"
+title: "Sagun B. Pradhan — Data Engineer"
+description: "Sagun B. Pradhan — data engineer in Lalitpur, Nepal, open to new roles. Python, SQL, PostgreSQL, asynchronous ETL pipelines, AWS Lambda and blockchain analytics."
+ogDescription: "Data engineer open to new roles. Asynchronous ETL pipelines, blockchain analytics and Django backends. Based in Lalitpur, Nepal."
+skipTo: "#work"
+pet: true
+hud: true
+---
   <!-- ============================= Hero ============================= -->
   <header class="hero" id="top">
     <div class="shell">
@@ -162,7 +92,7 @@
               <div class="chips">
                 <span>Python</span><span>Polars</span><span>PostgreSQL</span><span>Ethereum</span><span>ERC-4337</span>
               </div>
-              <a class="btn" href="writing/scamfilter/">Read the case study</a>
+              <a class="btn" href="/writing/scamfilter/">Read the case study</a>
             </div>
 
             <div class="card__art">
@@ -491,23 +421,24 @@
         </div>
 
         <div class="posts">
-          <a class="post reveal" href="writing/ddia/ch01/">
-            <span class="post__kind">Reading notes · DDIA Ch 1</span>
-            <span class="post__title">Every system is a trade-off</span>
-            <span class="post__text">Operational vs analytical, cloud vs self-hosting, single node vs distributed, and what the law has to do with databases.</span>
+          {%- set latest = collections.chapters | last %}
+          <a class="post reveal" href="{{ latest.url }}">
+            <span class="post__kind">Reading notes · DDIA Ch {{ latest.data.chapter }}</span>
+            <span class="post__title">{{ latest.data.heading }}</span>
+            <span class="post__text">{{ latest.data.cardText }}</span>
             <span class="post__more">Read the notes →</span>
           </a>
-          <a class="post reveal" href="writing/scamfilter/">
+          <a class="post reveal" href="/writing/scamfilter/">
             <span class="post__kind">Case study</span>
             <span class="post__title">ScamFilter: catching drained wallets</span>
             <span class="post__text">Scoring sweeper-bot behaviour on Ethereum and its L2s, without flagging honest users.</span>
             <span class="post__more">Read the case study →</span>
           </a>
-          <a class="post post--series reveal" href="writing/ddia/">
-            <span class="post__kind">Series</span>
+          <a class="post post--series reveal" href="/writing/ddia/">
+            <span class="post__kind">Series · {{ collections.chapters.length }} of {{ ddia.total }} chapters</span>
             <span class="post__title">Reading DDIA</span>
             <span class="post__text">All my notes on <em>Designing Data-Intensive Applications</em>, 2nd edition, as I work through it.</span>
-            <div class="post__hud" data-ddia-hud data-variant="compact"></div>
+            {% set hudClass = "post__hud" %}{% set hudVariant = "compact" %}{% include "partials/hud.njk" %}
             <span class="post__more">See the series →</span>
           </a>
         </div>
@@ -561,29 +492,3 @@
     </section>
 
   </main>
-
-  <!-- =========================== Footer ============================ -->
-  <footer class="footer">
-    <div class="shell footer__inner">
-      <p>© 2026 Sagun B. Pradhan — Lalitpur, Nepal</p>
-      <div class="footer__social">
-        <a href="https://github.com/Sagunnn" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/sagunnn/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <a href="mailto:pradhan_sagun@hotmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="assets/js/app.js?v=3"></script>
-  <script src="assets/js/pet.js?v=1"></script>
-  <script src="assets/js/ddia-hud.js?v=2"></script>
-  <script src="assets/js/pokedex.js?v=2"></script>
-</body>
-
-</html>

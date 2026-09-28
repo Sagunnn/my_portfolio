@@ -7,14 +7,21 @@
 (function () {
   'use strict';
 
-  /* ---- Update this as you read ---------------------------------------
-     read  — chapters with notes published (this is the Pokémon's level)
-     exp   — how far you are into the next chapter, 0–100 (the blue EXP bar)
-     When a chapter's notes go up: read + 1, exp back to 0. */
-  var DDIA = { read: 1, total: 14, exp: 0 };
-
   var huds = document.querySelectorAll('[data-ddia-hud]');
   if (!huds.length) return;
+
+  /* ---- Progress comes from the page -----------------------------------
+     The build writes it onto each [data-ddia-hud]:
+       data-read  — chapter pages published (the Pokémon's level)
+       data-total — chapters in the book
+       data-exp   — how far into the next chapter, 0–100 (the blue EXP bar),
+                    set in src/_data/ddia.json */
+  var src = huds[0].dataset;
+  var DDIA = {
+    read: parseInt(src.read, 10) || 0,
+    total: parseInt(src.total, 10) || 14,
+    exp: parseFloat(src.exp) || 0
+  };
 
   // resolve assets/ relative to this script, so the HUD works at any page depth
   var script = document.currentScript || document.querySelector('script[src*="ddia-hud.js"]');
