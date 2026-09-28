@@ -41,6 +41,7 @@
   {%- for sheet in css %}
   <link rel="stylesheet" href="{{ sheet | v }}">
   {%- endfor %}
+  <link rel="stylesheet" href="{{ '/assets/css/retro.css' | v }}">
 
   {%- if isHome %}
   {% include "partials/person-jsonld.njk" %}

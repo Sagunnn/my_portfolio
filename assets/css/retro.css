@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Retro skin for the Pokémon parts: the DDIA progress box, the Pokédex, Professor Oak's
+   dialogue and the My take / Push back bubbles. Loaded after style.css, pokedex.css and
+   case-study.css; the rest of the portfolio keeps its normal look.
+     - pixel fonts: Press Start 2P for small labels and numbers, VT323 for screen text
+     - stepped pixel borders from a 6×6 SVG, scaled 4× (one "pixel" = 4px)
+     - Oak drawn at half resolution and scaled 2× with hard pixel edges
+     - faint LCD scanlines on the Pokédex screens
+   ========================================================================== */
+
+:root {
+  --pixel: "Press Start 2P", var(--mono);
+  --lcd: "VT323", var(--mono);
+  /* 6×6 pixel-art frame: dark outline, one-step rounded corners, filled edge.
+     border-image-slice 2 keeps the corner steps; the fill colour must match the box background */
+  --px-frame-white: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6' shape-rendering='crispEdges'%3E%3Cpath fill='%231c1c1c' d='M2 0h2v1H2zM1 1h1v1H1zM4 1h1v1H4zM0 2h1v2H0zM5 2h1v2H5zM1 4h1v1H1zM4 4h1v1H4zM2 5h2v1H2z'/%3E%3Cpath fill='%23fff' d='M2 1h2v1H2zM1 2h4v2H1zM2 4h2v1H2z'/%3E%3C/svg%3E");
+  --px-frame-cream: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6' shape-rendering='crispEdges'%3E%3Cpath fill='%231c1c1c' d='M2 0h2v1H2zM1 1h1v1H1zM4 1h1v1H4zM0 2h1v2H0zM5 2h1v2H5zM1 4h1v1H1zM4 4h1v1H4zM2 5h2v1H2z'/%3E%3Cpath fill='%23ecdfbf' d='M2 1h2v1H2zM1 2h4v2H1zM2 4h2v1H2z'/%3E%3C/svg%3E");
+  /* 4×7 stepped speech-bubble tail pointing left; its right column opens into the bubble */
+  --px-tail: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='7' shape-rendering='crispEdges'%3E%3Cpath fill='%231c1c1c' d='M3 0h1v1H3zM2 1h1v1H2zM1 2h1v1H1zM0 3h1v1H0zM1 4h1v1H1zM2 5h1v1H2zM3 6h1v1H3z'/%3E%3Cpath fill='%23fff' d='M3 1h1v5H3zM2 2h1v3H2zM1 3h1v1H1z'/%3E%3C/svg%3E");
+}
+
+/* --- DDIA progress box ----------------------------------------------------- */
+.hud__box {
+  border: 8px solid transparent;
+  border-image: var(--px-frame-cream) 2 / 8px stretch;
+  background-clip: padding-box;
+  box-shadow: none;
+  filter: drop-shadow(5px 5px 0 var(--gold));   /* follows the stepped corners */
+  padding: 6px 10px 4px;
+}
+.hud__name { font: 11px/1.4 var(--pixel); letter-spacing: 0; }
+.hud__lv { font: 8px/1 var(--pixel); }
+.hud__lv b { font-size: 11px; font-weight: 400; }
+.hud__hp-label { font: 8px/1 var(--pixel); padding: 3px 4px; }
+.hud__xp-label { font: 6px/1 var(--pixel); letter-spacing: 0; }
+.hud__foot { font: 18px/1 var(--lcd); }
+.hud__count { font: 11px/1 var(--pixel); }
+.hud__levelup { font: 8px/1 var(--pixel); }
+.hud[data-variant="compact"] .hud__box { box-shadow: none; }
+
+/* --- Professor Oak dialogue ------------------------------------------------ */
+.oak__sprite { width: 76px; height: 180px; image-rendering: pixelated; }
+.oak__box {
+  border: 8px solid transparent;
+  border-image: var(--px-frame-white) 2 / 8px stretch;
+  background-clip: padding-box;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 10px 36px 12px 14px;
+  font: 22px/1.25 var(--lcd);
+  /* a <button> centres its content vertically; keep the text at the top like the game */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 5.6em;
+}
+.oak__speaker { font: 9px/1 var(--pixel); letter-spacing: 0.04em; margin-bottom: 8px; }
+.oak__arrow { font: 18px/1 var(--lcd); right: 12px; bottom: 6px; }
+.oak__count, .oak__btn { font: 8px/1.2 var(--pixel); letter-spacing: 0.04em; }
+.oak__btn { padding: 9px 10px; }
+
+@media (max-width: 480px) {
+  .oak__box { font-size: 19px; padding: 8px 30px 10px 12px; }
+}
+
+/* --- My take / Push back bubbles ------------------------------------------- */
+.take {
+  border: 8px solid transparent;
+  border-image: var(--px-frame-white) 2 / 8px stretch;
+  background-clip: padding-box;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 15px 19px 17px;
+}
+.take::before {                           /* pixel Oak, 2× */
+  left: -100px;
+  bottom: -8px;
+  width: 58px;
+  height: 138px;
+  background: url("../img/oak-px-sm.png") center bottom / 58px 138px no-repeat;
+  image-rendering: pixelated;
+}
+.take--push::before {
+  left: -104px;
+  width: 62px;
+  background-image: url("../img/oak-point-px-sm.png");
+  background-size: 62px 138px;
+}
+.take::after {                            /* stepped tail over the left edge of the frame */
+  left: -20px;
+  bottom: 22px;
+  width: 16px;
+  height: 28px;
+  background: var(--px-tail) 0 0 / 16px 28px no-repeat;
+  border: 0;
+  transform: none;
+}
+.take__label { font: 9px/1.2 var(--pixel); letter-spacing: 0.04em; }
+
+@media (max-width: 560px) {
+  .take::before { left: -69px; width: 44px; height: 104px; background-size: 44px 104px; }
+  .take--push::before { left: -71px; width: 47px; background-size: 47px 104px; }
+}
+
+/* --- Pokédex --------------------------------------------------------------- */
+.dex__screen {
+  background-image: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 3px);
+}
+.dex__info {
+  background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px);
+}
+.dex__name { font: 11px/1.4 var(--pixel); letter-spacing: 0; }
+.dex__page-no { font: 7px/1 var(--pixel); letter-spacing: 0; }
+.dex__genus { font: 17px/1.1 var(--lcd); }
+.dex__type { font: 7px/1 var(--pixel); letter-spacing: 0; padding: 4px 5px; border-radius: 0; }
+.dex__text { font: 19px/1.1 var(--lcd); }
+.dex__stats { font: 17px/1.15 var(--lcd); }
+.dex__stats b { font-weight: 400; }
+.dex__green { font: 12px/1 var(--pixel); letter-spacing: 0; padding: 10px 6px; }
+.dex.is-menu .dex__green { font-size: 10px; }
+.dex__keys button { font: 11px/1 var(--pixel); }
+.dex__whites button { font: 8px/1 var(--pixel); letter-spacing: 0; }
+.dex__label { font: 7px/1 var(--pixel); letter-spacing: 0; }
+.dex__tab { font: 6px/1 var(--pixel); letter-spacing: 0.04em; }
+.dex__bottom output { font: 18px/1 var(--lcd); padding: 7px 6px; }
+.dex__menu { font: 19px/1.05 var(--lcd); }
+.dex__menu li.is-active::before { top: 5px; }
