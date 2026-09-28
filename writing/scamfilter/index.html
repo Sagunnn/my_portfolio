@@ -26,7 +26,7 @@
 
   <link rel="stylesheet" href="../../assets/css/style.css?v=6">
   <link rel="stylesheet" href="../../assets/css/pokedex.css?v=2">
-  <link rel="stylesheet" href="../../assets/css/case-study.css?v=3">
+  <link rel="stylesheet" href="../../assets/css/case-study.css?v=4">
 
   <script type="application/ld+json">
   {
@@ -91,6 +91,22 @@
 
   <main id="content" class="cs-body">
     <div class="shell">
+
+      <!-- ---------- Takeaways (Prof. Oak dialogue, assets/js/oak.js) ---------- -->
+      <section class="prose oak" data-oak aria-labelledby="takeaways">
+        <p class="eyebrow">TL;DR</p>
+        <h2 id="takeaways">Key takeaways</h2>
+        <ol class="oak__list">
+          <li>Hello there! Welcome to the world of ON-CHAIN DATA! My name is OAK. Let me tell you what SAGUN learned building SCAMFILTER.</li>
+          <li>Clean the data before you measure it. Scam transactions look just like real activity, and they quietly skew every metric.</li>
+          <li>A blacklist only catches attackers someone has already reported. To catch new ones, score behaviour: draining the wallet, moving seconds after a deposit, overpaying for gas.</li>
+          <li>Speed alone proves nothing. A transaction only counts as a sweep if it also makes no economic sense, and that one rule protects honest users.</li>
+          <li>The same signal can mean different things on different chains. On Arbitrum, paying more gas doesn't get you in first, so high gas stops being a clue.</li>
+          <li>Keep "is this a bot?" apart from "was this wallet drained?". Exchanges are automated, not hacked.</li>
+          <li>Design for data you don't have yet. Optional fields let new signals switch on later without touching the filter.</li>
+          <li>Test what should NOT be flagged. In fraud detection, a false accusation costs more than a missed catch. Now, on to the details!</li>
+        </ol>
+      </section>
 
       <!-- ---------- Problem ---------- -->
       <section class="prose" aria-labelledby="problem">
@@ -426,6 +442,7 @@
 
   <script src="../../assets/js/app.js?v=3"></script>
   <script src="../../assets/js/pokedex.js?v=2"></script>
+  <script src="../../assets/js/oak.js?v=1"></script>
 </body>
 
 </html>

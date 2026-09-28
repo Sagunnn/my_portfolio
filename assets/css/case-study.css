@@ -299,3 +299,122 @@ a.chapter .chapter__status { color: var(--yellow); }
 /* DDIA progress HUD placement (styles live in style.css) */
 .cs-hud { margin-top: 36px; }
 .cs-hud--end { margin-top: clamp(56px, 8vw, 88px); }
+
+/* ==========================================================================
+   Professor dialogue (assets/js/oak.js) — key takeaways
+   ========================================================================== */
+
+.oak__list { margin-top: 16px; padding-left: 1.4em; display: grid; gap: 10px; color: rgba(238, 222, 193, 0.82); }
+.oak__list li::marker { color: var(--yellow); font-family: var(--mono); font-weight: 700; }
+.oak__list[hidden] { display: none; }
+
+.oak__stage {
+  margin-top: 22px;
+  border: 3px solid var(--on-face);
+  box-shadow: 6px 6px 0 var(--gold);
+  background: linear-gradient(to bottom, #e3f2ea 0, #cfe9dd 58%, #86c2aa 58%, #5f9f86 100%);
+  padding: 20px 14px 14px;
+}
+
+.oak__figure {
+  position: relative;
+  width: 64px;
+  margin: 0 auto 18px;
+}
+/* the round platform the professor stands on */
+.oak__figure::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 132px;
+  height: 26px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #e9f6ef 0 55%, #b7dccb 56% 100%);
+}
+.oak__sprite {
+  position: relative;
+  display: block;
+  width: 64px;
+  height: 104px;
+  image-rendering: pixelated;
+}
+
+.oak__box {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 7.6em;
+  padding: 14px 44px 18px 20px;
+  text-align: left;
+  background: #fff;
+  color: #1c1c1c;
+  border: 3px solid #1c1c1c;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #6f8190;
+  font: 600 16px/1.6 var(--mono);
+  cursor: pointer;
+}
+.oak__speaker {
+  display: block;
+  margin-bottom: 6px;
+  font: 700 11px/1 var(--mono);
+  letter-spacing: 0.16em;
+  color: #a3081f;
+}
+.oak__text { white-space: pre-wrap; }
+.oak__arrow {
+  position: absolute;
+  right: 18px;
+  bottom: 12px;
+  color: var(--red);
+  font-size: 13px;
+  visibility: hidden;
+}
+.oak__box.is-done .oak__arrow { visibility: visible; animation: oak-blink 0.9s steps(2, jump-none) infinite; }
+@keyframes oak-blink { 50% { opacity: 0; } }
+
+.oak__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+.oak__count {
+  margin-right: auto;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.oak__btn {
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.oak__btn:hover { background: var(--ink-soft); }
+.oak__btn--sound[aria-pressed="false"] { color: var(--cream-dim); border-color: var(--ink-line); }
+
+.oak__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .oak__box { font-size: 14px; padding: 12px 36px 16px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oak__box.is-done .oak__arrow { animation: none; }
+}
