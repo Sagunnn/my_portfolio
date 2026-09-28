@@ -6,7 +6,7 @@
       nav: work | writing         — highlights that nav link on subpages
       skipTo                      — skip-link target (default #content)
       css: [ "/assets/css/…" ]    — extra stylesheets
-      pet, hud                    — load pet.js / ddia-hud.js
+      pet, hud                    — load pet.js + catch.js (home) / ddia-hud.js
       date                        — publish date (articles: JSON-LD, feed)
       noindex                     — keep the page out of search results (404)
       takeaways                   — loads oak.js (see layouts/article.njk) -#}
@@ -100,6 +100,7 @@
   <script src="{{ '/assets/js/app.js' | v }}"></script>
   {%- if pet %}
   <script src="{{ '/assets/js/pet.js' | v }}"></script>
+  <script src="{{ '/assets/js/catch.js' | v }}"></script>
   {%- endif %}
   {%- if hud %}
   <script src="{{ '/assets/js/ddia-hud.js' | v }}"></script>
