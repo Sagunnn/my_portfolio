@@ -10,7 +10,8 @@ eyebrow: "Case study"
 heading: "ScamFilter"
 lede: "A detection engine that strips scam transactions out of wallet data and flags Ethereum wallets that have been drained by bots, including attackers that aren't on any blacklist yet."
 facts: [["Type", "Personal project"], ["Role", "Design, build &amp; testing"], ["When", "2025 – 2026"], ["Stack", "Python · Polars · PostgreSQL · MongoDB"]]
-takeaways: ["Hello there! Welcome to the world of ON-CHAIN DATA! My name is OAK. Let me tell you what SAGUN learned building SCAMFILTER.", "Clean the data before you measure it. Scam transactions look just like real activity, and they quietly skew every metric.", "A blacklist only catches attackers someone has already reported. To catch new ones, score behaviour: draining the wallet, moving seconds after a deposit, overpaying for gas.", "Speed alone proves nothing. A transaction only counts as a sweep if it also makes no economic sense, and that one rule protects honest users.", "The same signal can mean different things on different chains. On Arbitrum, paying more gas doesn't get you in first, so high gas stops being a clue.", "Keep \"is this a bot?\" apart from \"was this wallet drained?\". Exchanges are automated, not hacked.", "Design for data you don't have yet. Optional fields let new signals switch on later without touching the filter.", "Test what should NOT be flagged. In fraud detection, a false accusation costs more than a missed catch. Now, on to the details!"]
+takeaways: ["Hello there! Welcome to the world of ON-CHAIN DATA! My name is OAK. Let me tell you what SAGUN learned building SCAMFILTER.", "Clean the data before you measure it. Scam transactions look just like real activity, and they quietly skew every metric.", "A blacklist only catches attackers someone has already reported. To catch new ones, score behaviour: draining the wallet, moving seconds after a deposit, overpaying for gas.", "Speed alone proves nothing. A transaction only counts as a sweep if it also makes no economic sense, and that one rule protects honest users.", "The same signal can mean different things on different chains. On Arbitrum, paying more gas doesn't get you in first, so high gas stops being a clue.", "Keep \"is this a bot?\" apart from \"was this wallet drained?\". Exchanges are automated, not hacked.", "Design for data you don't have yet. Optional fields let new signals switch on later without touching the filter.", "Test what should NOT be flagged. In fraud detection, a false accusation costs more than a missed catch. That's everything from me. Thanks for reading!"]
+cta: {"text": "Want to talk about data pipelines or this project?", "href": "mailto:pradhan_sagun@hotmail.com?subject=ScamFilter%20case%20study", "label": "Email me"}
 ---
       <!-- ---------- Problem ---------- -->
       <section class="prose" aria-labelledby="problem">
@@ -318,7 +319,3 @@ takeaways: ["Hello there! Welcome to the world of ON-CHAIN DATA! My name is OAK.
         </p>
       </section>
 
-      <div class="cs-cta">
-        <p>Want to talk about data pipelines or this project?</p>
-        <a class="btn" href="mailto:pradhan_sagun@hotmail.com?subject=ScamFilter%20case%20study">Email me</a>
-      </div>

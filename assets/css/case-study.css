@@ -252,6 +252,46 @@
   border-left: 6px solid var(--teal);
 }
 .take--push { border-left-color: var(--orange); }
+
+/* "My take" as a speech bubble from Professor Oak, who stands to its left */
+.take:not(.take--push) {
+  position: relative;
+  min-height: 118px;
+  margin-left: 92px;
+  background: #fff;
+  color: #1c1c1c;
+  border: 3px solid #1c1c1c;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #6f8190;
+}
+.take:not(.take--push)::before {          /* Oak */
+  content: "";
+  position: absolute;
+  left: -95px;
+  bottom: -3px;
+  width: 58px;
+  height: 138px;
+  background: url("../img/oak.png") center bottom / contain no-repeat;
+}
+.take:not(.take--push)::after {           /* the bubble's tail, pointing at Oak */
+  content: "";
+  position: absolute;
+  left: -12px;
+  bottom: 30px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-left: 3px solid #1c1c1c;
+  border-bottom: 3px solid #1c1c1c;
+  transform: rotate(45deg);
+}
+.take:not(.take--push) .take__label { color: #a3081f; }
+
+@media (max-width: 560px) {
+  .take:not(.take--push) { margin-left: 62px; min-height: 96px; }
+  .take:not(.take--push)::before { left: -64px; width: 44px; height: 104px; }
+}
+
 .take__label {
   font: 700 11px/1 var(--mono);
   letter-spacing: 0.16em;

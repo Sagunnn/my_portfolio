@@ -9,7 +9,8 @@ css: [ "/assets/css/case-study.css" ]
       eyebrow, heading, lede      — the header text (lede may contain HTML)
       facts: [ [label, value] ]   — the fact grid under the lede
       heroHud: true               — full DDIA progress box in the header
-      takeaways: [ "…" ]          — Prof. Oak's lines, shown first in the body
+      takeaways: [ "…" ]          — Prof. Oak's lines, shown after the body as a recap
+      cta: { text, href, label }  — closing call-to-action, after the recap
       tags: ddiaChapter + chapter — makes it a DDIA chapter: compact progress box
                                     and previous / next chapter links at the end -#}
 {%- set isChapter = "ddiaChapter" in (tags or []) -%}
@@ -44,11 +45,13 @@ css: [ "/assets/css/case-study.css" ]
 
   <main id="content" class="cs-body">
     <div class="shell">
+
+{{ content | safe }}
       {%- if takeaways %}
 
       <!-- ---------- Takeaways (Prof. Oak dialogue, assets/js/oak.js) ---------- -->
       <section class="prose oak" data-oak aria-labelledby="takeaways">
-        <p class="eyebrow">TL;DR</p>
+        <p class="eyebrow">Recap</p>
         <h2 id="takeaways">Key takeaways</h2>
         <ol class="oak__list">
           {%- for line in takeaways %}
@@ -57,8 +60,13 @@ css: [ "/assets/css/case-study.css" ]
         </ol>
       </section>
       {%- endif %}
+      {%- if cta %}
 
-{{ content | safe }}
+      <div class="cs-cta">
+        <p>{{ cta.text }}</p>
+        <a class="btn" href="{{ cta.href }}">{{ cta.label }}</a>
+      </div>
+      {%- endif %}
       {%- if isChapter %}
       {%- set prev = collections.chapters | getPreviousCollectionItem(page) %}
       {%- set next = collections.chapters | getNextCollectionItem(page) %}
