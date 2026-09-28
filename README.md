@@ -24,13 +24,15 @@ npm run build    # writes the site to _site/
 ## Adding a DDIA chapter
 
 1. Copy `src/writing/ddia/ch02/index.md` to `src/writing/ddia/ch03/index.md`.
-2. Update the front matter: `chapter`, `chapterTitle`, `menuLabel`, `menuNote`, `cardText`,
-   the header text, `facts` and Prof. Oak's `takeaways`.
+2. Update the front matter: `chapter`, `date` (publish date), `chapterTitle`, `menuLabel`,
+   `menuNote`, `cardText`, the header text, `facts` and Prof. Oak's `takeaways`. Keep the
+   search-friendly title shape: `DDIA Chapter 3 Summary: <chapter title> | Sagun B. Pradhan`.
 3. Write the notes in Markdown. Wrap each part in
    `{% section "Eyebrow", "Heading", "id" %} … {% endsection %}`, and use
    `{% take %} … {% endtake %}` or `{% pushback %} … {% endpushback %}` for the callout boxes.
 4. In `src/_data/ddia.json`, set `exp` back to `0` and `next` to the following chapter.
 
-The progress level, chapter list, home page card, Pokédex menu, previous/next links and
-sitemap all update from the chapter files. Asset URLs get a content hash, so there's no
+The progress level, chapter list, home page card, Pokédex menu, previous/next links,
+sitemap (with git last-modified dates), Atom feed (`/feed.xml`) and structured data all update
+from the chapter files. Asset URLs get a content hash, so there's no
 `?v=` to bump by hand.

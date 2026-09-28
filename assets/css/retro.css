@@ -165,3 +165,9 @@
   .contact__cta.battle .battle__title { font-size: 13px; }
   .contact__cta.battle .battle__log { font-size: 10px; }
 }
+
+/* the battle box reused on the 404 page (outside the Contact section) */
+.battle.not-found { max-width: 620px; }
+.battle.not-found .battle__title { font: 15px/1.6 var(--pixel); color: #34449e; }
+.battle.not-found .battle__log { margin-top: 14px; font: 10px/2 var(--pixel); }
+.battle.not-found .battle__text { margin-top: 10px; font: 20px/1.15 var(--lcd); color: #52525b; }

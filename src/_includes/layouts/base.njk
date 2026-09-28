@@ -7,6 +7,8 @@
       skipTo                      — skip-link target (default #content)
       css: [ "/assets/css/…" ]    — extra stylesheets
       pet, hud                    — load pet.js / ddia-hud.js
+      date                        — publish date (articles: JSON-LD, feed)
+      noindex                     — keep the page out of search results (404)
       takeaways                   — loads oak.js (see layouts/article.njk) -#}
 {%- set isHome = page.url == "/" -%}
 {%- set navBase = "" if isHome else "/" -%}
@@ -29,7 +31,12 @@
   <meta property="og:image" content="{{ site.url }}{{ site.image }}">
   <meta name="twitter:card" content="summary_large_image">
 
+  {%- if noindex %}
+  <meta name="robots" content="noindex">
+  {%- else %}
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  {%- endif %}
+  <link rel="alternate" type="application/atom+xml" title="Sagun B. Pradhan — Writing" href="/feed.xml">
   <link rel="icon" href="/assets/img/favicon.png">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
@@ -45,16 +52,11 @@
 
   {%- if isHome %}
   {% include "partials/person-jsonld.njk" %}
-  {%- elif ogType == "article" %}
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": {{ (ogTitle or title) | dump | safe }},
-    "author": { "@type": "Person", "name": "{{ site.author }}", "url": "{{ site.url }}/" },
-    "url": "{{ site.url }}{{ page.url }}"
-  }
+  { "@context": "https://schema.org", "@type": "WebSite", "name": "{{ site.author }}", "url": "{{ site.url }}/" }
   </script>
+  {%- elif ogType == "article" %}
+  {% include "partials/article-jsonld.njk" %}
   {%- endif %}
 </head>
 

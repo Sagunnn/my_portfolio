@@ -1,5 +1,6 @@
 // Eleventy config — pages live in src/, static files in assets/, output in _site/.
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import markdownIt from "markdown-it";
 
@@ -20,6 +21,27 @@ export default function (eleventyConfig) {
   });
   // file hashes can change between rebuilds while serving locally
   eleventyConfig.on("eleventy.before", () => hashes.clear());
+
+  /* ---- Dates ------------------------------------------------------------- */
+  // last commit that touched a source file (needs full history: fetch-depth 0 in the workflow)
+  const modified = new Map();
+  eleventyConfig.addFilter("gitModified", (inputPath) => {
+    if (!modified.has(inputPath)) {
+      let iso = "";
+      try {
+        iso = execFileSync("git", ["log", "-1", "--format=%cI", "--", inputPath], { encoding: "utf8" }).trim();
+      } catch { /* not a git checkout */ }
+      modified.set(inputPath, iso || new Date().toISOString());
+    }
+    return modified.get(inputPath);
+  });
+  eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString());
+  eleventyConfig.addFilter("dateOnly", (date) => new Date(date).toISOString().slice(0, 10));
+
+  // case studies and chapter notes, newest first (the Atom feed)
+  eleventyConfig.addCollection("posts", (api) =>
+    api.getFilteredByTag("post").sort((a, b) => b.date - a.date)
+  );
 
   /* ---- DDIA chapters, in chapter order ---------------------------------- */
   eleventyConfig.addCollection("chapters", (api) =>

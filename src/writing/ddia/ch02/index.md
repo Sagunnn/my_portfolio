@@ -1,12 +1,13 @@
 ---
 layout: layouts/article.njk
-tags: [ddiaChapter]
+tags: [ddiaChapter, post]
+date: 2026-09-28
 chapter: 2
 chapterTitle: Defining Nonfunctional Requirements
 menuLabel: Ch 2 · Requirements
 menuNote: "How well, not just what: percentiles, faults vs failures, scalability and maintainability."
 cardText: Response times and percentiles, faults vs failures, what scalability really means, and why most of a system's cost comes after launch.
-title: DDIA Chapter 2 Notes — Sagun B. Pradhan
+title: "DDIA Chapter 2 Summary: Defining Nonfunctional Requirements | Sagun B. Pradhan"
 description: "Notes on chapter 2 of Designing Data-Intensive Applications (2nd edition): response times and percentiles, faults vs failures, scalability and maintainability."
 ogTitle: "DDIA Chapter 2: how well, not just what"
 nav: writing

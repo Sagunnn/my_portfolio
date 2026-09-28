@@ -1,0 +1,30 @@
+{#- Article + breadcrumb structured data for case studies, the DDIA series page and chapters -#}
+{%- if "ddiaChapter" in (tags or []) -%}
+{%- set crumbs = [{ name: "Home", url: "/" }, { name: "Reading DDIA", url: "/writing/ddia/" }, { name: "Chapter " + chapter, url: page.url }] -%}
+{%- else -%}
+{%- set crumbs = [{ name: "Home", url: "/" }, { name: heading, url: page.url }] -%}
+{%- endif -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ (ogTitle or title) | dump | safe }},
+    "description": {{ description | dump | safe }},
+    "image": "{{ site.url }}{{ site.image }}",
+    "datePublished": "{{ page.date | dateOnly }}",
+    "dateModified": "{{ page.inputPath | gitModified }}",
+    "author": { "@type": "Person", "name": "{{ site.author }}", "url": "{{ site.url }}/" },
+    "mainEntityOfPage": "{{ site.url }}{{ page.url }}"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {%- for c in crumbs %}
+      { "@type": "ListItem", "position": {{ loop.index }}, "name": {{ c.name | dump | safe }}, "item": "{{ site.url }}{{ c.url }}" }{% if not loop.last %},{% endif %}
+      {%- endfor %}
+    ]
+  }
+  </script>
