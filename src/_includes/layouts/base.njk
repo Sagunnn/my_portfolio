@@ -37,8 +37,9 @@
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   {%- endif %}
   <link rel="alternate" type="application/atom+xml" title="Sagun B. Pradhan — Writing" href="/feed.xml">
-  <link rel="icon" href="/assets/img/favicon.png">
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" href="{{ '/assets/img/favicon.svg' | v }}" type="image/svg+xml">
+  <link rel="icon" href="{{ '/assets/img/favicon.png' | v }}" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | v }}">
 
   <link rel="preload" href="/assets/fonts/archivo-latin.woff2?v=2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/fonts.css' | v }}">
