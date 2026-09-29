@@ -61,6 +61,7 @@
       { label: 'Reading DDIA', note: 'Chapter-by-chapter notes on Designing Data-Intensive Applications.', items: ddiaItems },
       L('ScamFilter case study', 'writing/scamfilter/', 'A detection engine for drained Ethereum wallets.')
     ] },
+    L('Pomodoro timer', 'pomodoro/', 'A Pokémon-battle Pomodoro timer: focus while a wild Pokémon\'s HP drains.'),
     { label: 'Contact', note: 'Get in touch.', items: [
       L('Email', 'mailto:pradhan_sagun@hotmail.com', 'pradhan_sagun@hotmail.com'),
       L('LinkedIn', 'https://www.linkedin.com/in/sagunnn/', 'linkedin.com/in/sagunnn'),

@@ -6,6 +6,7 @@
       nav: work | writing         — highlights that nav link on subpages
       skipTo                      — skip-link target (default #content)
       css: [ "/assets/css/…" ]    — extra stylesheets
+      scripts: [ "/assets/js/…" ] — extra scripts, loaded after the shared ones
       pet, hud                    — load pet.js + catch.js (home) / ddia-hud.js
       date                        — publish date (articles: JSON-LD, feed)
       noindex                     — keep the page out of search results (404)
@@ -81,8 +82,9 @@
         </svg>
       </button>
       <div class="nav__tab" id="nav-tab">
-        {%- for item in [["work", "WORK"], ["experience", "EXPERIENCE"], ["about", "ABOUT"], ["writing", "WRITING"], ["contact", "CONTACT"]] %}
-        <a class="nav__link{% if nav == item[0] %} is-active{% endif %}" href="{{ navBase }}#{{ item[0] }}"><span class="pokeball pokeball--sm" aria-hidden="true"></span>{{ item[1] }}</a>
+        {#- [key, label, href]; no href = a section on the home page #}
+        {%- for item in [["work", "WORK"], ["experience", "EXPERIENCE"], ["about", "ABOUT"], ["writing", "WRITING"], ["pomodoro", "POMODORO", "/pomodoro/"], ["contact", "CONTACT"]] %}
+        <a class="nav__link{% if nav == item[0] %} is-active{% endif %}" href="{{ item[2] or (navBase + '#' + item[0]) }}"><span class="pokeball pokeball--sm" aria-hidden="true"></span>{{ item[1] }}</a>
         {%- endfor %}
       </div>
     </div>
@@ -108,6 +110,9 @@
   {%- endif %}
   <script src="{{ '/assets/js/chiptune.js' | v }}"></script>
   <script src="{{ '/assets/js/pokedex.js' | v }}"></script>
+  {%- for s in scripts %}
+  <script src="{{ s | v }}"></script>
+  {%- endfor %}
   {%- if takeaways %}
   <script src="{{ '/assets/js/oak.js' | v }}"></script>
   {%- endif %}

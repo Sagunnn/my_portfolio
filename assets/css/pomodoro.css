@@ -1,0 +1,186 @@
+/* ==========================================================================
+   Pokémon Pomodoro (src/pomodoro/index.njk, assets/js/pomodoro.js)
+   Uses the pixel frame, fonts and Poké Ball from retro.css / style.css.
+   ========================================================================== */
+
+.pomo-hero h1 { max-width: none; }
+
+.pomo {
+  --hp-high: #3fbf5f;
+  --hp-mid: var(--yellow);
+  --hp-low: var(--red);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+/* --- Battle scene ---------------------------------------------------------- */
+.pomo__scene {
+  position: relative;
+  height: 340px;
+  border: 4px solid var(--on-face);
+  border-bottom: 0;
+  background:
+    radial-gradient(ellipse 150px 26px at 72% 72%, #b9dfae 0 60%, transparent 62%),
+    radial-gradient(ellipse 130px 22px at 22% 92%, #b9dfae 0 60%, transparent 62%),
+    linear-gradient(to bottom, #f3f7ea 0, #e3f0d4 55%, #cfe6bd 55%, #b7d9a1 100%);
+  overflow: hidden;
+}
+.pomo.is-break .pomo__scene {            /* the Pokémon Center: warm pink floor */
+  background:
+    radial-gradient(ellipse 150px 26px at 72% 72%, #f6d2da 0 60%, transparent 62%),
+    radial-gradient(ellipse 130px 22px at 22% 92%, #f6d2da 0 60%, transparent 62%),
+    linear-gradient(to bottom, #fbf1f3 0, #f8e4e8 55%, #f1cdd5 55%, #e9b7c2 100%);
+}
+
+.pomo__hud {
+  position: absolute;
+  left: 22px;
+  top: 22px;
+  width: min(330px, 58%);
+  border: 8px solid transparent;
+  border-image: var(--px-frame-cream) 2 / 8px stretch;
+  background: var(--cream-face) padding-box;
+  padding: 6px 10px 8px;
+  color: var(--on-face);
+}
+.pomo__top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.pomo__name { font: 11px/1.4 var(--pixel); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pomo__lv { font: 9px/1 var(--pixel); white-space: nowrap; }
+.pomo__lv b { font-size: 11px; font-weight: 400; margin-left: 2px; }
+.pomo__hp { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.pomo__hp-label { font: 9px/1 var(--pixel); color: var(--yellow); background: var(--on-face); padding: 3px 4px; }
+.pomo__track { flex: 1; height: 12px; background: #3a4640; border: 2px solid var(--on-face); }
+.pomo__fill { display: block; height: 100%; width: 100%; background: var(--hp-high); transition: width 0.25s linear; }
+.pomo.is-mid .pomo__fill { background: var(--hp-mid); }
+.pomo.is-low .pomo__fill { background: var(--hp-low); }
+.pomo.is-break .pomo__fill { background: #f06292; }
+.pomo__time { margin-top: 6px; text-align: right; font: 34px/1 var(--pixel); letter-spacing: 0.02em; }
+
+.pomo__foe { position: absolute; right: 10%; top: 96px; }
+.pomo__sprite { width: 176px; height: 176px; image-rendering: pixelated; }
+.pomo.is-running .pomo__sprite { animation: pomo-bob 1.4s steps(2, end) infinite; }
+.pomo.is-caught .pomo__sprite { animation: pomo-caught 1.4s ease-in forwards; }
+@keyframes pomo-bob { 50% { transform: translateY(-4px); } }
+@keyframes pomo-caught {
+  30% { transform: scale(1.1); filter: brightness(3); }
+  100% { transform: scale(0); opacity: 0; filter: brightness(3); }
+}
+
+.pomo__trainer {
+  position: absolute;
+  left: 22px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pomo__trainer > .pokeball { width: 44px; height: 44px; border-width: 5px; }
+.pomo__trainer > .pokeball::before { height: 5px; margin-top: -2.5px; left: -5px; right: -5px; }
+.pomo__trainer > .pokeball::after { width: 18px; height: 18px; margin: -9px 0 0 -9px; border-width: 4px; }
+.pomo__party {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px;
+  background: rgba(28, 35, 31, 0.85);
+  border: 2px solid var(--on-face);
+}
+.pomo__party .pokeball.is-empty { filter: grayscale(1) opacity(0.35); }
+
+/* --- Dialogue and battle menu ---------------------------------------------- */
+.pomo__panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  border: 4px solid var(--on-face);
+  background: #fff;
+  box-shadow: 6px 6px 0 var(--gold);
+}
+.pomo__dialog {
+  min-height: 118px;
+  padding: 16px 18px;
+  font: 23px/1.2 var(--lcd);
+  color: var(--on-face);
+  border-right: 4px solid var(--on-face);
+}
+.pomo__menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 18px;
+  align-content: center;
+  padding: 12px 18px;
+}
+.pomo__btn {
+  position: relative;
+  padding: 10px 6px 10px 20px;
+  font: 11px/1 var(--pixel);
+  color: var(--on-face);
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.pomo__btn::before { content: "▶"; position: absolute; left: 2px; opacity: 0; }
+.pomo__btn:hover::before, .pomo__btn:focus-visible::before, .pomo__btn[aria-expanded="true"]::before { opacity: 1; }
+.pomo__btn[data-act="toggle"] { color: var(--red); }
+
+/* --- Bag (settings) ---------------------------------------------------------- */
+.pomo__bag {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 26px;
+  align-items: center;
+  padding: 16px 18px;
+  background: var(--ink-soft);
+  border: 2px solid var(--ink-line);
+  font: 20px/1.2 var(--lcd);
+  color: var(--cream);
+}
+.pomo__bag[hidden] { display: none; }
+.pomo__bag-title { flex-basis: 100%; font: 9px/1 var(--pixel); color: var(--gold-lit); }
+.pomo__bag input[type="number"] {
+  width: 3.4em;
+  margin: 0 4px;
+  padding: 2px 4px;
+  font: inherit;
+  color: var(--on-face);
+  background: var(--cream-face);
+  border: 2px solid var(--on-face);
+}
+.pomo__check input { width: 16px; height: 16px; accent-color: var(--red); vertical-align: -2px; }
+.pomo__hint { flex-basis: 100%; font-size: 17px; color: var(--cream-dim); }
+.pomo__hint kbd { font: inherit; padding: 0 5px; border: 1px solid var(--ink-line); }
+
+/* --- Caught today ------------------------------------------------------------ */
+.pomo__caught { margin-top: 30px; }
+.pomo__caught-title { font: 10px/1.6 var(--pixel); color: var(--cream-dim); }
+.pomo__caught-title b { color: var(--yellow); font-weight: 400; }
+.pomo__box { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; min-height: 12px; }
+.pomo__box li { background: var(--ink-soft); border: 2px solid var(--ink-line); }
+.pomo__box img { display: block; image-rendering: pixelated; }
+.pomo__clear {
+  margin-top: 12px;
+  font: 9px/1 var(--pixel);
+  color: var(--cream-dim);
+  background: none;
+  border: 1.5px solid var(--ink-line);
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.pomo__clear:hover { color: var(--cream); }
+
+/* --- Small screens ----------------------------------------------------------- */
+@media (max-width: 640px) {
+  .pomo__scene { height: 300px; }
+  .pomo__hud { left: 10px; top: 10px; width: calc(100% - 20px); }
+  .pomo__time { font-size: 28px; }
+  .pomo__foe { right: 8%; top: 118px; }
+  .pomo__sprite { width: 132px; height: 132px; }
+  .pomo__trainer { left: 10px; bottom: 12px; }
+  .pomo__panel { grid-template-columns: 1fr; }
+  .pomo__dialog { border-right: 0; border-bottom: 4px solid var(--on-face); min-height: 96px; font-size: 21px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pomo.is-running .pomo__sprite, .pomo.is-caught .pomo__sprite { animation: none; }
+  .pomo__fill { transition: none; }
+}
