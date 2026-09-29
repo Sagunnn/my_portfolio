@@ -161,5 +161,5 @@ Chapter 1 gave me the vocabulary for architecture. Chapter 2 gives me the vocabu
 design reviews: *p99*, *throughput vs response time*, *fault vs failure*, *operability*.
 It's the chapter I'd hand to someone before their first on-call rotation.
 
-**Next up:** Chapter 3, on data models and query languages.
+**Next up:** [Chapter 3](/writing/ddia/ch03/), on data models and query languages.
 {% endsection %}
