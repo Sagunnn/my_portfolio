@@ -59,12 +59,20 @@
 .pomo__foe { position: absolute; right: 10%; top: 96px; }
 .pomo__sprite { width: 176px; height: 176px; image-rendering: pixelated; }
 .pomo.is-running .pomo__sprite { animation: pomo-bob 1.4s steps(2, end) infinite; }
-.pomo.is-caught .pomo__sprite { animation: pomo-caught 1.4s ease-in forwards; }
 @keyframes pomo-bob { 50% { transform: translateY(-4px); } }
-@keyframes pomo-caught {
-  30% { transform: scale(1.1); filter: brightness(3); }
-  100% { transform: scale(0); opacity: 0; filter: brightness(3); }
+
+/* the thrown Poké Ball and the catch sparkle (assets/js/pomodoro.js) */
+.pomo__ball { position: absolute; z-index: 2; transform-origin: 50% 85%; }
+.pomo__ball.is-shut::after { background: #b8b8b8; }      /* button goes dark once it clicks shut */
+.pomo__star {
+  position: absolute;
+  z-index: 3;
+  font: 18px/1 var(--mono);
+  color: #ffde00;
+  text-shadow: 0 0 0 var(--on-face), 1px 1px 0 var(--on-face);
+  pointer-events: none;
 }
+.pomo.is-busy .pomo__btn { opacity: 0.45; cursor: default; }
 
 .pomo__trainer {
   position: absolute;
@@ -181,6 +189,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pomo.is-running .pomo__sprite, .pomo.is-caught .pomo__sprite { animation: none; }
+  .pomo.is-running .pomo__sprite { animation: none; }
   .pomo__fill { transition: none; }
 }
