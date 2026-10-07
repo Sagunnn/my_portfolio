@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0   # full history, for last-modified dates in the sitemap and JSON-LD
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npx @11ty/eleventy

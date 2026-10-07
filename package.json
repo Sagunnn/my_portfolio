@@ -8,6 +8,9 @@
     "start": "eleventy --serve",
     "icons": "node scripts/make-skill-icons.mjs"
   },
+  "engines": {
+    "node": "24.x"
+  },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@resvg/resvg-js": "^2.6.2",
