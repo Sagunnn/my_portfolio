@@ -83,7 +83,7 @@
       </button>
       <div class="nav__tab" id="nav-tab">
         {#- [key, label, href]; no href = a section on the home page #}
-        {%- for item in [["work", "WORK"], ["experience", "EXPERIENCE"], ["about", "ABOUT"], ["writing", "WRITING"], ["pomodoro", "POMODORO", "/pomodoro/"], ["contact", "CONTACT"]] %}
+        {%- for item in [["work", "WORK"], ["experience", "EXPERIENCE"], ["about", "ABOUT"], ["writing", "WRITING"], ["pomodoro", "POMODORO", "/pomodoro/"], ["sysdesign", "SYS DESIGN", "https://systemdesign.sagunpradhan.com.np/"], ["contact", "CONTACT"]] %}
         <a class="nav__link{% if nav == item[0] %} is-active{% endif %}" href="{{ item[2] or (navBase + '#' + item[0]) }}"><span class="pokeball pokeball--sm" aria-hidden="true"></span>{{ item[1] }}</a>
         {%- endfor %}
       </div>

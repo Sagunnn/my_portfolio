@@ -161,7 +161,8 @@ section { padding-block: clamp(64px, 9vw, 120px); }
 .nav__brand:hover .pokeball,
 .nav__brand:hover .pokeball::after { animation-duration: 1.2s; }
 
-.nav__tab { display: flex; align-items: center; gap: clamp(22px, 3vw, 44px); }
+.nav__tab { display: flex; align-items: center; gap: clamp(16px, 2vw, 40px); }
+@media (max-width: 1100px) { .nav__tab { gap: 14px; } }
 
 .nav__link {
   position: relative;
@@ -255,7 +256,7 @@ section { padding-block: clamp(64px, 9vw, 120px); }
   60%, 68%          { background: #ff8a8f; }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1023px) {
   .nav { padding-inline: 12px; }
   .nav__inner { padding: 10px 14px; }
   .nav__toggle { display: grid; }
@@ -770,6 +771,9 @@ section { padding-block: clamp(64px, 9vw, 120px); }
 .post--series .post__text { color: var(--cream-dim); }
 .post__more { margin-top: auto; padding-top: 8px; font-weight: 700; color: var(--teal-deep); }
 .post--series .post__more { color: var(--yellow); }
+/* full-width banner card under the three posts (the system design guide) */
+.post--wide { grid-column: 1 / -1; border-top-color: var(--yellow); }
+.post--wide .post__text { max-width: 62ch; }
 
 @media (prefers-reduced-motion: reduce) {
   .post:hover { transform: none; }
