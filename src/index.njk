@@ -68,7 +68,7 @@ hud: true
           <p class="eyebrow">01 — Selected Work</p>
           <h2>My Work</h2>
           <p>Systems I designed and shipped: a fraud-detection engine for Ethereum wallets,
-             and two Django platforms that replaced manual HR processes.</p>
+             an interactive system design lab, and two Django platforms that replaced manual HR processes.</p>
         </div>
 
         <div class="cards">
@@ -130,6 +130,72 @@ hud: true
                 </g>
 
                 <text x="280" y="322" font-family="'JetBrains Mono', monospace" font-size="11" fill="#c7b074" text-anchor="middle" letter-spacing="1.2">100K+ ON-CHAIN TRANSACTIONS · 90-DAY RECOVERY WINDOW</text>
+              </svg>
+            </div>
+          </article>
+
+          <!-- ---------- System Design Guide / Design Lab ---------- -->
+          <article class="card reveal">
+            <div class="card__body">
+              <p class="tag">Personal project</p>
+              <h3>System Design Guide —<br>Design Lab</h3>
+              <p class="card__note">systemdesign.sagunpradhan.com.np · interactive study guide</p>
+              <p class="card__text">
+                A free study guide for system design interviews, built around an interactive lab:
+                pick a real brief, build your architecture on a canvas, and see how it holds up.
+              </p>
+              <ul class="card__points">
+                <li>Drag-and-drop canvas with 18 components and real tech choices (PostgreSQL, Cassandra, Redis, Kafka…), rated S to D against 11 interview scenarios with fixes for every gap.</li>
+                <li>Capacity calculator that sizes servers, load balancers, shards, replicas and cache from users and per-request work, with a guess-first mode that blasts over-estimates and melts down under-estimates.</li>
+                <li>Animated traffic simulations on 21 pages, plus 19 fundamentals, 10 worked interview walkthroughs and a 149-card Anki deck.</li>
+              </ul>
+              <div class="chips">
+                <span>JavaScript</span><span>Eleventy</span><span>SVG</span><span>Web Animations</span><span>Anki</span>
+              </div>
+              <a class="btn" href="https://systemdesign.sagunpradhan.com.np/lab/">Open the Design Lab</a>
+            </div>
+
+            <div class="card__art">
+              <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: components dragged from a palette onto a canvas, users to load balancer to app servers to cache and database, rated rank S, while an over-sized server tier blasts.">
+                <g fill="none" stroke="#eedec1" stroke-opacity=".28" stroke-width="1.5">
+                  <rect x="12" y="40" width="96" height="236"/>
+                  <rect x="24" y="66" width="72" height="28"/>
+                  <rect x="24" y="104" width="72" height="28"/>
+                  <rect x="24" y="142" width="72" height="28"/>
+                  <rect x="24" y="180" width="72" height="28"/>
+                  <rect x="128" y="138" width="88" height="44"/>
+                  <rect x="240" y="138" width="88" height="44"/>
+                  <rect x="352" y="138" width="88" height="44"/>
+                  <rect x="462" y="70" width="86" height="40"/>
+                  <rect x="462" y="210" width="86" height="40"/>
+                  <path d="M216 160 H238 M328 160 H350 M440 150 L462 96 M440 170 L462 226"/>
+                  <path d="M96 118 C110 118 112 150 126 156" stroke-dasharray="5 6" stroke-opacity=".5"/>
+                </g>
+
+                <g fill="#eedec1" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle" fill-opacity=".9">
+                  <text x="60" y="58" font-size="10" fill="#c7b074" fill-opacity="1" letter-spacing="1">PALETTE</text>
+                  <text x="60" y="84" font-size="10.5">LB</text>
+                  <text x="60" y="122" font-size="10.5">CACHE</text>
+                  <text x="60" y="160" font-size="10.5">SQL</text>
+                  <text x="60" y="198" font-size="10.5">QUEUE</text>
+                  <text x="172" y="165" font-size="12">USERS</text>
+                  <text x="284" y="165" font-size="12">LB ×2</text>
+                  <text x="396" y="165" font-size="12">APP ×9</text>
+                  <text x="505" y="95" font-size="12">CACHE</text>
+                  <text x="505" y="235" font-size="12">DB</text>
+                </g>
+
+                <g font-family="'JetBrains Mono', monospace" font-weight="700">
+                  <rect x="128" y="226" width="64" height="64" fill="none" stroke="#f7d30e" stroke-width="2.5"/>
+                  <text x="160" y="272" font-size="36" fill="#f7d30e" text-anchor="middle">S</text>
+                  <text x="206" y="250" font-size="11.5" fill="#eedec1">RANK S · 100/100</text>
+                  <text x="206" y="270" font-size="11" fill="#eedec1" fill-opacity=".6">strong hire</text>
+                  <rect x="340" y="226" width="108" height="30" fill="none" stroke="#d7212c" stroke-width="2"/>
+                  <text x="394" y="246" font-size="12" fill="#eedec1" text-anchor="middle">BOOM! ×60</text>
+                  <text x="394" y="276" font-size="11" fill="#eedec1" fill-opacity=".6" text-anchor="middle">$10k/mo idle</text>
+                </g>
+
+                <text x="280" y="322" font-family="'JetBrains Mono', monospace" font-size="11" fill="#c7b074" text-anchor="middle" letter-spacing="1.2">BUILD · RATE · SIZE · STRESS-TEST</text>
               </svg>
             </div>
           </article>
