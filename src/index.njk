@@ -200,6 +200,64 @@ hud: true
             </div>
           </article>
 
+          <!-- ---------- BillKhata ---------- -->
+          <article class="card reveal">
+            <div class="card__body">
+              <p class="tag">Personal project</p>
+              <h3>BillKhata —<br>Bills &amp; IRD Lucky Draw</h3>
+              <p class="card__note">expense.sagunpradhan.com.np · local-first web app</p>
+              <p class="card__text">
+                Snap a shop bill, and BillKhata reads it, files it in a daily expense ledger and
+                gets cash bills ready for Nepal's IRD prize coupon draw. Nothing leaves the browser.
+              </p>
+              <ul class="card__points">
+                <li>In-browser OCR with Tesseract.js, or your own Gemini, OpenAI or Claude key for handwritten and Nepali bills, pulling out seller PAN, invoice number, BS/AD date, total and VAT.</li>
+                <li>IRD eligibility engine matched to the live portal's rules, with copy buttons and a fill-in bookmarklet for prize.ird.gov.np and a vault for the 12-digit coupon.</li>
+                <li>Bikram Sambat calendar, IndexedDB storage with photos under 300 KB, JSON backup and restore, and PDF reports with a receipt appendix.</li>
+              </ul>
+              <div class="chips">
+                <span>React</span><span>Vite</span><span>Tailwind</span><span>IndexedDB</span><span>Tesseract.js</span><span>jsPDF</span>
+              </div>
+              <a class="btn" href="https://expense.sagunpradhan.com.np/">Open BillKhata</a>
+            </div>
+
+            <div class="card__art">
+              <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: a paper bill is scanned into fields (PAN, bill number, date, total), saved in a ledger, and turned into an IRD prize coupon.">
+                <g fill="none" stroke="#eedec1" stroke-opacity=".28" stroke-width="1.5">
+                  <path d="M28 46 H140 V262 L128 254 L116 262 L104 254 L92 262 L80 254 L68 262 L56 254 L44 262 L28 252 Z"/>
+                  <path d="M44 92 H124 M44 110 H110 M44 128 H118 M44 170 H124 M44 188 H96"/>
+                  <rect x="196" y="58" width="150" height="196"/>
+                  <path d="M196 102 H346 M196 146 H346 M196 190 H346"/>
+                  <rect x="404" y="98" width="140" height="116"/>
+                  <path d="M140 150 H194 M346 156 H402" stroke-dasharray="5 6" stroke-opacity=".5"/>
+                </g>
+
+                <g font-family="'JetBrains Mono', monospace" font-weight="700" fill="#eedec1">
+                  <text x="84" y="70" font-size="10.5" text-anchor="middle" fill-opacity=".9">KIRANA PASAL</text>
+                  <text x="84" y="234" font-size="13" text-anchor="middle">रु 1,356</text>
+                  <g font-size="10.5" fill-opacity=".9">
+                    <text x="208" y="78" fill="#c7b074" fill-opacity="1">PAN</text>
+                    <text x="208" y="94">609876543</text>
+                    <text x="208" y="122" fill="#c7b074" fill-opacity="1">BILL NO.</text>
+                    <text x="208" y="138">AKP-0457</text>
+                    <text x="208" y="166" fill="#c7b074" fill-opacity="1">DATE (BS)</text>
+                    <text x="208" y="182">2083-07-12</text>
+                    <text x="208" y="210" fill="#c7b074" fill-opacity="1">TOTAL</text>
+                    <text x="208" y="226">1,356.00</text>
+                  </g>
+                  <rect x="418" y="114" width="112" height="28" fill="none" stroke="#f7d30e" stroke-width="2"/>
+                  <text x="474" y="133" font-size="11.5" text-anchor="middle" fill="#f7d30e">ELIGIBLE</text>
+                  <text x="474" y="168" font-size="10.5" text-anchor="middle" fill="#c7b074">COUPON</text>
+                  <text x="474" y="188" font-size="11.5" text-anchor="middle">2083 0712 3456</text>
+                  <rect x="418" y="232" width="112" height="28" fill="none" stroke="#217793" stroke-width="2"/>
+                  <text x="474" y="251" font-size="11" text-anchor="middle">QR · AUTO</text>
+                </g>
+
+                <text x="280" y="322" font-family="'JetBrains Mono', monospace" font-size="11" fill="#c7b074" text-anchor="middle" letter-spacing="1.2">SCAN · TRACK · ENTER THE DRAW</text>
+              </svg>
+            </div>
+          </article>
+
           <!-- ---------- Leave Management ---------- -->
           <article class="card reveal">
             <div class="card__body">

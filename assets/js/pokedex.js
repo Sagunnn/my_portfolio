@@ -55,6 +55,7 @@
     { label: 'Projects', note: 'Things I have built.', items: [
       L('ScamFilter case study', 'writing/scamfilter/', 'How ScamFilter scores sweeper-bot behaviour without flagging honest users.'),
       L('Design Lab', 'https://systemdesign.sagunpradhan.com.np/lab/', 'Build a system design on a canvas and get it rated, sized and stress-tested.'),
+      L('BillKhata', 'https://expense.sagunpradhan.com.np/', 'Scan bills, track daily spending and enter cash bills in Nepal\'s IRD lucky draw.'),
       L('Leave Management', 'https://github.com/Sagunnn/HRIS-Internship', 'Django REST and React leave workflows, on GitHub.'),
       L('HRIS', 'https://github.com/Sagunnn/Synergy', 'Attendance, leave and payroll with RBAC, on GitHub.')
     ] },
