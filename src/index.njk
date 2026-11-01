@@ -212,14 +212,14 @@ hud: true
                 between friends by who had what. Everything stays in the browser.
               </p>
               <ul class="card__points">
-                <li>Receipt OCR in the browser with Tesseract.js: it straightens the photo, reads it several ways and votes on the result, rebuilds item rows from word positions so curved, crumpled bills still line up, and fixes misread digits with qty × rate. An optional Gemini, OpenAI or Claude key handles the hardest bills.</li>
-                <li>Bank statement matching: a statement PDF (password-locked or scanned too) becomes a ledger, with columns found from the header and every row checked against the running balance. Fonepay, eSewa and Khalti payment screenshots are read, and statement rows, screenshots and scanned bills are matched by amount, posting delay, transaction ID and shop name into one table, so each bank payment shows what it was for.</li>
+                <li>Receipt OCR in the browser with PaddleOCR on ONNX Runtime, in a Web Worker: it straightens the photo, finds where each word sits from the ink, rebuilds item rows so curved, crumpled bills still line up, and checks the total against subtotal + 13% VAT. A PDF e-bill is read from its own text. An optional Gemini, OpenAI or Claude key handles the hardest bills.</li>
+                <li>Bank statement matching: a statement PDF (password-locked or scanned too), Excel file or screenshot becomes a ledger, with columns found from the header and every row checked against the running balance. Fonepay, eSewa and Khalti payment screenshots are read, and statement rows, screenshots and scanned bills are matched by amount, posting delay, transaction ID and shop name into one table, so each bank payment shows what it was for.</li>
                 <li>Bill splitting in three steps: items are tagged veg, non-veg or drink so vegetarians and non-drinkers aren't charged for them, with equal splits, people left out, and VAT and service charge shared in proportion.</li>
                 <li>Group trips with several payers settled in the fewest transfers, duplicate-bill detection (bill number, item sequence, photo hash), Bikram Sambat dates, IndexedDB storage, PDF reports and JSON backups.</li>
               </ul>
               <p class="card__subhead">Drawbacks</p>
               <ul class="card__points card__points--minus">
-                <li>On-device OCR is the weak link. Tesseract was built for flat scans, so a crumpled bill takes up to five reads (6–9 s on a laptop, longer on a phone) and can still get a name or quantity wrong. A vision model fixes that, but sends the photo to a provider and costs a little per scan.</li>
+                <li>On-device OCR has a cost up front: the first scan downloads about 6 MB of models plus the engine that runs them, and a phone is slower than a laptop. Handwriting is still beyond it; a vision model reads that, but sends the photo to a provider and costs a little per scan.</li>
                 <li>No sync: data lives in one browser. Clearing site data loses it unless you export a backup, and two phones can't share a ledger.</li>
                 <li>No share links. Without a server there's no way to secure them, so a split goes out as an image and friends can't open it in the app.</li>
                 <li>Payment QR codes can't carry the amount, because eSewa and the banking apps ignore it, so friends type it in themselves.</li>
@@ -227,7 +227,7 @@ hud: true
                 <li>Tuned for Nepali bills (Bikram Sambat dates, रु, local layouts). Other formats parse less reliably.</li>
               </ul>
               <div class="chips">
-                <span>React</span><span>Vite</span><span>Tailwind</span><span>IndexedDB</span><span>Tesseract.js</span><span>pdf.js</span><span>jsPDF</span>
+                <span>React</span><span>Vite</span><span>Tailwind</span><span>IndexedDB</span><span>PaddleOCR</span><span>ONNX Runtime</span><span>pdf.js</span><span>jsPDF</span>
               </div>
               <a class="btn" href="https://expense.sagunpradhan.com.np/">Open BillKhata</a>
             </div>
