@@ -208,11 +208,12 @@ hud: true
               <p class="card__note">expense.sagunpradhan.com.np · local-first web app</p>
               <p class="card__text">
                 Snap a restaurant or shop bill, and BillKhata reads the items and total, files it in
-                a daily expense ledger and splits it fairly between friends by who had what.
-                Everything stays in the browser.
+                a daily expense ledger, matches it with your bank statement and splits it fairly
+                between friends by who had what. Everything stays in the browser.
               </p>
               <ul class="card__points">
                 <li>Receipt OCR in the browser with Tesseract.js: it straightens the photo, reads it several ways and votes on the result, rebuilds item rows from word positions so curved, crumpled bills still line up, and fixes misread digits with qty × rate. An optional Gemini, OpenAI or Claude key handles the hardest bills.</li>
+                <li>Bank statement matching: a statement PDF (password-locked or scanned too) becomes a ledger, with columns found from the header and every row checked against the running balance. Fonepay, eSewa and Khalti payment screenshots are read, and statement rows, screenshots and scanned bills are matched by amount, posting delay, transaction ID and shop name into one table, so each bank payment shows what it was for.</li>
                 <li>Bill splitting in three steps: items are tagged veg, non-veg or drink so vegetarians and non-drinkers aren't charged for them, with equal splits, people left out, and VAT and service charge shared in proportion.</li>
                 <li>Group trips with several payers settled in the fewest transfers, duplicate-bill detection (bill number, item sequence, photo hash), Bikram Sambat dates, IndexedDB storage, PDF reports and JSON backups.</li>
               </ul>
@@ -222,10 +223,11 @@ hud: true
                 <li>No sync: data lives in one browser. Clearing site data loses it unless you export a backup, and two phones can't share a ledger.</li>
                 <li>No share links. Without a server there's no way to secure them, so a split goes out as an image and friends can't open it in the app.</li>
                 <li>Payment QR codes can't carry the amount, because eSewa and the banking apps ignore it, so friends type it in themselves.</li>
+                <li>Every bank lays out its statement differently. The balance check catches a misread row but can't fix an unusual layout, and matching needs the same amount, so a payment with a fee added has to be linked by hand.</li>
                 <li>Tuned for Nepali bills (Bikram Sambat dates, रु, local layouts). Other formats parse less reliably.</li>
               </ul>
               <div class="chips">
-                <span>React</span><span>Vite</span><span>Tailwind</span><span>IndexedDB</span><span>Tesseract.js</span><span>jsPDF</span>
+                <span>React</span><span>Vite</span><span>Tailwind</span><span>IndexedDB</span><span>Tesseract.js</span><span>pdf.js</span><span>jsPDF</span>
               </div>
               <a class="btn" href="https://expense.sagunpradhan.com.np/">Open BillKhata</a>
             </div>
