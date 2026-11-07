@@ -56,6 +56,7 @@
       L('ScamFilter case study', 'writing/scamfilter/', 'How ScamFilter scores sweeper-bot behaviour without flagging honest users.'),
       L('Design Lab', 'https://systemdesign.sagunpradhan.com.np/lab/', 'Build a system design on a canvas and get it rated, sized and stress-tested.'),
       L('BillKhata', 'https://expense.sagunpradhan.com.np/', 'Scan bills, track daily spending, match them with your bank statement and split them fairly with friends.'),
+      L('Mandala Quest', 'https://mandala-quest.sagunpradhan.com.np/', 'A GPS-only heritage game for Patan Durbar Square and the Boudhanath kora.'),
       L('Leave Management', 'https://github.com/Sagunnn/HRIS-Internship', 'Django REST and React leave workflows, on GitHub.'),
       L('HRIS', 'https://github.com/Sagunnn/Synergy', 'Attendance, leave and payroll with RBAC, on GitHub.')
     ] },

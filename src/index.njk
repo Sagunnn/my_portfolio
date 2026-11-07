@@ -273,6 +273,60 @@ hud: true
             </div>
           </article>
 
+          <!-- ---------- Mandala Quest ---------- -->
+          <article class="card reveal">
+            <div class="card__body">
+              <p class="tag">Personal project</p>
+              <h3>Mandala Quest —<br>GPS Heritage Game</h3>
+              <p class="card__note">mandala-quest.sagunpradhan.com.np · game prototype</p>
+              <p class="card__text">
+                A heritage walk through Patan Durbar Square and around Boudhanath that unlocks each
+                monument from where you stand. There are no QR codes: GPS, a dwell timer and the barometer do the work.
+              </p>
+              <ul class="card__points">
+                <li>Ray-casting point-in-polygon checks once a second against nine monument outlines, with a 5-second dwell at walking pace and a short grace window for GPS drift.</li>
+                <li>A barometric depth gate for the sunken water spouts: walk about 3 m down the steps (+0.30 hPa) to unlock Manga Hiti and Tusa Hiti.</li>
+                <li>A kora engine that adds up the clockwise angle around the stupa across 12 sectors and warns anyone circling the wrong way. A virtual walker lets you play it from anywhere.</li>
+              </ul>
+              <div class="chips">
+                <span>React</span><span>Vite</span><span>Tailwind</span><span>Geolocation API</span><span>SVG</span>
+              </div>
+              <a class="btn" href="https://mandala-quest.sagunpradhan.com.np/">Play Mandala Quest</a>
+            </div>
+
+            <div class="card__art">
+              <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: a player stands inside a temple's outline while a dwell timer fills to 5 seconds, a barometer reads +0.30 hPa below a water spout, and a ring around a stupa tracks a clockwise kora.">
+                <g fill="none" stroke="#eedec1" stroke-opacity=".28" stroke-width="1.5">
+                  <rect x="40" y="70" width="130" height="130"/>
+                  <path d="M40 112 H170 M40 158 H170 M82 70 V200 M128 70 V200" stroke-opacity=".12"/>
+                  <rect x="214" y="96" width="120" height="104"/>
+                  <path d="M228 120 H320 M240 144 H308 M252 168 H296"/>
+                  <circle cx="452" cy="135" r="86"/>
+                  <circle cx="452" cy="135" r="32"/>
+                  <path d="M452 49 V103 M452 167 V221 M366 135 H420 M484 135 H538 M391 74 L429 112 M475 158 L513 196 M513 74 L475 112 M429 158 L391 196" stroke-opacity=".14"/>
+                </g>
+
+                <circle cx="105" cy="135" r="30" fill="none" stroke="#eedec1" stroke-opacity=".18" stroke-width="5"/>
+                <circle cx="105" cy="135" r="30" fill="none" stroke="#f7d30e" stroke-width="5" stroke-dasharray="113 189" transform="rotate(-90 105 135)"/>
+                <circle cx="105" cy="135" r="7" fill="#f7d30e"/>
+                <path d="M452 49 A86 86 0 1 1 366 135" fill="none" stroke="#f7d30e" stroke-width="3"/>
+                <path d="M359 127 L366 140 L374 128" fill="none" stroke="#f7d30e" stroke-width="3"/>
+                <circle cx="452" cy="135" r="10" fill="#c7b074" fill-opacity=".8"/>
+                <path d="M274 216 V246" stroke="#217793" stroke-width="2" stroke-dasharray="4 4"/>
+
+                <g font-family="'JetBrains Mono', monospace" font-weight="700" fill="#eedec1">
+                  <text x="105" y="232" font-size="11.5" text-anchor="middle">DWELL 3/5 s</text>
+                  <text x="105" y="250" font-size="10.5" text-anchor="middle" fill="#c7b074">PIP · 1 Hz</text>
+                  <text x="274" y="86" font-size="10.5" text-anchor="middle" fill="#c7b074">MANGA HITI</text>
+                  <text x="274" y="266" font-size="11.5" text-anchor="middle" fill="#217793">−3.0 m · +0.30 hPa</text>
+                  <text x="452" y="250" font-size="11.5" text-anchor="middle">θ +270° / 360°</text>
+                </g>
+
+                <text x="280" y="322" font-family="'JetBrains Mono', monospace" font-size="11" fill="#c7b074" text-anchor="middle" letter-spacing="1.2">STAND · DESCEND · CIRCLE CLOCKWISE</text>
+              </svg>
+            </div>
+          </article>
+
           <!-- ---------- Leave Management ---------- -->
           <article class="card reveal">
             <div class="card__body">
